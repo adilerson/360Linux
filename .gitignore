@@ -1,0 +1,54 @@
+# compiled output
+videoSpinAPI/dist
+videoSpin/dist
+videoSpinAPI/node_modules
+videoSpin/node_modules
+/node_modules
+
+# Logs
+logs
+*.log
+videoSpinAPI/npm-debug.log*
+videoSpin/npm-debug.log*
+
+videoSpin/pnpm-debug.log*
+videoSpinAPI/pnpm-debug.log*
+
+videoSpin/yarn-debug.log*
+videoSpinAPI/yarn-debug.log*
+
+videoSpin/yarn-error.log*
+videoSpinAPI/yarn-error.log*
+
+videoSpin/lerna-debug.log*
+videoSpinAPI/lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+videoSpinAPI/*.mp4
+*.rar
+*.pem
+secrets/key.pem
+videoSpinAPi.zip
+videoSpinAPi.zip
+videoSpinAPI/*.pem
