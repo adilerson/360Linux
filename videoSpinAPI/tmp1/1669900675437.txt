@@ -1,0 +1,1 @@
+{"name":"teste","vNormal":6,"vFast":3,"vSlow":3}
