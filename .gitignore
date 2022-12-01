@@ -57,3 +57,7 @@ videoSpinAPI/*.pem
 *.map
 *.tsbuildinfo
 *.tsbuildinfo
+*.txt
+*.pack
+*.mp3
+*.png
