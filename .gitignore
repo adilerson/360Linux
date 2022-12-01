@@ -52,3 +52,8 @@ secrets/key.pem
 videoSpinAPi.zip
 videoSpinAPi.zip
 videoSpinAPI/*.pem
+*.mp4
+*.txt
+*.map
+*.tsbuildinfo
+*.tsbuildinfo
