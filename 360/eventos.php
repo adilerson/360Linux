@@ -168,6 +168,7 @@ $itens = new DirectoryIterator('../videoSpinApi/config/evento');
         */
         if ( $ext == 'json')
         {
+            $filename = str_replace(".json", "", $filename);
             echo '
             <div class="pai">
                 <div class="link">
