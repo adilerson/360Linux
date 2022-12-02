@@ -22,7 +22,7 @@
   <ion-chip
 
     style="z-index: 999; font-size: 7rem; background:none; margin-top: 2rem;"
-    [hidden]="!isRecording"
+    [hidden]="!isRecording || counter === 0"
     class="icon"
     #recordEffect
     [ngClass]="position === 'top'?'position-top':position === 'center'?'position-center':'position-bottom'"

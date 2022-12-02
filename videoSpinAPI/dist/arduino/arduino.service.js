@@ -21,7 +21,6 @@ let ArduinoService = class ArduinoService {
                     console.error(`stderr: ${stderr}`);
                     return;
                 }
-                console.log(`stdout:\n${stdout}`);
             });
             setTimeout(() => {
                 exec('python3 /var/www/html/360/begin.py', (error, stdout, stderr) => {
@@ -33,7 +32,7 @@ let ArduinoService = class ArduinoService {
             }, 1000);
         }
         else {
-            exec('python3 /var/www/html/360/off.py', (error, stdout, stderr) => {
+            exec('python3 /var/www/html/360/acoff.py', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
@@ -42,7 +41,6 @@ let ArduinoService = class ArduinoService {
                     console.error(`stderr: ${stderr}`);
                     return;
                 }
-                console.log(`stdout:\n${stdout}`);
             });
             setTimeout(() => {
                 exec('python3 /var/www/html/360/begin.py', (error, stdout, stderr) => {
