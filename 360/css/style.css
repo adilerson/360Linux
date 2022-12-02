@@ -1,13 +1,17 @@
 @font-face {
-    font-family: "poppins";
-    src: url("./fonts/Roboto-Regular.ttf");
+    font-family: "Roboto";
+    src: url("Roboto-Regular.ttf") format('truetype');
 }
 
 body{
-    font-family:'poppins';
+    font-family:'Roboto';
     background: #373e46 !important;
 }
 
+.dividir{
+    width:100%;
+    border-bottom: 1px solid silver;
+}
 .text-center{
     text-align: center;
 }
@@ -21,6 +25,9 @@ body{
     align-items: center;
     margin-top: 1rem;
     
+}
+.home{
+    margin-left:0.5rem
 }
 .qrcode{
     /*text-align: center;*/
@@ -51,13 +58,21 @@ video{
     margin: 0 !important;
     width: 41vh !important;
 }
-.titulo{
+.topo{
+    display: flex;
+    
+    align-items: center;
     width: 100%;
-    /* padding: 3rem 0rem 1rem 0rem; */
+    
     color: white;
     text-align: center;
     font-size: 2rem;
+    text-shadow: 3px 4px 4px black;
     background-color: #272727;
+}
+.eventoTitulo{
+width: 100%;
+text-align:center;
 }
 .videoEmbed{
     width: 10rem !important;
@@ -68,6 +83,8 @@ video{
 
 .videoEmbedModal{
     max-width: 85% !important;
+    border-radius: 0.5rem;
+    border: 3px solid #c1c1c1;
 }
 
 .videoPai{
@@ -132,6 +149,9 @@ video{
 transition: all 0.3s ease-in-out;
 }
 
+.fechar{
+    height: 1px;
+}
 
 
 
@@ -153,18 +173,37 @@ transition: all 0.3s ease-in-out;
     
     display: flex;
     flex-direction: column;
-
-    background-color: #fefefe;
+    box-shadow: 1px 1px 10px black;
+    background-color: #21252a;
     margin: 2% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+    /*border: 1px solid #888;*/
     border-radius: 0.5rem;
     width: 80%; /* Could be more or less, depending on screen size */
     max-height: -webkit-fill-available;
+
     animation-name: animatetop;
     animation-duration: 0.4s
   }
-  
+ 
+
+
+  input, select{
+    font-size: 1.5rem;
+    border-radius: 0.3rem;
+    border: none;
+  }
+  .label{
+    font-size: 1.3rem;
+    min-width: 13rem;;
+  }
+  .branco{
+    color:white !important;
+  }
+  .inputs{
+    display: flex;
+    margin-bottom:0.5rem;
+  }
   /* The Close Button */
   .close {
     color: #aaa;
@@ -173,8 +212,13 @@ transition: all 0.3s ease-in-out;
     font-weight: bold;
     width: 2rem;
     text-align: center;
+    height: 1px;
+    z-index: 1000;
   }
   
+  .esquerda{
+    color: rgb(197, 197, 197) !important;
+  }
   .close:hover,
   .close:focus {
     color: black;

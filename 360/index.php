@@ -1,10 +1,6 @@
 <?php
     include('class.php');
-        if (isset($_GET['maximo'])){
-            $maximo = $_GET['maximo'];
-        }else{
-            $maximo = 100;
-        }
+        
 
 
         if (!isset($_GET['evento'])){
@@ -14,11 +10,8 @@
             $evento = $_GET['evento'];
         }
 
-        function corrigeNome($string){
-            $string = str_replace("_", " ", $string); 
+        $path = "../videoSpinAPI/dist/media/".$evento."/";
 
-            return $string;
-        }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,9 +21,9 @@
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
-    <link href="css/style.css?teste=2" rel="stylesheet">
+    <link href="css/style.css?teste=3" rel="stylesheet">
 
-    <title>360 - <?php echo $evento; ?></title>
+    <title>360 - <?php echo corrigeNome($evento); ?></title>
     <script>
         
         
@@ -57,76 +50,20 @@
 </script>
 </head>
 <body id="body">
-    
+    <div class="topo">
+        <div class="home" id="home">
+            <img src="img/home.png">
+        </div>
+        <div class="eventoTitulo"><?php echo ucfirst(corrigeNome($evento)) ?></div>  
+</div>
+<div id="listaVideos">
+
+</div>
 
 
-<?php
-    
-
-        
-            echo '<div class="titulo fw-bold">'.ucfirst($evento).'</div>';
-        
-    
-    echo '<div class="ws-100 text-center transition"><div id="atualizar" class="btn transition" style="display:none;">Atualizar</div></div>';
-    echo '<div class="videos">';
-
-    $pathSingle = $evento."/";
-	$path = "../videoSpinAPI/dist/".$evento."/";
-	
-    $diretorio = dir($path);
-    $script = '';
-    
-
-    while($arquivo = $diretorio -> read()){
-        $arq = $arquivo;
-        $ext = pathinfo($arq, PATHINFO_EXTENSION);
-        
-        //echo $name;
-        
-        if ($ext == 'mp4'){
-            $arquivos[] = $arquivo;
-        }
-        
-
-    }
-    $key = 0;
-
-    $arquivos = array_reverse($arquivos);
-    foreach($arquivos as $arquivo){
-
-        
-        if ($key < $maximo){
-        
-            $sonome = pathinfo($arquivo, PATHINFO_FILENAME);
-
-            echo '<div class="videoPai">
-                    <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">';
-                /*
-                    <video  class="videoEmbed" controls>
-                        <source src="'.$path.$arquivo.'" type="video/mp4">
-                    </video>
-                    */
-            //echo '<img src="'.$path.$sonome.'.jpg" class="videoEmbed"></img>';
-
-                echo '</div><div id="qrcode_'.$key.'" class="desfocado qrcode transition-1"></div>
-                </div>';
-                $script .= 'gerar("http://'.$_SERVER['SERVER_NAME'].'/360/download.php?video='.$pathSingle.$arquivo.'","qrcode_'.$key.'"); ';
-
-            }
-            $key++;
-        
-
-    }
-    echo '<script>conta = '.$key.';</script>';
-    
-        echo '</div>';
-
-?>
-
-<!-- The Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
+  
   <div class="modal-content">
     <div>
         <span class="close">&times;</span>
@@ -141,6 +78,8 @@
   </div>
 </div>
 
+<div onclick="full();" id="full"><img src="img/full.png"></div>
+<div onclick="fullE();" id="fullE"style="display:none;"><img src="img/fullE.png"></div>
 <div id="status"></div>
 </body>
 </html>
@@ -150,65 +89,55 @@
 </style>
 
 <script>
-    <?php
-        echo $script;
-    ?>
+    
     $("#atualizar").click(function(){
 
-            window.location.reload();
-            openFullscreen()
+        $("#listaVideos").load("listaVideos.php?", {'evento': '<?php echo $evento; ?>'});
+            //window.location.reload();
+            //openFullscreen()
     })
 
-    $(".qrcode").click(function(){
-        $(".qrcode").removeClass("desfocado");
-        $(".qrcode").addClass("desfocado");
-        $(this).removeClass("desfocado",1300);
-    })
-    $(".video").click(function(){
-        
-        $(".qrcode").removeClass("desfocado");
-        $(".qrcode").addClass("desfocado");
-        $("#"+$(this).attr("ide")).removeClass("desfocado",1300);
-    });
+    function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
-
-
-
-
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    $(".video").click(function(){
-        modal.style.display = "block";
-        
-        
-        gerar("http://<?php echo $_SERVER['SERVER_NAME'] ?>/360/download.php?video=<?php echo $path ?>"+$(this).attr("video"),"qrcodeModal"); 
-        $("#videoModal").attr("src","http://<?php echo $_SERVER['SERVER_NAME'] ?>/<?php echo $path ?>"+$(this).attr("video"))
-        
-    })
-    
-
-    // When the user clicks on <span> (x), close the modal
-    $(".close").click(function(){
-        $("#videoModal").attr("src","");
-        modal.style.display = "none";
-    });
-    
-
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
     }
-    }
+}
+
+function full(){
+    $("#full").hide();
+    $("#fullE").show();
+    $("#home").hide();
+    
+    var elem = document.body; // Make the body go full screen.
+    requestFullScreen(elem);
+    
+}
+
+function fullE() {
+    $("#full").show();
+    $("#fullE").hide();
+    $("#home").show();
+
+    if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => { });
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+}
+
+$("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
 
 
 </script>
