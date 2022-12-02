@@ -54,8 +54,8 @@ let MediaService = class MediaService {
             try {
                 let fileName = this.getFileNameWithoutExtension(file);
                 let fileConfig;
-                let audioConfig = '';
-                let frameConfig = '';
+                let audioConfig = false;
+                let frameConfig = false;
                 let folder = '';
                 try {
                     fileConfig = JSON.parse(fs.readFileSync(`tmp/${fileName}.txt`, 'utf8'));
@@ -92,165 +92,317 @@ let MediaService = class MediaService {
                     ];
                 console.log('fodler: ' + folder);
                 console.log(fileConfig);
-                if (fileConfig && fileConfig.audio) {
-                    console.log(fileConfig.audio);
-                    if (fs.existsSync(`tmp/${fileConfig.audio}.mp3`)) {
-                        audioConfig = fileConfig.audio;
-                        console.log(audioConfig);
-                    }
-                }
+                let output = 'output1';
                 var command = ffmpeg();
                 command.input(`tmp/${file}`).format('mp4');
+                if (fs.existsSync(`config/audio`)) {
+                    if (fs.existsSync(`config/audio/audio.mp3`)) {
+                        audioConfig = true;
+                        command.input(`config/audio/audio.mp3`);
+                    }
+                }
+                if (fs.existsSync(`config/frame`)) {
+                    if (fs.existsSync(`config/frame/frame.png`)) {
+                        frameConfig = true;
+                        command.input(`config/frame/frame.png`);
+                    }
+                }
                 if (frameConfig) {
+                    output = 'output2';
+                    command.complexFilter([
+                        {
+                            filter: 'trim',
+                            options: { start: '0', duration: fileConfig.vNormal },
+                            inputs: '0:v',
+                            outputs: ['t0'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal,
+                                duration: fileConfig.vSlow,
+                            },
+                            inputs: '0',
+                            outputs: ['t1'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal + fileConfig.vSlow,
+                                duration: fileConfig.vFast,
+                            },
+                            inputs: '0',
+                            outputs: ['t2'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't0',
+                            outputs: ['t0N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't1',
+                            outputs: ['t1N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't2',
+                            outputs: ['t2N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '0.5*PTS',
+                            inputs: 't1N',
+                            outputs: ['t1F'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '1.5*PTS',
+                            inputs: 't2N',
+                            outputs: ['t2S'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: { start: '0', duration: fileConfig.vNormal },
+                            inputs: '0:v',
+                            outputs: ['t0'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal,
+                                duration: fileConfig.vSlow,
+                            },
+                            inputs: '0',
+                            outputs: ['t1'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal + fileConfig.vSlow,
+                                duration: fileConfig.vFast,
+                            },
+                            inputs: '0',
+                            outputs: ['t2'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't0',
+                            outputs: ['t0N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't1',
+                            outputs: ['t1N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't2',
+                            outputs: ['t2N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '0.5*PTS',
+                            inputs: 't1N',
+                            outputs: ['t1F'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '1.5*PTS',
+                            inputs: 't2N',
+                            outputs: ['t2S'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '3' },
+                            inputs: ['t0N', 't1F', 't2S'],
+                            outputs: ['c0'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '3' },
+                            inputs: ['t0N', 't1F', 't2S'],
+                            outputs: ['c1'],
+                        },
+                        {
+                            filter: 'reverse',
+                            inputs: 'c0',
+                            outputs: ['r'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '2' },
+                            inputs: ['c1', 'r'],
+                            outputs: 'output',
+                        },
+                        '[output]scale=720:1080[scaled]',
+                        {
+                            filter: 'framerate',
+                            options: { fps: '60' },
+                            inputs: ['scaled'],
+                            outputs: 'output1',
+                        },
+                        {
+                            filter: 'overlay',
+                            options: { x: '0', y: '0' },
+                            inputs: ['output1'],
+                            outputs: ['output2'],
+                        },
+                    ], output);
+                    if (audioConfig) {
+                        command.outputOptions(['-map 1:0', '-shortest']);
+                    }
                 }
-                if (audioConfig) {
-                    command.input(`tmp/${audioConfig}.mp3`);
-                }
-                command.complexFilter([
-                    {
-                        filter: 'trim',
-                        options: { start: '0', duration: fileConfig.vNormal },
-                        inputs: '0:v',
-                        outputs: ['t0'],
-                    },
-                    {
-                        filter: 'trim',
-                        options: {
-                            start: fileConfig.vNormal,
-                            duration: fileConfig.vSlow,
+                else {
+                    command.complexFilter([
+                        {
+                            filter: 'trim',
+                            options: { start: '0', duration: fileConfig.vNormal },
+                            inputs: '0:v',
+                            outputs: ['t0'],
                         },
-                        inputs: '0',
-                        outputs: ['t1'],
-                    },
-                    {
-                        filter: 'trim',
-                        options: {
-                            start: fileConfig.vNormal + fileConfig.vSlow,
-                            duration: fileConfig.vFast,
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal,
+                                duration: fileConfig.vSlow,
+                            },
+                            inputs: '0',
+                            outputs: ['t1'],
                         },
-                        inputs: '0',
-                        outputs: ['t2'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't0',
-                        outputs: ['t0N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't1',
-                        outputs: ['t1N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't2',
-                        outputs: ['t2N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: '0.5*PTS',
-                        inputs: 't1N',
-                        outputs: ['t1F'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: '1.5*PTS',
-                        inputs: 't2N',
-                        outputs: ['t2S'],
-                    },
-                    {
-                        filter: 'trim',
-                        options: { start: '0', duration: fileConfig.vNormal },
-                        inputs: '0:v',
-                        outputs: ['t0'],
-                    },
-                    {
-                        filter: 'trim',
-                        options: {
-                            start: fileConfig.vNormal,
-                            duration: fileConfig.vSlow,
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal + fileConfig.vSlow,
+                                duration: fileConfig.vFast,
+                            },
+                            inputs: '0',
+                            outputs: ['t2'],
                         },
-                        inputs: '0',
-                        outputs: ['t1'],
-                    },
-                    {
-                        filter: 'trim',
-                        options: {
-                            start: fileConfig.vNormal + fileConfig.vSlow,
-                            duration: fileConfig.vFast,
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't0',
+                            outputs: ['t0N'],
                         },
-                        inputs: '0',
-                        outputs: ['t2'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't0',
-                        outputs: ['t0N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't1',
-                        outputs: ['t1N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: 'PTS-STARTPTS',
-                        inputs: 't2',
-                        outputs: ['t2N'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: '0.5*PTS',
-                        inputs: 't1N',
-                        outputs: ['t1F'],
-                    },
-                    {
-                        filter: 'setpts',
-                        options: '1.5*PTS',
-                        inputs: 't2N',
-                        outputs: ['t2S'],
-                    },
-                    {
-                        filter: 'concat',
-                        options: { n: '3' },
-                        inputs: ['t0N', 't1F', 't2S'],
-                        outputs: ['c0'],
-                    },
-                    {
-                        filter: 'concat',
-                        options: { n: '3' },
-                        inputs: ['t0N', 't1F', 't2S'],
-                        outputs: ['c1'],
-                    },
-                    {
-                        filter: 'reverse',
-                        inputs: 'c0',
-                        outputs: ['r'],
-                    },
-                    {
-                        filter: 'concat',
-                        options: { n: '2' },
-                        inputs: ['c1', 'r'],
-                        outputs: 'output',
-                    },
-                    '[output]scale=720:1080[scaled]',
-                    {
-                        filter: 'framerate',
-                        options: { fps: '60' },
-                        inputs: ['scaled'],
-                        outputs: 'output1',
-                    },
-                ], 'output1');
-                if (audioConfig && !frameConfig) {
-                    command.outputOptions(['-map 1:0', '-shortest']);
-                }
-                if (audioConfig && frameConfig) {
-                    command.outputOptions(['-map 2:0', '-shortest']);
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't1',
+                            outputs: ['t1N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't2',
+                            outputs: ['t2N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '0.5*PTS',
+                            inputs: 't1N',
+                            outputs: ['t1F'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '1.5*PTS',
+                            inputs: 't2N',
+                            outputs: ['t2S'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: { start: '0', duration: fileConfig.vNormal },
+                            inputs: '0:v',
+                            outputs: ['t0'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal,
+                                duration: fileConfig.vSlow,
+                            },
+                            inputs: '0',
+                            outputs: ['t1'],
+                        },
+                        {
+                            filter: 'trim',
+                            options: {
+                                start: fileConfig.vNormal + fileConfig.vSlow,
+                                duration: fileConfig.vFast,
+                            },
+                            inputs: '0',
+                            outputs: ['t2'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't0',
+                            outputs: ['t0N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't1',
+                            outputs: ['t1N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: 'PTS-STARTPTS',
+                            inputs: 't2',
+                            outputs: ['t2N'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '0.5*PTS',
+                            inputs: 't1N',
+                            outputs: ['t1F'],
+                        },
+                        {
+                            filter: 'setpts',
+                            options: '1.5*PTS',
+                            inputs: 't2N',
+                            outputs: ['t2S'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '3' },
+                            inputs: ['t0N', 't1F', 't2S'],
+                            outputs: ['c0'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '3' },
+                            inputs: ['t0N', 't1F', 't2S'],
+                            outputs: ['c1'],
+                        },
+                        {
+                            filter: 'reverse',
+                            inputs: 'c0',
+                            outputs: ['r'],
+                        },
+                        {
+                            filter: 'concat',
+                            options: { n: '2' },
+                            inputs: ['c1', 'r'],
+                            outputs: 'output',
+                        },
+                        '[output]scale=720:1080[scaled]',
+                        {
+                            filter: 'framerate',
+                            options: { fps: '60' },
+                            inputs: ['scaled'],
+                            outputs: 'output1',
+                        },
+                    ], output);
+                    if (audioConfig) {
+                        command.outputOptions(['-map 1:0', '-shortest']);
+                    }
                 }
                 command
                     .save(`${folder}/${fileName}_1.mp4`)
