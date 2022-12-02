@@ -9,6 +9,8 @@
         if (strlen($_FILES['frameName']['name']) > 0)
         {
 
+            echo 'teve png<br>';
+
             $pasta = "../videoSpinApi/config/frame/";
 
             $nome_frameName    = $_FILES['frameName']['name'];
@@ -29,6 +31,7 @@
         if (!isset($erro)){
             if (strlen($_FILES['audioName']['name']) > 0)
             {
+                echo 'teve audio<br>';
 
                 $pasta = "../videoSpinApi/config/audio/";
                 $permitidos = array(".png");	
@@ -51,29 +54,31 @@
         }
 
         if (!isset($erro)){
-            $json = "{
-                nome: ['".$evento."', Validators.required],
-                tempo: ['".$_POST['tempo']."', Validators.required],
-                frameName: ['".$nome_atual_frame."'..''],
-                audioName: ['".$nome_atual_audio."'],
-                data: ['".date("Y-m-d")."'],
-                videoInput: ['', Validators.required],
-                vNormal: ['".$_POST['vNormal']."', Validators.required],
-                vSlow: ['".$_POST['vSlow']."', Validators.required],
-                vFast: ['".$_POST['vFast']."', Validators.required],
-                position: ['".$_POST['position']."']
-            }
-            ";
 
-            $conteudo = json_decode($json);
 
-            $fp = fopen("../videoSpinApi/config/evento/".$evento.".json","wb");
+            $file = "../videoSpinAPI/config/evento/evento.json";
+            $json = json_decode(file_get_contents($file),TRUE);
 
-            fwrite($fp,$conteudo);
+            $json[] = array(
+                "nome" => [$evento, "Validators.required"],
+                "tempo" => [$_POST['tempo'], "Validators.required"],
+                "frameName" => ["$nome_atual_frame"],
+                "audioName" => ["$nome_atual_audio"],
+                "data" => [date('Y-m-d')],
+                "videoInput" => ["", "Validators.required"],
+                "vNormal" => [$_POST['vNormal'], "Validators.required"],
+                "vSlow" => [$_POST['vSlow'], "Validators.required"],
+                "vFast" => [$_POST['vFast'], "Validators.required"],
+                "position" => [$_POST['position']]
+            );
+            //print_r($json);exit;
+            file_put_contents($file, json_encode($json));
 
-            fclose($fp);
         }
     }
+
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
