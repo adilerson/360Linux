@@ -12,16 +12,16 @@
 <ion-content>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button id="open-modal">
-      <ion-icon name="add"></ion-icon> </ion-fab-button
+      <ion-icon name="cog"></ion-icon> </ion-fab-button
   ></ion-fab>
 
   <h1 class="ion-padding">Eventos Cadastrados</h1>
 
   <ng-container *ngFor="let evento of eventos; let i = index">
-    <ion-item (click)="eventoActionSheet(evento,i)" button>
+    <ion-item (click)="eventoActionSheet(evento[i+1],i)" button>
       <ion-label>
-        <h3>{{evento.nome}}</h3>
-        <p>{{evento.data |date:'dd/MM/YYYY HH:mm'}}</p>
+        <h3>{{evento[i+1].nome}}</h3>
+        <p>{{evento[i+1].data |date:'dd/MM/YYYY'}}</p>
       </ion-label>
     </ion-item>
   </ng-container>
@@ -45,10 +45,10 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <h1 class="ion-padding">Configuração do Evento</h1>
+        <h1 class="ion-padding">Configuração da entrada de Video</h1>
 
         <form [formGroup]="configForm">
-          <ion-item>
+             <!--    <ion-item>
             <ion-label position="stacked">Nome do Evento</ion-label>
             <ion-input
               type="text"
@@ -81,7 +81,7 @@
               <ion-select-option value="15">15 segundos</ion-select-option>
             </ion-select>
           </ion-item>
-          <hr />
+    <hr />
           <h4>Tempo dos efeitos</h4>
 
           <ion-item>
@@ -111,53 +111,8 @@
             ></ion-input>
           </ion-item>
 
-          <hr />
+          <hr /> -->
 
-          <!--    <ion-item>
-            <ion-label>Posição da câmera</ion-label>
-            <ion-select
-              placeholder="Câmera"
-              id="camera"
-              formControlName="camera"
-              required
-            >
-              <ion-select-option value="environment"
-                >Traseira</ion-select-option
-              >
-              <ion-select-option value="user" selected
-                >Frontal</ion-select-option
-              >
-            </ion-select>
-          </ion-item>
-          <span
-            class="error"
-            *ngIf="isSubmitted && errorControl.nome.errors?.required"
-          >
-            A câmera é obrigatória.
-          </span> -->
-          <!--     <hr />
-
-          <ion-item>
-            <ion-label position="stacked">Nome da imagem do Frame</ion-label>
-            <ion-input
-              type="text"
-              placeholder="Frame"
-              formControlName="frameName"
-            ></ion-input>
-          </ion-item>
-
-          <hr />
-
-          <ion-item>
-            <ion-label position="stacked">Nome do audio do evento</ion-label>
-            <ion-input
-              type="text"
-              placeholder="Audio"
-              formControlName="audioName"
-            ></ion-input>
-          </ion-item> -->
-
-          <hr />
 
           <ion-item>
             <ion-label>Entrada de Video</ion-label>
@@ -175,7 +130,7 @@
             </ion-select>
           </ion-item>
 
-          <ion-item>
+       <!--    <ion-item>
             <ion-label>Posição dos Avisos</ion-label>
             <ion-select
               #tempoGrav
@@ -210,7 +165,7 @@
                 </ng-template>
               </ion-modal>
             </ion-label>
-          </ion-item>
+          </ion-item> -->
         </form>
       </ion-content>
     </ng-template>

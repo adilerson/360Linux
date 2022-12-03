@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
+import { async } from 'rxjs';
 /* eslint-disable arrow-body-style */
 import { HttpService } from './../services/http.service';
 /* eslint-disable @typescript-eslint/no-unused-expressions */
@@ -40,6 +42,7 @@ export class ConfigPage implements OnInit {
   result: string;
 
   videoDevices = [];
+  videoInput: any;
   constructor(
     private storage: StorageService,
     private formBuilder: FormBuilder,
@@ -53,19 +56,19 @@ export class ConfigPage implements OnInit {
 
   ngOnInit() {
     this.configForm = this.formBuilder.group({
-      nome: ['', Validators.required],
+      /*   nome: ['', Validators.required],
       tempo: ['7', Validators.required],
-      // frameName: [''],
-      //  audioName: [''],
+      rameName: [''],
+        audioName: [''],
       data: [''],
-      videoInput: ['', Validators.required],
       vNormal: ['', Validators.required],
       vSlow: ['', Validators.required],
       vFast: ['', Validators.required],
-      position:['']
+      position: [''], */
+      videoInput: ['', Validators.required],
     });
 
-    this.eventos = this.storage.get('eventos') || [];
+    this.videoInput = this.storage.get('videoInput') || '';
     this.apiUrl = this.storage.get('apiUrl') || '';
     console.log(this.apiUrl);
     console.log(this.http.url);
@@ -73,18 +76,28 @@ export class ConfigPage implements OnInit {
     if (this.apiUrl.length) {
       EventService.get('apiUrl').emit(this.apiUrl);
     }
+
+    this.getEventos();
   }
 
   ionViewDidEnter() {
-    setTimeout(() => {
+    /*     setTimeout(() => {
       console.log(new Date().toISOString());
       this.errorControl.data.setValue(new Date().toISOString());
-    }, 1000);
+    }, 1000); */
 
     console.log(this.getDevices());
   }
   get errorControl() {
     return this.configForm.controls;
+  }
+
+  async getEventos() {
+    (await this.http.getEventos()).subscribe((res: Array<any>) => {
+      console.log(res);
+
+      this.eventos = res;
+    });
   }
 
   cancel() {
@@ -103,7 +116,7 @@ export class ConfigPage implements OnInit {
   }
 
   async salvaEvento(config: any) {
-    const totalTempo = config.vNormal + config.vFast + config.vSlow;
+    /*   const totalTempo = config.vNormal + config.vFast + config.vSlow;
     const tempo: any = config.tempo;
     console.log(tempo);
     if (totalTempo !== parseFloat(tempo)) {
@@ -121,18 +134,20 @@ export class ConfigPage implements OnInit {
     }
 
     this.isSubmitted = true;
+    this.eventos.push(config); */
+    this.guardaEventos(config.videoInput);
+
     console.log(config);
-    this.eventos.push(config);
-    this.guardaEventos();
 
     this.configForm.reset();
     this.modal.dismiss();
   }
 
   async eventoActionSheet(evento: any, index: any) {
+    console.log(evento);
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Opções do Evento',
-      mode:'ios',
+      mode: 'ios',
       subHeader: evento.nome,
       buttons: [
         {
@@ -148,14 +163,14 @@ export class ConfigPage implements OnInit {
             this.seeEvento(evento);
           },
         },
-        {
+    /*     {
           text: 'Deletar',
           role: 'destructive',
 
           handler: () => {
             this.deleteEvento(index);
           },
-        },
+        }, */
 
         {
           text: 'Cancelar',
@@ -187,7 +202,6 @@ export class ConfigPage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.eventos.splice(i, 1);
-            this.guardaEventos();
           },
         },
       ],
@@ -198,15 +212,31 @@ export class ConfigPage implements OnInit {
     const { role } = await alert.onDidDismiss();
   }
 
-  async guardaEventos() {
-    this.storage.set('eventos', this.eventos);
+  async guardaEventos(videoInput) {
+    this.storage.set('videoInput', videoInput);
 
     setTimeout(() => {
-      this.eventos = this.storage.get('eventos') || [];
+      this.videoInput = this.storage.get('videoInput') || '';
     }, 100);
   }
 
-  setConfig(config) {
+  async setConfig(config) {
+    if (!config.videoInput && this.videoInput) {
+      config.videoInput = this.videoInput;
+    }
+
+    if (!config.videoInput && !this.videoInput) {
+      const toast = await this.toastController.create({
+        message: 'Selecione a camera que irá utilizar primeiro',
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger',
+      });
+
+      await toast.present();
+      this.modal.present();
+      return;
+    }
     this.eventoService.setConfig(config);
     this.router.navigate(['/home']);
   }
@@ -217,7 +247,7 @@ export class ConfigPage implements OnInit {
       subHeader: `${evento.frameName ? 'Frame: ' + evento.frameName : ''} ${
         evento.audioName ? ', Audio: ' + evento.audioName : ''
       }  ${
-        evento.camera === 'user' ? ', Câmera: Frontal' : ', Câmera: Traseira'
+        this.videoInput?', '+ this.videoInput.label : ', Não informada'
       }`,
       buttons: [
         {

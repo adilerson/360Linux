@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+import { EventoModule } from './evento/evento.module';
 import { ArduinoModule } from './arduino/arduino.module';
 import { MediaModule } from './media/media.module';
 import { Module } from '@nestjs/common';
@@ -8,6 +10,7 @@ import { videoConsumer } from './media/media-consumer';
 
 @Module({
   imports: [
+    EventoModule,
     ArduinoModule,
     MediaModule,
     BullModule.forRoot({
