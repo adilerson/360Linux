@@ -16,6 +16,18 @@ function clean($string) {
  }
  
 
+ function descorrigeNome($string){
+    $string = str_replace(" ", "_", $string); 
+
+    return $string;
+}
+
+$pathEventos = "/360Linux/videoSpinAPI/dist/media/";
+$pathLixeira = "/360Linux/360/videos/lixeira/";
+$pathBackup = "/360Linux/360/videos/backup/";
+
+
  ?>
+
 
 

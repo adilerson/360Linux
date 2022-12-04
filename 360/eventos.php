@@ -1,81 +1,178 @@
 <?php
     include('class.php');
-    if (isset($_POST['nome'])){
+    
+    if (isset($_POST['lixeira']))
+    {
+
+        $file = "../videoSpinAPI/config/evento/evento.json";
+        $json =  json_decode(file_get_contents($file),true);
+
         
-        $evento = clean($_POST['nome']);
-        $nome_atual_frame = '';
-        $nome_atual_audio = '';
-
-        if (strlen($_FILES['frameName']['name']) > 0)
-        {
-
-            echo 'teve png<br>';
-
-            $pasta = "../videoSpinApi/config/frame/";
-
-            $nome_frameName    = $_FILES['frameName']['name'];
-            $tamanho_frameName = $_FILES['frameName']['size'];
-            
-            
-            $nome_atual_frame = $evento.'.png';
-            $tmp = $_FILES['frameName']['tmp_name'];
-
-            if(move_uploaded_file($tmp,$pasta.$nome_atual_frame)){
+        foreach($json as $key => $value){
+            if ($key == $_POST['key']){   
                 
+                unset($json[$key]);
+            }
+            
+        }
+        
+        if (is_dir("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'])){
+            $nomeNovo = $_POST['nomeoriginal'];
+            if (is_dir("videos/lixeira/".$_POST['nomeoriginal'])){
+                $nomeNovo = $_POST['nomeoriginal'].'-'.date("ymdhi");
+            }
+            if (rename("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'], "videos/lixeira/".$_POST['nomeoriginal'])){
+                $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Enviado para lixeira';
             }else{
-                $erro[] =  "Falha ao enviar a foto ";
-                
+                $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['edit_nome'].'<strong>';
+            }
+        }
+        
+        file_put_contents($file, json_encode($json));
+
+    }
+
+
+    if (isset($_POST['atualizar'])){
+        //echo $_POST['nomeoriginal'];
+
+
+        $file = "../videoSpinAPI/config/evento/evento.json";
+        $json =  json_decode(file_get_contents($file),true);
+        
+
+        foreach($json as $key => $value){
+            if ($key == $_POST['key']){                
+                $json[$key]['nome'] = corrigeNome($_POST['edit_nome']);
+                $json[$key]['tempo'] = $_POST['edit_tempo'];
+                $json[$key]['vNormal'] = $_POST['edit_vNormal'];
+                $json[$key]['vSlow'] = $_POST['edit_vSlow'];
+                $json[$key]['vFast'] = $_POST['edit_vFast'];
+                $json[$key]['posicao'] = $_POST['edit_position'];
+            }
+
+        }
+        
+
+        //echo $_POST['nomeoriginal'].' - '.clean($_POST['edit_nome']).'<br>';
+
+        if ($_POST['nomeoriginal'] != clean($_POST['edit_nome'])){
+            if (rename("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'], "../videoSpinAPI/dist/media/".clean($_POST['edit_nome']))){
+                $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Atualizado com sucesso';
+            }else{
+                $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['nomeoriginal'].'<strong>';
             }
         }
 
-        if (!isset($erro)){
-            if (strlen($_FILES['audioName']['name']) > 0)
+        
+        file_put_contents($file, json_encode($json));
+
+    }
+
+
+    if (isset($_POST['nome'])){
+        
+        $evento = clean($_POST['nome']);
+
+        if (is_dir("../videoSpinAPI/dist/media/".$evento)){
+            $erro[] =  "Evento já existente";
+
+        }else{
+
+            $nome_atual_frame = 'null';
+            $nome_atual_audio = 'null';
+
+
+            if (strlen($_FILES['frameName']['name']) > 0)
             {
-                echo 'teve audio<br>';
 
-                $pasta = "../videoSpinApi/config/audio/";
-                $permitidos = array(".png");	
+                
 
-                $nome_audioName    = $_FILES['audioName']['name'];
-                $tamanho_audioName = $_FILES['audioName']['size'];
+                $pasta = "../videoSpinApi/config/frame/";
+
+                $nome_frameName    = $_FILES['frameName']['name'];
+                $tamanho_frameName = $_FILES['frameName']['size'];
                 
                 
-                $nome_atual_audio = $evento.'.mp3';
-                $tmp = $_FILES['audioName']['tmp_name'];
+                $nome_atual_frame = $evento.'.png';
+                $tmp = $_FILES['frameName']['tmp_name'];
 
-                if(move_uploaded_file($tmp,$pasta.$nome_atual_audio)){
+                if(move_uploaded_file($tmp,$pasta.$nome_atual_frame)){
                     
                 }else{
                     $erro[] =  "Falha ao enviar a foto ";
                     
                 }
-
             }
-        }
 
-        if (!isset($erro)){
+            if (!isset($erro)){
+                if (strlen($_FILES['audioName']['name']) > 0)
+                {
+                    
 
 
-            $file = "../videoSpinAPI/config/evento/evento.json";
-            $json = json_decode(file_get_contents($file),TRUE);
+                    $pasta = "../videoSpinApi/config/audio/";
+                    $permitidos = array(".png");	
 
-            $json[] = array(
-                "nome" => [$evento, "Validators.required"],
-                "tempo" => [$_POST['tempo'], "Validators.required"],
-                "frameName" => ["$nome_atual_frame"],
-                "audioName" => ["$nome_atual_audio"],
-                "data" => [date('Y-m-d')],
-                "videoInput" => ["", "Validators.required"],
-                "vNormal" => [$_POST['vNormal'], "Validators.required"],
-                "vSlow" => [$_POST['vSlow'], "Validators.required"],
-                "vFast" => [$_POST['vFast'], "Validators.required"],
-                "position" => [$_POST['position']]
-            );
-            //print_r($json);exit;
-            file_put_contents($file, json_encode($json));
+                    $nome_audioName    = $_FILES['audioName']['name'];
+                    $tamanho_audioName = $_FILES['audioName']['size'];
+                    
+                    
+                    $nome_atual_audio = $evento.'.mp3';
+                    $tmp = $_FILES['audioName']['tmp_name'];
 
+                    if(move_uploaded_file($tmp,$pasta.$nome_atual_audio)){
+                        
+                    }else{
+                        $erro[] =  "Falha ao enviar a foto ";
+                        
+                    }
+                    
+
+                }
+            }
+
+            if (!isset($erro)){
+
+            
+                    $file = "../videoSpinAPI/config/evento/evento.json";
+                    $json = json_decode(file_get_contents($file),true);
+
+                    
+                    $conta = 0;
+                        foreach($json as $key => $val){
+                            if ($key > $conta){
+                                $conta = $key;
+                            }
+                        }
+
+                    
+                    $conta++;
+
+                        $json[] = array(
+
+                                "nome" => $evento,
+                                "tempo" => $_POST['tempo'],
+                                "frameName" => "$nome_atual_frame",
+                                "audioName" => "$nome_atual_audio",
+                                "data" => date('Y-m-d'),
+                                "videoInput" => "",
+                                "vNormal" => $_POST['vNormal'],
+                                "vSlow" => $_POST['vSlow'],
+                                "vFast" => $_POST['vFast'],
+                                "position" => $_POST['position']
+                                
+                        );
+                
+                
+
+                mkdir("../videoSpinAPI/dist/media/".$evento);
+                file_put_contents($file, json_encode($json));
+                
+            
         }
     }
+}
 
 
     
@@ -95,7 +192,13 @@
         if (isset($erro)){
             foreach($erro as $val)
             {
-                echo '<div class="erro">'.$val.'</div>';
+                echo '<div class="p-2 w-100 bg-danger text-white fs-15 text-center">'.$val.'</div>';
+            }
+        }
+        if (isset($sucesso)){
+            foreach($sucesso as $val)
+            {
+                echo '<div class="p-2 w-100 bg-success text-white fs-15 text-center">'.$val.'</div>';
             }
         }
     ?>
@@ -123,16 +226,16 @@
                 <label class="branco label" for="data">Data do Evento</label><input type="text" name="data" id="data">
             </div>-->
             <div class="inputs">
-                <label class="branco label" for="tempo">Tempo Total</label><input type="text" name="tempo" id="tempo">
+                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" name="vNormal" id="vNormal">
+                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="vNormal" id="vNormal" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" name="vSlow" id="vSlow">
+                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" name="vFast" id="vFast">
+                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" required>
             </div>
             <div class="inputs">
                 
@@ -153,41 +256,116 @@
     <?php
 
 
+    $file = "../videoSpinAPI/config/evento/evento.json";
+    $json = (object) json_decode(file_get_contents($file),true);
+    
+    
+       
 
-$itens = new DirectoryIterator('../videoSpinApi/config/evento');
-    foreach($itens as $item){
-
-        $ext = pathinfo($item, PATHINFO_EXTENSION);
-        $filename = pathinfo($item, PATHINFO_BASENAME);
-        $file = pathinfo($item, PATHINFO_FILENAME);
+    foreach($json as $key => $value){    
+        $value = (object) $value;
         
+       if ($value->nome == 'null'){continue;}
+        if ($value->audioName == ''){
+            $value->audioName = 'null';
+        }
+        if ($value->frameName == ''){
+            $value->frameName = 'null';
+        }
 
-        /*if ( ($ext != 'png') || ($item->gettype() == 'dir') || ($item == '.') || ($item == '..') ) {
-            continue;
-        }
-        */
-        if ( $ext == 'json')
-        {
-            $filename = str_replace(".json", "", $filename);
-            echo '
-            <div class="pai">
-                <div class="link">
-                    <a href="index.php?evento='.$filename.'" nome="'.$file.'" class="bubbly-button" style="">'.corrigeNome($filename).'</a>
-                </div>
-                
-            </div>';
-        }
-            
+        echo '
+        <div class="pai">
+            <div class="link bubbly-button flex" >
+                <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
+                <img src="img/settingsW.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
+            </div>        
+        </div>';
     }
 
-    
-
-
-    
     ?>
+
+     
+<div id="myModal" class="modal">
+  
+    <div class="modal-content flex">
+      <div class="fecharModal">
+          <span class="close" style="height: 3rem !important;">&times;</span>
+      </div>
+    <div style="">
+        <form method="post" action="eventos.php" enctype="multipart/form-data">
+            <input type="hidden" name="nomeoriginal" id="nomeoriginal">
+            <input type="hidden" name="key" id="key">
+            <div class="inputs">
+                <label class="branco label" for="nome">Nome</label><input type="text" name="edit_nome" id="edit_nome">
+            </div>
+            
+            <div class="inputs">
+                <label class="branco label" for="frameName">Moldura</label><input type="file" accept="image/png" name="edit_frameName" id="edit_frameName">
+            </div>
+            <div class="inputs">
+                <label class="branco label" for="audioName">Áudio</label><input type="file" accept="audio/mp3" name="edit_audioName" id="edit_audioName">
+            </div>
+            <div class="inputs">
+                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="edit_tempo" min="5" max="30" id="edit_tempo" required>
+            </div>
+            <div class="inputs">
+                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="edit_vNormal" id="edit_vNormal" required>
+            </div>
+            <div class="inputs">
+                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="edit_vSlow" id="edit_vSlow" required>
+            </div>
+            <div class="inputs">
+                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="edit_vFast" id="edit_vFast" required>
+            </div>
+            <div class="inputs">
+                
+                <label class="branco label" for="edit_position">Posição dos Botões</label>
+                <select name="edit_position" id="edit_position">
+                    <option value="top">Topo</option>
+                    <option value="center">Centro</option>
+                    <option value="bottom">Rodapé</option>
+                </select>
+
+            </div>
+            <div class="flex">
+                <input type="submit" class="btn" value="Atualizar" name="atualizar">
+                <input type="submit" class="btn btn-danger" value="Lixeira" name="lixeira">
+            </div>
+        </form>
+    </div>
+    
+  </div>
+</div>
+
 </body>
 
 <script>
+
+
+    $(".close").click(function(){
+        //$("#videoModal").attr("src","");
+        //$("#myModal").fadeOut("50");
+
+
+            $('#myModal').fadeOut("50");
+    });
+
+$(".editarEvento").click(function(){
+
+    $("#myModal").fadeIn("50");
+        
+    $("#edit_nome").val($(this).attr("nome"));
+
+    $("#edit_tempo").val($(this).attr("tempo"));
+    $("#edit_vNormal").val($(this).attr("vnormal"));
+    $("#edit_vSlow").val($(this).attr("vslow"));
+    $("#edit_vFast").val($(this).attr("vfast"));
+    $("#nomeoriginal").val($(this).attr("nomeoriginal"));
+    $("#key").val($(this).attr("key"));
+
+    
+        
+});
 
     if ($("#tempo").val() == ''){
         $("#tempo").val("12");
@@ -229,6 +407,48 @@ $itens = new DirectoryIterator('../videoSpinApi/config/evento');
         var total =  +vNormal + +vFast + +vSlow;
         $("#tempo").val(total);
     })
+
+
+    $("#edit_tempo").change(function(){
+        var tempo = $("#edit_tempo").val();
+        if (tempo > 3){
+            var div = tempo / 3;
+
+            $("#edit_vNormal").val(Math.ceil(div));
+            $("#edit_vSlow").val(Math.round(div));
+            $("#edit_vFast").val(Math.floor(div));
+        }
+    })
+
+    $("#edit_vNormal").change(function(){
+        var vNormal = $("#edit_vNormal").val();
+        var vFast = $("#edit_vFast").val();
+        var vSlow = $("#edit_vSlow").val();
+        var total =  +vNormal + +vFast + +vSlow;
+        $("#edit_tempo").val(total);
+    })
+
+    $("#edit_vFast").change(function(){
+        var vNormal = $("#edit_vNormal").val();
+        var vFast = $("#edit_vFast").val();
+        var vSlow = $("#edit_vSlow").val();
+        var total =  +vNormal + +vFast + +vSlow;
+        $("#edit_tempo").val(total);
+    })
+    $("#edit_vSlow").change(function(){
+        var vNormal = $("#edit_vNormal").val();
+        var vFast = $("#edit_vFast").val();
+        var vSlow = $("#edit_vSlow").val();
+        var total =  +vNormal + +vFast + +vSlow;
+        $("#edit_tempo").val(total);
+    })
+
+
+
+
+
+
+
 
 </script>
 

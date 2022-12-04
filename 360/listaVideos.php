@@ -1,4 +1,5 @@
 <?php
+
     include('class.php');
     
     if (isset($_GET['maximo'])){
@@ -10,16 +11,25 @@
     $evento = $_REQUEST['evento'];
     
     echo '';
-    echo '<div class="ws-100 text-center transition"><div id="atualizar" class="btn transition" style="display:none;">Atualizar</div></div>';
+
     echo '<div class="videos">';
 
     $pathSingle = $evento."/";
 	$path = "../videoSpinAPI/dist/media/".$evento."/";
-	
-    $diretorio = dir($path);
-    $script = '';
+
+    if (!is_dir($path)){
+
+        echo '<div class="bg-orange text-white p-2 w-100 text-center fs-15">Aguardando Envio de video</div>';
+        exit;
+    }
+    
+    $diretorio = dir($path);    
     
 
+
+    $script = '';
+    
+    $arquivos = [];
     while($arquivo = $diretorio -> read()){
         $arq = $arquivo;
         $ext = pathinfo($arq, PATHINFO_EXTENSION);
@@ -30,30 +40,34 @@
         
 
     }
+
+
+    if (count($arquivos) == 0){
+        
+        echo '<div class="bg-orange text-white p-2 w-100 text-center fs-15">Aguardando Envio de video</div>';
+        exit;
+    }
+
     $key = 0;
 
     $arquivos = array_reverse($arquivos);
+    $delay = 0;
     foreach($arquivos as $arquivo){
-
         
+
         if ($key < $maximo){
         
             $sonome = pathinfo($arquivo, PATHINFO_FILENAME);
 
-            echo '<div class="videoPai">
+            echo '<div class="videoPai animate-out" style="opacity:0;animation-delay: '.$delay.'ms;">
+            
                     <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">';
-                /*
-                    <video  class="videoEmbed" controls>
-                        <source src="'.$path.$arquivo.'" type="video/mp4">
-                    </video>
-                    */
-            //echo '<img src="'.$path.$sonome.'.jpg" class="videoEmbed"></img>';
-
                 echo '</div><div id="qrcode_'.$key.'" class="desfocado qrcode transition-1"></div>
                 </div>';
                 $script .= 'gerar("http://'.$_SERVER['SERVER_NAME'].'/360/download.php?video='.$pathSingle.$arquivo.'","qrcode_'.$key.'"); ';
 
             }
+            $delay = $delay + 100;
             $key++;
         
 
@@ -84,16 +98,11 @@ $(".qrcode").click(function(){
 
     // Get the modal
     var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn"); 
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
+    
     $(".video").click(function(){
-        //modal.style.display = "block";
+        
         $("#myModal").fadeIn("50");
         
         
@@ -103,10 +112,8 @@ $(".qrcode").click(function(){
     })
     
 
-    // When the user clicks on <span> (x), close the modal
+    var span = document.getElementsByClassName("close")[0];
     $(".close").click(function(){
-        //$("#videoModal").attr("src","");
-        //$("#myModal").fadeOut("50");
 
         $(function() {
             $('#myModal').fadeOut({
@@ -115,7 +122,7 @@ $(".qrcode").click(function(){
                 $('#videoModal').attr("src","")
             })
         })
-        //modal.style.display = "none";
+        
     });
     
 

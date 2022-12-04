@@ -18,6 +18,27 @@ body{
 .ws-100{
     width:100%;
 }
+.flex{
+    display: flex !important;
+}
+.hCenter{
+    justify-content: center;
+}
+.vCenter{
+  align-items: center;
+}
+.m-s1{
+    margin-left: 1rem;
+}
+.m-s2{
+    margin-left: 2rem;
+}
+.m-s3{
+    margin-left: 3rem;
+}
+.text-center{
+    text-align: center;
+}
 .lastVideo{
     display: flex;
     justify-content: center;
@@ -93,7 +114,7 @@ text-align:center;
     margin-bottom: 1rem;
 }
 .video{
-    position: relative;
+    /*position: relative;*/
     /*width: 10rem;*/
     height: 17rem;
     /*border: 1px solid #e5e5e5;*/
@@ -110,6 +131,7 @@ text-align:center;
     display: flex;
     padding: 1rem;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 .download{
     cursor: pointer;
@@ -128,7 +150,7 @@ text-align:center;
     background-color: #56baed;
     border: none;
     color: white;
-    padding: 15px 80px;
+    padding: 15px 50px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -152,6 +174,7 @@ transition: all 0.3s ease-in-out;
 .fechar{
     height: 1px;
 }
+
 
 
 
@@ -203,6 +226,48 @@ transition: all 0.3s ease-in-out;
     font-size: 1.3rem;
     min-width: 13rem;;
   }
+  .bg-success{
+    background-color: rgb(40, 150, 40);
+  }
+  .bg-danger{
+    background-color: #cc1517;
+  }
+  .bg-orange{
+    background-color: rgb(255, 109, 56);
+  }
+  .w-100{
+    width: 100% !important;
+  }
+  .p-1{
+    padding: 1rem;
+  }
+  .p-2{
+    padding: 2rem;
+  }
+  .p-3{
+    padding: 3rem;
+  }
+  .text-white{
+    color:white !important;
+  }
+  .fs-1{
+    font-size: 1rem;
+  }
+  .fs-15{
+    font-size: 1.5rem;
+  }
+  .fs-17{
+    font-size: 1.7rem;
+  }
+  .fs-2{
+    font-size: 2rem;
+  }
+
+
+  .btn-danger{
+    background-color: #cc1517;
+  }
+
   .branco{
     color:white !important;
   }
@@ -210,10 +275,16 @@ transition: all 0.3s ease-in-out;
     display: flex;
     margin-bottom:0.5rem;
   }
-  /* The Close Button */
+  .fecharModal{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    z-index: 1000;
+  }
+
   .close {
     color: #aaa;
-    float: right;
+    /*float: right;*/
     font-size: 28px;
     font-weight: bold;
     width: 2rem;
@@ -249,3 +320,52 @@ transition: all 0.3s ease-in-out;
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
   }
+
+
+
+  .animate-out {
+    -webkit-animation: out 200ms ease-in-out forwards;
+            animation: out 200ms ease-in-out forwards;
+            animation-timing-function: ease-out;
+            
+  }
+  
+  .animate-in {
+    -webkit-animation: in 500ms ease-in-out forwards;
+            animation: in 500ms ease-in-out forwards;
+    display: block;
+  }
+
+  @keyframes out { 
+    0% {
+      opacity: 0;
+      /*transform: rotate(10deg);*/
+      margin-top: -3rem;
+     }
+    100% { 
+      opacity: 1;
+      /*transform: rotate(0deg);*/
+      margin-top:0rem;
+    }
+  }
+/*
+  @keyframes out { 
+    0% {
+      opacity: 0;
+      margin-top: -2rem;
+     }
+    100% { 
+      opacity: 1;
+      margin-top:0rem;
+    }
+  }
+
+
+
+*/
+
+
+
+
+
+

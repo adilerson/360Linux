@@ -23,6 +23,10 @@
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
     <link href="css/style.css?teste=3" rel="stylesheet">
 
+
+    <link rel="stylesheet" href="css/jquery-confirm.css">
+    <script src="js/jquery-confirm.js"></script>
+
     <title>360 - <?php echo corrigeNome($evento); ?></title>
     <script>
         
@@ -34,7 +38,7 @@
             $('#'+key).qrcode({text: address});
         }
         function contar(qt){
-            console.log('Conta: '+ conta + ', Qt: ' + qt)
+            //console.log('Conta: '+ conta + ', Qt: ' + qt)
             if (qt > conta){
                 conta = qt;
                 $("#atualizar").fadeIn("300");
@@ -52,10 +56,12 @@
 <body id="body">
     <div class="topo">
         <div class="home" id="home">
-            <img src="img/home.png">
+            <a href="eventos.php"><img src="img/home.png"></a>
         </div>
         <div class="eventoTitulo"><?php echo ucfirst(corrigeNome($evento)) ?></div>  
+        <div class="text-center transition flex"><img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;"></div>
 </div>
+
 <div id="listaVideos">
 
 </div>
@@ -92,9 +98,9 @@
     
     $("#atualizar").click(function(){
 
-        $("#listaVideos").load("listaVideos.php?", {'evento': '<?php echo $evento; ?>'});
-            //window.location.reload();
-            //openFullscreen()
+        $("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
+        $("#atualizar").fadeOut("50")
+
     })
 
     function requestFullScreen(element) {
@@ -139,5 +145,43 @@ function fullE() {
 
 $("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
 
+function confirma(item){
+    $.confirm({
+        title: 'Excluir',
+        content: 'Tem certeza que deseja excluir o item '+item,
+        buttons: {
+            /*
+            Sim: function () {
+                $.alert('Excluído!');
+            },
+            */
+            Cancelar: function () {
+                //$.alert('Canceled!');
+            },
+            somethingElse: {
+                text: 'Excluir',
+                btnClass: 'btn-blue',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    $.alert('Excluído com sucesso');
+                }
+            }
+        }
+    });
+}
+
+mostra = 1;
+$(".eventoTitulo").click(function(){
+    
+    if (mostra = 1){
+        $(".eventoTitulo").css('color',"#272727");
+        $(".eventoTitulo").css('text-shadow',"none");
+        mostra = 0;
+    }else{
+        $(".eventoTitulo").css('color',"white");
+        $(".eventoTitulo").css('text-shadow',"3px 4px 4px black");
+        mostra = 1;
+    }
+});
 
 </script>
