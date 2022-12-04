@@ -25,6 +25,8 @@ async function bootstrap() {
       `https://${process.env.SERVIDOR_IP}:4200`,
       `https://${process.env.SERVIDOR_IP}`,
       `https://${process.env.SERVIDOR_IP}:443`,
+      `https://${process.env.SERVIDOR_IP}:8080`,
+      `http://${process.env.SERVIDOR_IP}:8080`,
       `http://localhost:4200`,
     ],
   });

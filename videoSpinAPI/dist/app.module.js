@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const evento_module_1 = require("./evento/evento.module");
 const arduino_module_1 = require("./arduino/arduino.module");
 const media_module_1 = require("./media/media.module");
 const common_1 = require("@nestjs/common");
@@ -19,6 +20,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            evento_module_1.EventoModule,
             arduino_module_1.ArduinoModule,
             media_module_1.MediaModule,
             bull_1.BullModule.forRoot({

@@ -96,15 +96,19 @@ let MediaService = class MediaService {
                 var command = ffmpeg();
                 command.input(`tmp/${file}`).format('mp4');
                 if (fs.existsSync(`config/audio`)) {
-                    if (fs.existsSync(`config/audio/audio.mp3`)) {
-                        audioConfig = true;
-                        command.input(`config/audio/audio.mp3`);
+                    if (fileConfig.audio) {
+                        if (fs.existsSync(`config/audio/${fileConfig.audio}.mp3`)) {
+                            audioConfig = true;
+                            command.input(`config/audio/${fileConfig.audio}.mp3`);
+                        }
                     }
                 }
                 if (fs.existsSync(`config/frame`)) {
-                    if (fs.existsSync(`config/frame/frame.png`)) {
-                        frameConfig = true;
-                        command.input(`config/frame/frame.png`);
+                    if (fileConfig.frame) {
+                        if (fs.existsSync(`config/frame/${fileConfig.frame}.png`)) {
+                            frameConfig = true;
+                            command.input(`config/frame/${fileConfig.frame}.png`);
+                        }
                     }
                 }
                 if (frameConfig) {

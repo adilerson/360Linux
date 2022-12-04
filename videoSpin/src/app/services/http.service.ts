@@ -15,6 +15,7 @@ export class HttpService {
   public url = serverIP;
 
   public rodaApi = 'https://192.168.36.36:3000';
+  //public rodaApi = 'https://192.168.1.104:3000';
 
   constructor(
     private http: HttpClient,
@@ -35,13 +36,17 @@ export class HttpService {
     loading.present();
   }
 
+  async getEventos() {
+    return this.http.get(`${this.rodaApi}/eventos`);
+  }
+
   async startGiraGira() {
     await this.http
       .get(`${this.rodaApi}/arduino?status=1`)
       .subscribe(async (res) => {
         console.log(res);
         const toast = await this.toastController.create({
-          message: 'success',
+          message: 'start ok',
           duration: 1500,
           position: 'bottom',
           color: 'success',
@@ -57,7 +62,7 @@ export class HttpService {
       .subscribe(async (res) => {
         console.log(res);
         const toast = await this.toastController.create({
-          message: 'success',
+          message: 'stop ok',
           duration: 1500,
           position: 'bottom',
           color: 'success',
@@ -66,7 +71,6 @@ export class HttpService {
         await toast.present();
       });
   }
-
 
   async sendVideo(formData: FormData) {
     this.showLoading();
