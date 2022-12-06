@@ -32,6 +32,7 @@
     "@ffmpeg/ffmpeg": "^0.11.6",
     "@flemist/ffmpeg.wasm-core-st": "^0.10.2",
     "@ionic/angular": "^6.1.9",
+    "@ionic/cli": "^6.20.4",
     "capacitor-video-player": "^4.1.0",
     "ionicons": "^6.0.3",
     "rxjs": "~6.6.0",

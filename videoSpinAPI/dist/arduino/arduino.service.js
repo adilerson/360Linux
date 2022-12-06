@@ -12,7 +12,7 @@ const { exec } = require('child_process');
 let ArduinoService = class ArduinoService {
     async sendArduinoCommand(status) {
         if (status === 1) {
-            exec('python3 /var/www/html/360/on.py', (error, stdout, stderr) => {
+            exec('python3 /var/www/html/360Linux/on.py', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
@@ -23,7 +23,7 @@ let ArduinoService = class ArduinoService {
                 }
             });
             setTimeout(() => {
-                exec('python3 /var/www/html/360/begin.py', (error, stdout, stderr) => {
+                exec('python3 /var/www/html/360Linux/begin.py', (error, stdout, stderr) => {
                     if (error) {
                         console.error(`error: ${error.message}`);
                         return;
@@ -32,7 +32,11 @@ let ArduinoService = class ArduinoService {
             }, 1000);
         }
         else {
+<<<<<<< Updated upstream
             exec('python3 /var/www/html/360/off.py', (error, stdout, stderr) => {
+=======
+            exec('python3 /var/www/html/360Linux/off.py', (error, stdout, stderr) => {
+>>>>>>> Stashed changes
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
@@ -43,7 +47,7 @@ let ArduinoService = class ArduinoService {
                 }
             });
             setTimeout(() => {
-                exec('python3 /var/www/html/360/begin.py', (error, stdout, stderr) => {
+                exec('python3 /var/www/html/360Linux/begin.py', (error, stdout, stderr) => {
                     if (error) {
                         console.error(`error: ${error.message}`);
                         return;

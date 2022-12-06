@@ -35,7 +35,7 @@ async function bootstrap() {
         console.log('aplication started');
         console.log(process.env.SERVIDOR_IP);
         setTimeout(() => {
-            exec('python3 /var/www/html/360/begin.py', (error, stdout, stderr) => {
+            exec('python3 /var/www/html/360Linux/begin.py', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
