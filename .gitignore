@@ -46,7 +46,7 @@ videoSpinAPI/lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 videoSpinAPI/*.mp4
-videoSpinAPI/*.png
+#videoSpinAPI/*.png
 secrets/key.pem
 videoSpinAPi.zip
 videoSpinAPi.zip
