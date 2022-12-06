@@ -60,5 +60,5 @@ videoSpinAPI/*.pem
 *.txt
 *.pack
 *.mp3
-*.png
+videoSpinAPI/*.png
 *.tsbuildinfo
