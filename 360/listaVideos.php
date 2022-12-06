@@ -15,7 +15,7 @@
     echo '<div class="videos">';
 
     $pathSingle = $evento."/";
-	$path = "../videoSpinAPI/dist/media/".$evento."/";
+	$path = "../videoSpinAPI/eventos/".$evento."/";
 
     if (!is_dir($path)){
 

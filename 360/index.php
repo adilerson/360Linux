@@ -10,7 +10,7 @@
             $evento = $_GET['evento'];
         }
 
-        $path = "../videoSpinAPI/dist/media/".$evento."/";
+        $path = "../videoSpinAPI/eventos/".$evento."/";
 
 ?>
 <!DOCTYPE html>

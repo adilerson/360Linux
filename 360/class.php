@@ -22,7 +22,7 @@ function clean($string) {
     return $string;
 }
 
-$pathEventos = "/360Linux/videoSpinAPI/dist/media/";
+$pathEventos = "/360Linux/videoSpinAPI/eventos/";
 $pathLixeira = "/360Linux/360/videos/lixeira/";
 $pathBackup = "/360Linux/360/videos/backup/";
 

@@ -16,12 +16,12 @@
             
         }
         
-        if (is_dir("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'])){
+        if (is_dir("../videoSpinAPI/eventos/".$_POST['nomeoriginal'])){
             $nomeNovo = $_POST['nomeoriginal'];
             if (is_dir("videos/lixeira/".$_POST['nomeoriginal'])){
                 $nomeNovo = $_POST['nomeoriginal'].'-'.date("ymdhi");
             }
-            if (rename("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'], "videos/lixeira/".$_POST['nomeoriginal'])){
+            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal'], "videos/lixeira/".$_POST['nomeoriginal'])){
                 $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Enviado para lixeira';
             }else{
                 $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['edit_nome'].'<strong>';
@@ -57,7 +57,7 @@
         //echo $_POST['nomeoriginal'].' - '.clean($_POST['edit_nome']).'<br>';
 
         if ($_POST['nomeoriginal'] != clean($_POST['edit_nome'])){
-            if (rename("../videoSpinAPI/dist/media/".$_POST['nomeoriginal'], "../videoSpinAPI/dist/media/".clean($_POST['edit_nome']))){
+            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal'], "../videoSpinAPI/eventos/".clean($_POST['edit_nome']))){
                 $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Atualizado com sucesso';
             }else{
                 $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['nomeoriginal'].'<strong>';
@@ -74,7 +74,7 @@
         
         $evento = clean($_POST['nome']);
 
-        if (is_dir("../videoSpinAPI/dist/media/".$evento)){
+        if (is_dir("../videoSpinAPI/eventos/".$evento)){
             $erro[] =  "Evento já existente";
 
         }else{
@@ -166,7 +166,7 @@
                 
                 
 
-                mkdir("../videoSpinAPI/dist/media/".$evento);
+                mkdir("../videoSpinAPI/eventos/".$evento);
                 file_put_contents($file, json_encode($json));
                 
             
