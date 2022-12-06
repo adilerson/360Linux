@@ -46,12 +46,13 @@ videoSpinAPI/lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 videoSpinAPI/*.mp4
-*.rar
-*.pem
+videoSpinAPI/*.png
 secrets/key.pem
 videoSpinAPi.zip
 videoSpinAPi.zip
 videoSpinAPI/*.pem
+*.pem
+*.rar
 *.mp4
 *.txt
 *.map
@@ -60,5 +61,4 @@ videoSpinAPI/*.pem
 *.txt
 *.pack
 *.mp3
-videoSpinAPI/*.png
 *.tsbuildinfo
