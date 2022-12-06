@@ -41,7 +41,7 @@ export class ArduinoService {
 
 
     } else {
-      exec('python3 /var/www/html/360/acoff.py', (error, stdout, stderr) => {
+      exec('python3 /var/www/html/360/off.py', (error, stdout, stderr) => {
         if (error) {
           console.error(`error: ${error.message}`);
           return;

@@ -89,20 +89,24 @@ export class MediaService {
           return
         }
   
-      
+    
+        if (!fs.existsSync(`eventos`)) {
+          fs.mkdirSync(`eventos`)
+        }
 
         if (fileConfig) {
-          if (fs.existsSync(`dist/${fileConfig.name}`)) {
-            folder = `dist/${fileConfig.name}`
+
+          if (fs.existsSync(`eventos/${fileConfig.name}`)) {
+            folder = `eventos/${fileConfig.name}`
      
           }else{
-           await fs.promises.mkdir(`dist/${fileConfig.name}`).then((e)=>{
+           await fs.promises.mkdir(`eventos/${fileConfig.name}`).then((e)=>{
             console.log('Criou a pasta')
-            folder = `dist/${fileConfig.name}`
+            folder = `eventos/${fileConfig.name}`
            })
           }
         }else[
-          folder = `dist/media`
+          folder = `dist`
         ]
 
         console.log('fodler: '+folder)
