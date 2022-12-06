@@ -99,8 +99,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
             this.eventoDetails = {
               name: _event.nome.replace(/[^A-Z0-9]+/gi, '_'),
-              audio: _event.audioName,
-              frame: _event.frameName,
+              audio: _event.audioName !== 'null'?_event.audioName:'',
+              frame: _event.frameName !== 'null'?_event.frameName:'',
               vNormal: _event.vNormal,
               vFast: _event.vFast,
               vSlow: _event.vSlow,
@@ -287,7 +287,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   async recordVideo() {
 
-    
+
     clearInterval(this.intervalDelay);
     this.delayStarted = false;
     this.isRecording = true;

@@ -18,12 +18,15 @@
   <h1 class="ion-padding">Eventos Cadastrados</h1>
 
   <ng-container *ngFor="let evento of eventos; let i = index">
-    <ion-item (click)="eventoActionSheet(evento[i+1],i)" button>
-      <ion-label>
-        <h3>{{evento[i+1].nome}}</h3>
-        <p>{{evento[i+1].data |date:'dd/MM/YYYY'}}</p>
-      </ion-label>
-    </ion-item>
+    <div *ngIf="evento.nome !== 'null' ">
+      <ion-item (click)="eventoActionSheet(evento,i)" button>
+        <ion-label>
+          <h3>{{evento.nome}}</h3>
+          <p>{{evento.data |date:'dd/MM/YYYY'}}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+
   </ng-container>
 
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">

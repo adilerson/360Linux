@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/prefer-for-of */
 import { async } from 'rxjs';
 /* eslint-disable arrow-body-style */
@@ -95,8 +96,15 @@ export class ConfigPage implements OnInit {
   async getEventos() {
     (await this.http.getEventos()).subscribe((res: Array<any>) => {
       console.log(res);
+      this.eventos = [];
+      for (const key in res) {
+        if (Object.prototype.hasOwnProperty.call(res, key)) {
+          const element = res[key];
+          this.eventos.push(element);
+        }
+      }
 
-      this.eventos = res;
+      console.log(this.eventos)
     });
   }
 
@@ -163,7 +171,7 @@ export class ConfigPage implements OnInit {
             this.seeEvento(evento);
           },
         },
-    /*     {
+        /*     {
           text: 'Deletar',
           role: 'destructive',
 
@@ -246,9 +254,7 @@ export class ConfigPage implements OnInit {
       header: `Nome:${evento.nome},  Gravação: ${evento.tempo} seg`,
       subHeader: `${evento.frameName ? 'Frame: ' + evento.frameName : ''} ${
         evento.audioName ? ', Audio: ' + evento.audioName : ''
-      }  ${
-        this.videoInput?', '+ this.videoInput.label : ', Não informada'
-      }`,
+      }  ${this.videoInput ? ', ' + this.videoInput.label : ', Não informada'}`,
       buttons: [
         {
           text: 'Fechar',
