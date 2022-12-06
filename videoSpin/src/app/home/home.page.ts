@@ -97,6 +97,15 @@ export class HomePage implements OnInit, AfterViewInit {
             this.evento = _event;
             this.position =_event.position? _event.position:'center';
 
+            console.log(typeof _event.vNormal)
+            console.log(typeof _event.vFast)
+            console.log(typeof _event.vSlow)
+
+
+          _event.vNormal =parseInt(_event.vNormal,10)
+          _event.vFast =parseInt(_event.vFast,10)
+          _event.vSlow =parseInt(_event.vSlow,10)
+
             this.eventoDetails = {
               name: _event.nome.replace(/[^A-Z0-9]+/gi, '_'),
               audio: _event.audioName !== 'null'?_event.audioName:'',
@@ -120,10 +129,20 @@ export class HomePage implements OnInit, AfterViewInit {
           this.position =config.position? config.position:'center';
           //this.camera = this.evento.camera;
           this.segundos = this.evento.tempo * 1000;
+
+
+          console.log(typeof config.vNormal)
+          console.log(typeof config.vFast)
+          console.log(typeof config.vSlow)
+
+          config.vNormal =parseInt(config.vNormal,10)
+          config.vFast =parseInt(config.vFast,10)
+          config.vSlow =parseInt(config.vSlow,10)
+
           this.eventoDetails = {
             name: config.nome.replace(/[^A-Z0-9]+/gi, '_'),
-            audio: config.audioName,
-            frame: config.frameName,
+            audio: config.audioName !== 'null'?config.audioName:'',
+            frame: config.frameName !== 'null'?config.frameName:'',
             vNormal: config.vNormal,
             vFast: config.vFast,
             vSlow: config.vSlow,
