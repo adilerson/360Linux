@@ -16,7 +16,7 @@
         return ucfirst($string);
     }
 
-$itens = new DirectoryIterator('../videoSpinApi/dist/');
+$itens = new DirectoryIterator('../videoSpinAPI/dist/');
     foreach($itens as $item){
         if ( ($item->gettype() === 'dir') && ($item != '.') && ($item != '..')){
             echo '<a href="index.php?evento='.$item.'" class="bubbly-button">'.corrigeNome($item).'</a>';

@@ -9,7 +9,9 @@
     }
 
     if (isset($_GET['contaVideos'])){
+        
         $path = "../videoSpinAPI/eventos/".$_GET['evento']."/";
+        
         $diretorio = dir($path);
         $conta = 0;
         while($arquivo = $diretorio -> read()){

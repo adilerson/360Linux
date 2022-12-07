@@ -73,7 +73,7 @@
         <link href="css/style.css?teste=3" rel="stylesheet">
         </form>
         <?php
-            $itens = new DirectoryIterator('../videoSpinApi/config/audio/');
+            $itens = new DirectoryIterator('../videoSpinAPI/config/audio/');
             foreach($itens as $item){
 
                 $ext = pathinfo($item, PATHINFO_EXTENSION);
@@ -103,7 +103,7 @@
         <input type="submit" value="Enviar"/>
         </form>
         <?php
-            $itens = new DirectoryIterator('../videoSpinApi/config/frame/');
+            $itens = new DirectoryIterator('../videoSpinAPI/config/frame/');
             foreach($itens as $item){
 
                 $ext = pathinfo($item, PATHINFO_EXTENSION);

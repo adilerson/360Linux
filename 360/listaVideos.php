@@ -64,7 +64,7 @@
                     <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">';
                 echo '</div><div id="qrcode_'.$key.'" class="desfocado qrcode transition-1"></div>
                 </div>';
-                $script .= 'gerar("http://'.$_SERVER['SERVER_NAME'].'/360/download.php?video='.$pathSingle.$arquivo.'","qrcode_'.$key.'"); ';
+                $script .= 'gerar("http://'.$_SERVER['SERVER_NAME'].'/360Linux/360/download.php?video='.$pathSingle.$arquivo.'","qrcode_'.$key.'"); ';
 
             }
             $delay = $delay + 100;
@@ -106,7 +106,7 @@ $(".qrcode").click(function(){
         $("#myModal").fadeIn("50");
         
         
-        gerar("http://<?php echo $_SERVER['SERVER_NAME'] ?>/360/download.php?video=<?php echo $path ?>"+$(this).attr("video"),"qrcodeModal"); 
+        gerar("http://<?php echo $_SERVER['SERVER_NAME'] ?>/360Linux/360/download.php?video=<?php echo $path ?>"+$(this).attr("video"),"qrcodeModal"); 
         $("#videoModal").attr("src","<?php echo $path ?>"+$(this).attr("video"))
         
     })

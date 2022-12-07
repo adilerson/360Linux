@@ -18,7 +18,7 @@
 <div class="pai">
 
     <div class="baixarDiv">
-        <a class="bubbly-button" href="<?php echo $video?>" download>Baixar Video</a>
+        <a class="bubbly-button" href="<?php echo $video?>" style="white-space: nowrap;" download>Baixar Video</a>
     </div>
 
     <!--<button class="bubbly-button">Click me!</button>-->

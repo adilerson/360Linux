@@ -80,22 +80,30 @@
         }else{
 
             $nome_atual_frame = 'null';
+            $nome_atual_frame_sem = 'null';
             $nome_atual_audio = 'null';
+            $nome_atual_audio_sem = 'null';
 
 
             if (strlen($_FILES['frameName']['name']) > 0)
             {
+                //echo $_FILES['frameName']['size'];exit;
 
                 
 
-                $pasta = "../videoSpinApi/config/frame/";
+                $pasta = "../videoSpinAPI/config/frame/";
 
                 $nome_frameName    = $_FILES['frameName']['name'];
                 $tamanho_frameName = $_FILES['frameName']['size'];
                 
                 
                 $nome_atual_frame = $evento.'.png';
+                $nome_atual_frame_sem = $evento;
+                
+                
                 $tmp = $_FILES['frameName']['tmp_name'];
+                //echo $pasta.$nome_atual_frame;exit;
+                
 
                 if(move_uploaded_file($tmp,$pasta.$nome_atual_frame)){
                     
@@ -111,7 +119,7 @@
                     
 
 
-                    $pasta = "../videoSpinApi/config/audio/";
+                    $pasta = "../videoSpinAPI/config/audio/";
                     $permitidos = array(".png");	
 
                     $nome_audioName    = $_FILES['audioName']['name'];
@@ -119,12 +127,13 @@
                     
                     
                     $nome_atual_audio = $evento.'.mp3';
+                    $nome_atual_audio_sem = $evento;
                     $tmp = $_FILES['audioName']['tmp_name'];
 
                     if(move_uploaded_file($tmp,$pasta.$nome_atual_audio)){
                         
                     }else{
-                        $erro[] =  "Falha ao enviar a foto ";
+                        $erro[] =  "Falha ao enviar o audio";
                         
                     }
                     
@@ -153,8 +162,8 @@
 
                                 "nome" => $evento,
                                 "tempo" => $_POST['tempo'],
-                                "frameName" => "$nome_atual_frame",
-                                "audioName" => "$nome_atual_audio",
+                                "frameName" => "$evento",
+                                "audioName" => "$evento",
                                 "data" => date('Y-m-d'),
                                 "videoInput" => "",
                                 "vNormal" => $_POST['vNormal'],
@@ -166,7 +175,9 @@
                 
                 
 
-                mkdir("../videoSpinAPI/eventos/".$evento);
+                $oldmask = umask(0);
+                mkdir("../videoSpinAPI/eventos/".$evento, 0777);
+                umask($oldmask);
                 file_put_contents($file, json_encode($json));
                 
             
@@ -261,7 +272,8 @@
     
     
        
-
+    //$json = array_reverse($json);
+    $str = '';
     foreach($json as $key => $value){    
         $value = (object) $value;
         
@@ -273,15 +285,15 @@
             $value->frameName = 'null';
         }
 
-        echo '
+        $str = '
         <div class="pai">
             <div class="link bubbly-button flex" >
                 <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
                 <img src="img/settingsW.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
             </div>        
-        </div>';
+        </div>'.$str;
     }
-
+    echo $str;
     ?>
 
      

@@ -30,7 +30,7 @@
     <title>360 - <?php echo corrigeNome($evento); ?></title>
     <script>
         
-        
+        conta = 0;
         function gerar(address,key){
 
             $('#'+key).empty();
@@ -47,7 +47,7 @@
 
         function atualizaVideos(){
 
-            $("#status").load("script.php?contaVideos=1&evento=<?php echo corrigeNome($evento) ?> ");
+            $("#status").load("script.php?contaVideos=1&evento=<?php echo clean($evento) ?> ");
         }
         setInterval(atualizaVideos, 3000);
 
