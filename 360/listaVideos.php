@@ -34,13 +34,34 @@
         $arq = $arquivo;
         $ext = pathinfo($arq, PATHINFO_EXTENSION);
 
-        if ($ext == 'mp4'){
-            $arquivos[] = $arquivo;
+        if ($ext == 'jpg'){
+            /*
+            echo '<br>***';
+            echo $arquivo;
+            echo '***<br>';
+            //
+            */
+            $arquivos[date('Y/m/d H:i:s', filemtime($path.'/'.$arquivo))] = $arquivo;
+            //$arquivos[] = $arquivo;
+            //$arrayArquivos[date('Y/m/d H:i:s', filemtime($pasta.$arquivo))] = $pasta.$arquivo;
         }
         
 
     }
 
+    /*
+    foreach($arquivos as $key => $value){
+        echo $key.' - '.$value.'<br>';
+    }
+    
+    echo '<br><br>';
+    foreach($arquivos as $key => $value){
+        echo $key.' - '.$value.'<br>';
+    }
+    exit;
+    */
+
+    ksort($arquivos, SORT_STRING);
 
     if (count($arquivos) == 0){
         
@@ -113,17 +134,8 @@ $(".qrcode").click(function(){
     
 
     var span = document.getElementsByClassName("close")[0];
-    $(".close").click(function(){
 
-        $(function() {
-            $('#myModal').fadeOut({
-                
-            }, 50, function() {
-                $('#videoModal').attr("src","")
-            })
-        })
-        
-    });
+
     
 
 

@@ -72,7 +72,7 @@
   
   <div class="modal-content">
     <div>
-        <span class="close">&times;</span>
+        <span class="close" onclick="fechar()">&times;</span>
     </div>
     <div style="text-align: center;">
         <video  class="videoEmbedModal" src="" id="videoModal" controls="controls" autoplay>
@@ -183,5 +183,23 @@ $(".eventoTitulo").click(function(){
         mostra = 1;
     }
 });
+
+
+
+function fechar(){
+    var video = document.getElementById("videoModal");
+    video.pause();
+    $('#videoModal').attr("src","")
+$(function() {
+    $('#myModal').fadeOut({
+        
+    }, 50, function() {
+        
+        
+    })
+})
+
+}
+
 
 </script>

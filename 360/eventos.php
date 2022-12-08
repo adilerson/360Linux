@@ -34,12 +34,69 @@
 
 
     if (isset($_POST['atualizar'])){
-        //echo $_POST['nomeoriginal'];
-
 
         $file = "../videoSpinAPI/config/evento/evento.json";
         $json =  json_decode(file_get_contents($file),true);
+        $evento = clean($_POST['edit_nome']);
         
+
+        if (strlen($_FILES['edit_frameName']['name']) > 0)
+        {
+            
+
+            
+
+            $pasta = "../videoSpinAPI/config/frame/";
+
+            $nome_frameName    = $_FILES['edit_frameName']['name'];
+            $tamanho_frameName = $_FILES['edit_frameName']['size'];
+            
+            
+            $nome_atual_frame = $evento.'.png';
+            $nome_atual_frame_sem = $evento;
+            
+            
+            $tmp = $_FILES['edit_frameName']['tmp_name'];
+            
+
+            if(move_uploaded_file($tmp,$pasta.$nome_atual_frame)){
+                
+            }else{
+                $erro[] =  "Falha ao enviar a foto ";
+                
+            }
+            
+        }
+
+        if (!isset($erro)){
+            if (strlen($_FILES['edit_audioName']['name']) > 0)
+            {
+                
+
+                $pasta = "../videoSpinAPI/config/audio/";
+                $permitidos = array(".png");	
+
+                $nome_audioName    = $_FILES['edit_audioName']['name'];
+                $tamanho_audioName = $_FILES['edit_audioName']['size'];
+                
+                $nome_atual_audio = $evento.'.mp3';
+                $nome_atual_audio_sem = $evento;
+                $tmp = $_FILES['edit_audioName']['tmp_name'];
+                
+
+                if(move_uploaded_file($tmp,$pasta.$nome_atual_audio)){
+                    
+                }else{
+                    $erro[] =  "Falha ao enviar o audio";
+                    
+                }
+                
+
+            }
+        }
+
+
+
 
         foreach($json as $key => $value){
             if ($key == $_POST['key']){                
@@ -52,9 +109,7 @@
             }
 
         }
-        
 
-        //echo $_POST['nomeoriginal'].' - '.clean($_POST['edit_nome']).'<br>';
 
         if ($_POST['nomeoriginal'] != clean($_POST['edit_nome'])){
             if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal'], "../videoSpinAPI/eventos/".clean($_POST['edit_nome']))){
@@ -75,7 +130,7 @@
         $evento = clean($_POST['nome']);
 
         if (is_dir("../videoSpinAPI/eventos/".$evento)){
-            $erro[] =  "Evento já existente";
+            $erro[] =  "Evento '$evento' já existente";
 
         }else{
 
@@ -87,7 +142,7 @@
 
             if (strlen($_FILES['frameName']['name']) > 0)
             {
-                //echo $_FILES['frameName']['size'];exit;
+                
 
                 
 
@@ -102,7 +157,7 @@
                 
                 
                 $tmp = $_FILES['frameName']['tmp_name'];
-                //echo $pasta.$nome_atual_frame;exit;
+                
                 
 
                 if(move_uploaded_file($tmp,$pasta.$nome_atual_frame)){
@@ -118,17 +173,16 @@
                 {
                     
 
-
                     $pasta = "../videoSpinAPI/config/audio/";
                     $permitidos = array(".png");	
 
                     $nome_audioName    = $_FILES['audioName']['name'];
                     $tamanho_audioName = $_FILES['audioName']['size'];
                     
-                    
                     $nome_atual_audio = $evento.'.mp3';
                     $nome_atual_audio_sem = $evento;
                     $tmp = $_FILES['audioName']['tmp_name'];
+                    
 
                     if(move_uploaded_file($tmp,$pasta.$nome_atual_audio)){
                         
@@ -289,7 +343,7 @@
         <div class="pai">
             <div class="link bubbly-button flex" >
                 <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
-                <img src="img/settingsW.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
+                <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
             </div>        
         </div>'.$str;
     }
