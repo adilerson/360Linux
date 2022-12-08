@@ -9,6 +9,7 @@ import { Injectable } from '@nestjs/common';
 const { exec } = require('child_process');
 @Injectable()
 export class ArduinoService {
+
   async sendArduinoCommand(status: any) {
     
 
@@ -16,6 +17,7 @@ export class ArduinoService {
 
 	
 	exec('python3 /var/www/html/360Linux/360/on.py', (error, stdout, stderr) => {
+
 
         if (error) {
           console.error(`error: ${error.message}`);
@@ -26,10 +28,8 @@ export class ArduinoService {
           console.error(`stderr: ${stderr}`);
           return;
         }
-
-
-        
       });
+
 
 	setTimeout(() => {
     exec('python3 /var/www/html/360Linux/360/begin.py', (error, stdout, stderr) => {
@@ -52,10 +52,8 @@ export class ArduinoService {
           console.error(`stderr: ${stderr}`);
           return;
         }
-
-
-        
       });
+
 
 setTimeout(() => {
     exec('python3 /var/www/html/360Linux/360/begin.py', (error, stdout, stderr) => {
@@ -64,6 +62,7 @@ setTimeout(() => {
         return;
       }})
   }, 1000);
+
 
     }
   }
