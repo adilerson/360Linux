@@ -1,5 +1,7 @@
 <?php
-    include('class.php');
+
+
+include('class.php');
     
     if (isset($_POST['lixeira']))
     {
@@ -248,11 +250,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css?teste=3" rel="stylesheet">
+    <link href="css/style.css?teste=4" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <title>360BR</title>
 </head>
 <body>
+    
     <?php
         if (isset($erro)){
             foreach($erro as $val)
@@ -268,16 +271,16 @@
         }
     ?>
     <div class="settings">
-        <a href="enviar.php">
+        <!--<a href="enviar.php">
             Envio de Audios e Molduras
             <img src="img/uploadW.png">
-        </a>
+        </a>-->
     </div>
 
     <div>
         <form method="post" action="eventos.php" enctype="multipart/form-data">
             <div class="inputs">
-                <label class="branco label" for="nome">Nome</label><input type="text" name="nome" id="nome">
+                <label class="branco label" for="nome">Nome</label><input type="text" size="10" name="nome" id="nome">
             </div>
             
             <div class="inputs">
@@ -325,8 +328,9 @@
     $json = (object) json_decode(file_get_contents($file),true);
     
     
-       
-    //$json = array_reverse($json);
+    echo '<div id="status"></div>
+    <div class="arquivoDownload"><a href="arquivos360.zip" class="fs-1">Baixar Arquivo</a></div>';
+    echo '<div class="eventosBtn">';
     $str = '';
     foreach($json as $key => $value){    
         $value = (object) $value;
@@ -341,13 +345,21 @@
 
         $str = '
         <div class="pai">
-            <div class="link bubbly-button flex" >
-                <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
-                <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
+            <div class="link bubbly-button flex hCenter vCenter" >
+                <div>
+                    <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
+                </div>
+                    <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
+                <div>
+                </div>
+                <div>
+                    <img src="img/download.png" class="m-s1 downALL" nome="'.corrigeNome($value->nome).'" key="'.$key.'">
+                </div>
+                
             </div>        
         </div>'.$str;
     }
-    echo $str;
+    echo $str.'</div>';
     ?>
 
      
@@ -510,10 +522,13 @@ $(".editarEvento").click(function(){
     })
 
 
+$(".downALL").click(function (){
+    var evento = $(this).attr("nome")
+    $("#status").load("baixaTudo.php?evento="+ evento);
+    
+});
 
-
-
-
+$(".arquivoDownload").slideUp();
 
 
 </script>
@@ -528,21 +543,15 @@ $(".editarEvento").click(function(){
     display: inline-block;
     font-size: 1em;
     padding: 1em 2em;
-    /*
-    margin-top: 100px;
-    margin-bottom: 60px;
-    */
     -webkit-appearance: none;
     appearance: none;
-    /* background-color: #00cffc; */
     border: 3px solid #00cffc;
     color: #fff;
-    border-radius: 4rem;
-    /* border: none; */
+    border-radius: 0.4rem;
     cursor: pointer;
     position: relative;
     transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-    box-shadow: 0 2px 25px rgb(0 207 252 / 39%);
+    box-shadow: 0 2px 8px rgb(0 207 252 / 38%);
     font-family: 'Roboto';
     font-weight: bold;
     font-size: 1.5rem;
@@ -567,6 +576,10 @@ a {
     display: flex;
     align-items: center;
     cursor:pointer;
+}
+.eventosBtn{
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>
 </html>

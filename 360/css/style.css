@@ -321,7 +321,19 @@ transition: all 0.3s ease-in-out;
     to {top: 0; opacity: 1}
   }
 
+.arquivoDownload{
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 
+}
+.arquivoDownload a{
+  color: #39ff39;
+  border: 3px solid;
+  border-radius: 0.24rem;
+  padding: 0.6rem 1.8rem;
+}
 
   .animate-out {
     -webkit-animation: out 200ms ease-in-out forwards;

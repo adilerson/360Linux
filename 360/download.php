@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <link href="css/style.css?teste=3" rel="stylesheet">
+    <link href="css/style.css?teste=4" rel="stylesheet">
     <title>CG-360</title>
 </head>
 
