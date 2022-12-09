@@ -19,7 +19,8 @@
 <div class="pai">
 
     <div class="baixarDiv">
-        <a class="bubbly-button" href="../videoSpinAPI/eventos/<? echo $video ?>" style="white-space: nowrap;" download>Baixar Video</a>
+        <a class="bubbly-button" href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap;" download>Baixar Video</a>
+        
     </div>
 
 </div>
