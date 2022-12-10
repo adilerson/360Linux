@@ -62,12 +62,19 @@
         
             $sonome = pathinfo($arquivo, PATHINFO_FILENAME);
 
-            echo '<div class="videoPai animate-out" style="opacity:0;animation-delay: '.$delay.'ms;">
+            echo '
+                    <div class="videoPai animate-out" style="opacity:0;animation-delay: '.$delay.'ms;">
             
-                    <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">';
-                echo '</div><div id="qrcode_'.$key.'" class="desfocado qrcode transition-1"></div>
-                </div>';
-                $script .= 'gerar("http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle.$sonome.'.mp4","qrcode_'.$key.'"); ';
+                        <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
+                        
+                        </div>
+                        <div id="qrcode_'.$key.'" class="desfocado qrcode transition-1">
+                            <img src="img/clique.png" class="clique">
+                        </div>
+                    </div>';
+                    
+                    
+                $script .= 'gerar("http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle.$sonome.'.mp4","qrcode_'.$key.'");';
 
             }
             $delay = $delay + 100;

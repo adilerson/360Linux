@@ -84,8 +84,11 @@
   </div>
 </div>
 
-<div onclick="full();" id="full"><img src="img/full.png"></div>
-<div onclick="fullE();" id="fullE"style="display:none;"><img src="img/fullE.png"></div>
+<div class="w-100 text-center">
+    <div onclick="full();" id="full"><img src="img/full.png"></div>
+    <div onclick="fullE();" id="fullE"style="display:none;"><img src="img/fullE.png"></div>
+</div>
+
 <div id="status"></div>
 </body>
 </html>
