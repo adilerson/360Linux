@@ -250,9 +250,9 @@ export class HomePage implements OnInit, AfterViewInit {
     this.stream = await navigator.mediaDevices.getUserMedia({
       video: {
         // facingMode: this.camera,
-         /* width: { ideal: 1080 },
+        width: { ideal: 1080 },
         height: { ideal: 720 },
-         */
+        /*
         width: { ideal: 4096 },
         height: { ideal: 2160 },
 
@@ -269,7 +269,7 @@ export class HomePage implements OnInit, AfterViewInit {
     // Show the stream inside our video object
     this.captureElement.nativeElement.srcObject = this.stream;
 
-    const options = {mimeType: "video/webm",};
+    const options = { mimeType: 'video/webm' };
     this.mediaRecorder = new MediaRecorder(this.stream, options);
     this.changeDetector.detectChanges();
   }

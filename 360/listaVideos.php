@@ -35,31 +35,13 @@
         $ext = pathinfo($arq, PATHINFO_EXTENSION);
 
         if ($ext == 'jpg'){
-            /*
-            echo '<br>***';
-            echo $arquivo;
-            echo '***<br>';
-            //
-            */
+
             $arquivos[date('Y/m/d H:i:s', filemtime($path.'/'.$arquivo))] = $arquivo;
-            //$arquivos[] = $arquivo;
-            //$arrayArquivos[date('Y/m/d H:i:s', filemtime($pasta.$arquivo))] = $pasta.$arquivo;
+
         }
         
 
     }
-
-    /*
-    foreach($arquivos as $key => $value){
-        echo $key.' - '.$value.'<br>';
-    }
-    
-    echo '<br><br>';
-    foreach($arquivos as $key => $value){
-        echo $key.' - '.$value.'<br>';
-    }
-    exit;
-    */
 
     ksort($arquivos, SORT_STRING);
 
@@ -85,7 +67,7 @@
                     <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">';
                 echo '</div><div id="qrcode_'.$key.'" class="desfocado qrcode transition-1"></div>
                 </div>';
-                $script .= 'gerar("http://'.$_SERVER['SERVER_NAME'].'/360Linux/360/download.php?video='.$pathSingle.$arquivo.'","qrcode_'.$key.'"); ';
+                $script .= 'gerar("http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle.$sonome.'.mp4","qrcode_'.$key.'"); ';
 
             }
             $delay = $delay + 100;

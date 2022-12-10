@@ -300,8 +300,8 @@ export class ConfigPage implements OnInit {
     navigator.mediaDevices
       .getUserMedia({
         video: {
-          width: { ideal: 1080 },
-          height: { ideal: 720 },
+          width: { ideal: 4096 },
+          height: { ideal: 2160 },
         },
       })
       .then((stream) => {

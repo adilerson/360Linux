@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <meta http-equiv="Cache-control" content="no-cache">
     <link href="css/style.css?teste=4" rel="stylesheet">
     <title>CG-360</title>
 </head>
@@ -18,15 +19,10 @@
 <div class="pai">
 
     <div class="baixarDiv">
-        <a class="bubbly-button" href="<?php echo $video?>" style="white-space: nowrap;" download>Baixar Video</a>
+        <a class="bubbly-button" href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap;" download>Baixar Video</a>
+        
     </div>
 
-    <!--<button class="bubbly-button">Click me!</button>-->
-    <!--
-        <div class="divVideo">
-            <video src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/<?php echo $video?>">
-        </div>
-    -->
 </div>
 
 </body>
