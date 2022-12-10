@@ -5,7 +5,7 @@ $zip = new ZipArchive();
 $arquivoZip=$_GET['evento'].".zip";
 
 $rootPath = realpath("../videoSpinAPI/eventos/".$_GET['evento']);
-// Initialize archive object
+
 $zip = new ZipArchive();
 $zip->open('arquivos360.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
@@ -22,6 +22,10 @@ foreach ($files as $name => $file)
     if (!$file->isDir())
     {
         // Get real and relative path for current file
+        $ext = pathinfo($file, PATHINFO_EXTENSION);
+        if ($ext != 'mp4'){
+            continue;
+        }
         $filePath = $file->getRealPath();
         $relativePath = substr($filePath, strlen($rootPath) + 1);
 
