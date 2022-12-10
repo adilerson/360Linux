@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { AnimationController, ToastController } from '@ionic/angular';
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
@@ -23,6 +24,7 @@ import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { EventService } from '../services/event.service';
+import * as dayjs from 'dayjs'
 
 @Component({
   selector: 'app-home',
@@ -248,12 +250,12 @@ export class HomePage implements OnInit, AfterViewInit {
     this.stream = await navigator.mediaDevices.getUserMedia({
       video: {
         // facingMode: this.camera,
-        width: { ideal: 2048 },
-        height: { ideal: 1080 },
+        width: { ideal: 1080 },
+        height: { ideal: 720 },
         /*
         width: { ideal: 4096 },
         height: { ideal: 2160 },
-        */
+
         //user
         //environment
         deviceId: this.evento.videoInput.deviceId
@@ -267,7 +269,7 @@ export class HomePage implements OnInit, AfterViewInit {
     // Show the stream inside our video object
     this.captureElement.nativeElement.srcObject = this.stream;
 
-    const options = { mimeType: 'video/webM' };
+    const options = { mimeType: 'video/webm' };
     this.mediaRecorder = new MediaRecorder(this.stream, options);
     this.changeDetector.detectChanges();
   }
@@ -289,7 +291,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.delay = 8;
       }
-      if (this.delay == 2) {
+      if (this.delay === 2) {
         this.startGiraGira()
       }
 
@@ -327,10 +329,10 @@ export class HomePage implements OnInit, AfterViewInit {
     // Store the video on stop
     this.mediaRecorder.onstop = async (event) => {
       const videoBuffer = new Blob(chunks, { type: 'video/mp4' });
-      const fileName = new Date().getTime() + '.mp4';
+      const fileName = dayjs().format('YYYY-MM-DD_HH_mm_ss')  + '.mp4';
       await this.videoService.storeVideo(videoBuffer);
       const formData = new FormData();
-
+      console.log(fileName)
       formData.append('evento', JSON.stringify(this.eventoDetails));
 
       formData.append('file', videoBuffer, fileName);

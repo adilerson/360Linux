@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const { exec } = require('child_process');
 let ArduinoService = class ArduinoService {
     async sendArduinoCommand(status) {
-        if (status === 1) {
+        if (parseInt(status) === 1) {
             exec('python3 /var/www/html/360Linux/360/on.py', (error, stdout, stderr) => {
                 if (error) {
                     console.error(`error: ${error.message}`);
@@ -33,7 +33,6 @@ let ArduinoService = class ArduinoService {
         }
         else {
             exec('python3 /var/www/html/360Linux/360/off.py', (error, stdout, stderr) => {
-
                 if (error) {
                     console.error(`error: ${error.message}`);
                     return;
