@@ -28,6 +28,7 @@ async function bootstrap() {
             `https://${process.env.SERVIDOR_IP}:8080`,
             `http://${process.env.SERVIDOR_IP}:8080`,
             `http://localhost:4200`,
+            `http://localhost:4300`,
             `http://localhost:8100`,
         ],
     });

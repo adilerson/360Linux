@@ -14,8 +14,8 @@ import { EventService } from './event.service';
 export class HttpService {
   public url = serverIP;
 
-  public rodaApi = 'https://192.168.36.36:3000';
-  //public rodaApi = 'https://192.168.1.104:3000';
+  //public rodaApi = 'https://192.168.36.36:3000';
+  public rodaApi = 'https://192.168.1.104:3000';
 
   constructor(
     private http: HttpClient,
@@ -52,7 +52,7 @@ export class HttpService {
           color: 'success',
         });
 
-        await toast.present();
+       // await toast.present();
       });
   }
 
@@ -68,7 +68,7 @@ export class HttpService {
           color: 'success',
         });
 
-        await toast.present();
+      //  await toast.present();
       });
   }
 
