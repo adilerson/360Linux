@@ -255,6 +255,7 @@ export class HomePage implements OnInit, AfterViewInit {
         /*
         width: { ideal: 4096 },
         height: { ideal: 2160 },
+        */
 
         //user
         //environment

@@ -2,7 +2,8 @@
 
 
 
-$command = 'ls /dev/tty*';
+$command = 'bash /home/adilerson/atualizar.sh';
+
 exec($command, $out, $status);
 
 
