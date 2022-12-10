@@ -122,9 +122,9 @@ function full(){
     $("#fullE").show();
     $("#home").hide();
     
-    var elem = document.body; // Make the body go full screen.
-    requestFullScreen(elem);
-    
+    //var elem = document.body; // Make the body go full screen.
+    //requestFullScreen(elem);
+    toggleFullScreen();
 }
 
 function fullE() {
@@ -132,15 +132,34 @@ function fullE() {
     $("#fullE").hide();
     $("#home").show();
 
+    toggleFullScreen();
+}
+
+
+function toggleFullScreen(teste) {
+    
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
     if (document.exitFullscreen) {
-                document.exitFullscreen().catch(() => { });
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
 }
 
 $("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
