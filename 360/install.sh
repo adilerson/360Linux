@@ -1,17 +1,22 @@
 #!/bin/bash
-
-echo "**********************************Instalondo Apache***********************************"
+echo "********************************** Instalando Apache ***********************************"
 apt install apache2
-echo "**********************************Instalondo ZIP***********************************"
-sudo apt-get install -y php-zip
+echo "********************************** Instalando php ***********************************"
 apt-get install apache2 php libapache2-mod-php
+echo "********************************** Instalando ZIP ***********************************"
+sudo apt-get install -y php-zip
+echo "********************************** Instalando GIT ***********************************"
 sudo apt install git-all
+echo "********************************** Update Linux ***********************************"
 sudo apt update
+echo "********************************** Instalando Node ***********************************"
 sudo apt install nodejs
+echo "********************************** Instalando NPM ***********************************"
 sudo apt install npm
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
+echo "********************************** GitClone ***********************************"
 git clone https://github.com/adilerson/360Linux /var/www/html/360Linux
 echo "********************************** NEST ***********************************"
 npm install -g @nestjs/cli

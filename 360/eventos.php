@@ -280,7 +280,7 @@ include('class.php');
     <div>
         <form method="post" action="eventos.php" enctype="multipart/form-data">
             <div class="inputs">
-                <label class="branco label" for="nome">Nome</label><input type="text" size="10" name="nome" id="nome">
+                <label class="branco label" for="nome">Nome</label><input type="text" size="10" name="nome" id="nome" required>
             </div>
             
             <div class="inputs">
