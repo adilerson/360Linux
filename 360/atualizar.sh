@@ -18,8 +18,7 @@ cd /var/www/html/360Linux/videoSpin
 npm install
 echo "********************************** NPM FFmpeg ***********************************"
 cd /var/www/html/360Linux/videoSpinAPI
-apt install ffmpeg
-
+apt --assume-yes install ffmpeg
 echo "********************************** NPM build VideoSPinAPI ***********************************"
 cd /var/www/html/360Linux/videoSpinAPI
 npm run build 
@@ -37,3 +36,5 @@ echo "********************** Restaurando Backup Eventos ************************
 mv /var/www/html/eventos /var/www/html/360Linux/videoSpinAPI/eventos
 echo "********************** Restaurando Backup Config ****************************"
 mv /var/www/html/config /var/www/html/360Linux/videoSpinAPI/config
+
+nano /etc/netplan/00-installer-config-wifi.yaml
