@@ -1,8 +1,11 @@
+import serial
 import time
 import os, fnmatch
 
+
 listOfFiles = os.listdir('/dev/')
 pattern = "tty*"
+#print(pattern)
 for entry in listOfFiles:
         if fnmatch.fnmatch(entry, pattern):
                 try:
@@ -10,7 +13,6 @@ for entry in listOfFiles:
                         arduino.write(b'5')
                         time.sleep(0.05)
                         data = arduino.readline().decode("utf-8")
-                        #print(entry,"(" + data + ")")
                         if data == 'ok':
                                 print('Porta: ',entry)
                                 break

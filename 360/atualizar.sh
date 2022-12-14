@@ -1,3 +1,6 @@
+
+
+
 pm2 stop 0
 echo "********************************** backup Eventos ***********************************"
 mv /var/www/html/360Linux/videoSpinAPI/eventos /var/www/html/eventos
@@ -36,5 +39,3 @@ echo "********************** Restaurando Backup Eventos ************************
 mv /var/www/html/eventos /var/www/html/360Linux/videoSpinAPI/eventos
 echo "********************** Restaurando Backup Config ****************************"
 mv /var/www/html/config /var/www/html/360Linux/videoSpinAPI/config
-
-nano /etc/netplan/00-installer-config-wifi.yaml

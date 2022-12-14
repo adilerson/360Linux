@@ -1,21 +1,42 @@
 <?php
 
-$port = "/dev/ttyACM0";
+if ($_GET['reset'])
+{
 
-$command = '/var/www/html/360/python3 begin.py';
-exec($command, $out, $status);
+    $command = 'sudo python3 /var/www/html/360Linux/360/arduino/reset.py';
+    exec($command, $out, $status);
 
-echo '<br>passo 1 finalizado<br>';
+    foreach ($out as $value){
+        echo $value.'<br>';
+    }
 
-$message = exec("/var/www/html/360/begin.py 2>&1");
-
-echo '<br>passo 2 finalizado</br><br>';
-
-print_r($message);
-
-foreach ($out as $value){
-echo $value.'<br>';
 }
-echo '<br>'.$status.'<br>';
+
+if ($_GET['gravaStart'])
+{
+
+    $command = 'sudo python3 /var/www/html/360Linux/360/arduino/startRec.py';
+    exec($command, $out, $status);
+
+    foreach ($out as $value){
+        echo $value.'<br>';
+    }
+
+}
+
+
+if ($_GET['gravaStart'])
+{
+
+    $command = 'sudo python3 /var/www/html/360Linux/360/arduino/stopRec.py';
+    exec($command, $out, $status);
+
+    foreach ($out as $value){
+        echo $value.'<br>';
+    }
+
+}
+
 
 ?>
+

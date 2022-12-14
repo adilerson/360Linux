@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "********************************** Instalando net-tools *********************************"
+apt install net-tools
 echo "********************************** Instalando Apache ***********************************"
 apt --assume-yes install apache2
 echo "********************************** Instalando php ***********************************"
