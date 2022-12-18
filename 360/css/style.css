@@ -27,15 +27,40 @@ body{
 .vCenter{
   align-items: center;
 }
+
+.mt-1{
+  margin-top: 1rem !important;
+}
+.mt-2{
+  margin-top: 2rem !important;
+}
+.mt-3{
+  margin-top: 3rem !important;
+}
+.mt-4{
+  margin-top: 4rem !important;
+}
+
 .m-s1{
-    margin-left: 1rem;
+    margin-left: 1rem !important;
 }
 .m-s2{
-    margin-left: 2rem;
+    margin-left: 2rem !important;
 }
 .m-s3{
-    margin-left: 3rem;
+    margin-left: 3rem !important;
 }
+
+.m-1{
+  margin: 1rem !important;
+}
+.m-2{
+  margin: 2rem !important;
+}
+.m-3{
+  margin: 3rem !important;
+}
+
 .text-center{
     text-align: center;
 }
@@ -238,6 +263,11 @@ transition: all 0.3s ease-in-out;
   .w-100{
     width: 100% !important;
   }
+
+  .p-05{
+    padding: 0.5rem;
+  }
+
   .p-1{
     padding: 1rem;
   }
@@ -262,7 +292,12 @@ transition: all 0.3s ease-in-out;
   .fs-2{
     font-size: 2rem;
   }
-
+  .fs-25{
+    font-size: 2.5rem;
+  }  
+  .fs-3{
+    font-size: 3rem;
+  }
 
   .btn-danger{
     background-color: #cc1517;

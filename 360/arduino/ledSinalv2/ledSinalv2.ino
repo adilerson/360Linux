@@ -39,16 +39,13 @@ void loop() {
     // Lê toda string recebida
     String recebido = leStringSerial();
 
-
     if (recebido == "0") {
-
       digitalWrite(led, HIGH);
       digitalWrite(b, LOW);
       delay(750);
       digitalWrite(led, LOW);
       digitalWrite(b, HIGH);
-    }
-    
+    }    
 
     if (recebido == "1") {
       digitalWrite(led, HIGH);
@@ -64,7 +61,7 @@ void loop() {
       Serial.print("Stop Gravado");
       digitalWrite(led, HIGH);
       digitalWrite(b, LOW);
-      delay(5000);
+      delay(4000);
       digitalWrite(led, LOW);
       digitalWrite(b, HIGH);
       
@@ -74,21 +71,36 @@ void loop() {
       Serial.print("Start gravado");
       digitalWrite(led, HIGH);
       digitalWrite(a, LOW);
-      delay(5000);
+      delay(4000);
       digitalWrite(led, LOW);
       digitalWrite(a, HIGH);
       
     }
 
      if (recebido == "9") {
-      Serial.print("Reset iniciado");
+      Serial.print("Reset iniciado...");
 
       digitalWrite(a, LOW);
       digitalWrite(b, LOW);
-      delay(5000);
-      digitalWrite(a, HIGH);
+      delay(3500);
+      Serial.print("5 segundos...");
       digitalWrite(b, HIGH);
-      
+      delay(350);
+      digitalWrite(b, LOW);
+      delay(350);
+      digitalWrite(b, HIGH);
+      delay(350);
+      digitalWrite(b, LOW);
+      delay(350);
+      digitalWrite(b, HIGH);      
+      delay(350);
+      digitalWrite(b, LOW);
+      delay(350);
+      digitalWrite(b, HIGH);      
+      delay(50);
+      digitalWrite(a, HIGH);
+
+
     }
 
     if (recebido == "5") {
