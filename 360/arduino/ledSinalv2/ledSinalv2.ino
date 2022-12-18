@@ -96,9 +96,4 @@ void loop() {
     }
 
   }
-
 }
-
-  void ativar(int porta, int tempo){
-    
-  }
