@@ -324,7 +324,19 @@ let HomePage = class HomePage {
             });
             // Show the stream inside our video object
             this.captureElement.nativeElement.srcObject = this.stream;
-            const options = { mimeType: 'video/webm' };
+            let options;
+            if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+                options = { mimeType: 'video/webm; codecs=vp9' };
+            }
+            else if (MediaRecorder.isTypeSupported('video/webm')) {
+                options = { mimeType: 'video/webm' };
+            }
+            else if (MediaRecorder.isTypeSupported('video/mp4')) {
+                options = { mimeType: 'video/mp4' };
+            }
+            else {
+                console.error("no suitable mimetype found for this device");
+            }
             this.mediaRecorder = new MediaRecorder(this.stream, options);
             this.changeDetector.detectChanges();
         });
@@ -674,7 +686,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "registerWebPlugin": () => (/* binding */ registerWebPlugin),
 /* harmony export */   "setPlatform": () => (/* binding */ setPlatform)
 /* harmony export */ });
-/* harmony import */ var _Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 
 
 /*! Capacitor: https://capacitorjs.com/ - MIT License */
@@ -861,7 +873,7 @@ const createCapacitor = win => {
     let jsImplementation;
 
     const loadPluginImplementation = /*#__PURE__*/function () {
-      var _ref = (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      var _ref = (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
         if (!jsImplementation && platform in jsImplementations) {
           jsImplementation = typeof jsImplementations[platform] === 'function' ? jsImplementation = yield jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
         } else if (capCustomPlatform !== null && !jsImplementation && 'web' in jsImplementations) {
@@ -915,7 +927,7 @@ const createCapacitor = win => {
         });
 
         if (prop === 'addListener') {
-          p.remove = /*#__PURE__*/(0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+          p.remove = /*#__PURE__*/(0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
             return remove();
           });
         }
@@ -943,7 +955,7 @@ const createCapacitor = win => {
       }, callback);
 
       const remove = /*#__PURE__*/function () {
-        var _ref3 = (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+        var _ref3 = (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
           const callbackId = yield call;
           removeListener({
             eventName,
@@ -959,7 +971,7 @@ const createCapacitor = win => {
       const p = new Promise(resolve => call.then(() => resolve({
         remove
       })));
-      p.remove = /*#__PURE__*/(0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      p.remove = /*#__PURE__*/(0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
         console.warn(`Using addListener() without 'await' is deprecated.`);
         yield remove();
       });
@@ -1078,7 +1090,7 @@ class WebPlugin {
     }
 
     const remove = /*#__PURE__*/function () {
-      var _ref5 = (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      var _ref5 = (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
         return _this.removeListener(eventName, listenerFunc);
       });
 
@@ -1092,7 +1104,7 @@ class WebPlugin {
     });
     Object.defineProperty(p, 'remove', {
       value: function () {
-        var _ref6 = (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+        var _ref6 = (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
           console.warn(`Using addListener() without 'await' is deprecated.`);
           yield remove();
         });
@@ -1108,7 +1120,7 @@ class WebPlugin {
   removeAllListeners() {
     var _this2 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this2.listeners = {};
 
       for (const listener in _this2.windowListeners) {
@@ -1153,7 +1165,7 @@ class WebPlugin {
   removeListener(eventName, listenerFunc) {
     var _this3 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const listeners = _this3.listeners[eventName];
 
       if (!listeners) {
@@ -1202,7 +1214,7 @@ const encode = str => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, de
 
 class CapacitorCookiesPluginWeb extends WebPlugin {
   setCookie(options) {
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       try {
         // Safely Encoded Key/Value
         const encodedKey = encode(options.key);
@@ -1220,7 +1232,7 @@ class CapacitorCookiesPluginWeb extends WebPlugin {
   }
 
   deleteCookie(options) {
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       try {
         document.cookie = `${options.key}=; Max-Age=0`;
       } catch (error) {
@@ -1230,7 +1242,7 @@ class CapacitorCookiesPluginWeb extends WebPlugin {
   }
 
   clearCookies() {
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       try {
         const cookies = document.cookie.split(';') || [];
 
@@ -1246,7 +1258,7 @@ class CapacitorCookiesPluginWeb extends WebPlugin {
   clearAllCookies() {
     var _this4 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       try {
         yield _this4.clearCookies();
       } catch (error) {
@@ -1267,7 +1279,7 @@ const CapacitorCookies = registerPlugin('CapacitorCookies', {
  */
 
 const readBlobAsBase64 = /*#__PURE__*/function () {
-  var _ref7 = (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (blob) {
+  var _ref7 = (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
@@ -1393,7 +1405,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
    * @param options Options to build the HTTP request
    */
   request(options) {
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const requestInit = buildRequestInit(options, options.webFetchExtra);
       const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
       const url = urlParams ? `${options.url}?${urlParams}` : options.url;
@@ -1450,7 +1462,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
   get(options) {
     var _this5 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return _this5.request(Object.assign(Object.assign({}, options), {
         method: 'GET'
       }));
@@ -1465,7 +1477,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
   post(options) {
     var _this6 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return _this6.request(Object.assign(Object.assign({}, options), {
         method: 'POST'
       }));
@@ -1480,7 +1492,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
   put(options) {
     var _this7 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return _this7.request(Object.assign(Object.assign({}, options), {
         method: 'PUT'
       }));
@@ -1495,7 +1507,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
   patch(options) {
     var _this8 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return _this8.request(Object.assign(Object.assign({}, options), {
         method: 'PATCH'
       }));
@@ -1510,7 +1522,7 @@ class CapacitorHttpPluginWeb extends WebPlugin {
   delete(options) {
     var _this9 = this;
 
-    return (0,_Users_adilersoncasagrande_Desktop_nova360_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,E_IONIC_360Linux_videoSpin_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return _this9.request(Object.assign(Object.assign({}, options), {
         method: 'DELETE'
       }));
@@ -2106,7 +2118,7 @@ const CapacitorVideoPlayer = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.reg
 /***/ ((module) => {
 
 "use strict";
-module.exports = "#container {\n  text-align: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 50%;\n  transform: translateY(-50%);\n}\n\n#container strong {\n  font-size: 20px;\n  line-height: 26px;\n}\n\n#container p {\n  font-size: 16px;\n  line-height: 22px;\n  color: #8c8c8c;\n  margin: 0;\n}\n\n#container a {\n  text-decoration: none;\n}\n\n.video {\n  width: 100%;\n  height: 100%;\n}\n\n.icon {\n  position: fixed;\n  left: 40%;\n  top: 40%;\n  min-height: 7rem;\n  color: white;\n  text-shadow: 1px 1px 5px black;\n}\n\n.footer {\n  background: #272727 !important;\n  width: 100%;\n}\n\n.position-top {\n  top: 5%;\n}\n\n.position-center {\n  top: 40%;\n}\n\n.position-bottom {\n  top: 80%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFFQSxrQkFBQTtFQUNBLE9BQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0FBQUY7O0FBR0E7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7QUFBRjs7QUFHQTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUVBLGNBQUE7RUFFQSxTQUFBO0FBRkY7O0FBS0E7RUFDRSxxQkFBQTtBQUZGOztBQUtBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFGRjs7QUFLQTtFQUNFLGVBQUE7RUFDQSxTQUFBO0VBQ0EsUUFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtFQUNBLDhCQUFBO0FBRkY7O0FBSUM7RUFDQyw4QkFBQTtFQUNBLFdBQUE7QUFERjs7QUFPQTtFQUNFLE9BQUE7QUFKRjs7QUFNQTtFQUNFLFFBQUE7QUFIRjs7QUFNQTtFQUNFLFFBQUE7QUFIRiIsImZpbGUiOiJob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNjb250YWluZXIge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG5cbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgdG9wOiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbn1cblxuI2NvbnRhaW5lciBzdHJvbmcge1xuICBmb250LXNpemU6IDIwcHg7XG4gIGxpbmUtaGVpZ2h0OiAyNnB4O1xufVxuXG4jY29udGFpbmVyIHAge1xuICBmb250LXNpemU6IDE2cHg7XG4gIGxpbmUtaGVpZ2h0OiAyMnB4O1xuXG4gIGNvbG9yOiAjOGM4YzhjO1xuXG4gIG1hcmdpbjogMDtcbn1cblxuI2NvbnRhaW5lciBhIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuXG4udmlkZW8ge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uaWNvbiB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgbGVmdDogNDAlO1xuICB0b3A6IDQwJTtcbiAgbWluLWhlaWdodDogN3JlbTtcbiAgY29sb3I6d2hpdGU7XG4gIHRleHQtc2hhZG93OiAxcHggMXB4IDVweCBibGFjaztcbiB9XG4gLmZvb3RlcntcbiAgYmFja2dyb3VuZDogIzI3MjcyNyAhaW1wb3J0YW50O1xuICB3aWR0aDogMTAwJTtcbiB9XG5cblxuXG5cbi5wb3NpdGlvbi10b3B7XG4gIHRvcDo1JVxufVxuLnBvc2l0aW9uLWNlbnRlcntcbiAgdG9wOjQwJVxufVxuXG4ucG9zaXRpb24tYm90dG9te1xuICB0b3A6ODAlXG59XG4iXX0= */";
+module.exports = "#container {\n  text-align: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 50%;\n  transform: translateY(-50%);\n}\n\n#container strong {\n  font-size: 20px;\n  line-height: 26px;\n}\n\n#container p {\n  font-size: 16px;\n  line-height: 22px;\n  color: #8c8c8c;\n  margin: 0;\n}\n\n#container a {\n  text-decoration: none;\n}\n\n.video {\n  width: 100%;\n  height: 100%;\n}\n\n.icon {\n  position: fixed;\n  left: 40%;\n  top: 40%;\n  min-height: 7rem;\n  color: white;\n  text-shadow: 1px 1px 5px black;\n}\n\n.footer {\n  background: #272727 !important;\n  width: 100%;\n}\n\n.position-top {\n  top: 5%;\n}\n\n.position-center {\n  top: 40%;\n}\n\n.position-bottom {\n  top: 80%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFFQSxrQkFBQTtFQUNBLE9BQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0FBQUY7O0FBR0E7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7QUFBRjs7QUFHQTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUVBLGNBQUE7RUFFQSxTQUFBO0FBRkY7O0FBS0E7RUFDRSxxQkFBQTtBQUZGOztBQUtBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFGRjs7QUFLQTtFQUNFLGVBQUE7RUFDQSxTQUFBO0VBQ0EsUUFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtFQUNBLDhCQUFBO0FBRkY7O0FBSUM7RUFDQyw4QkFBQTtFQUNBLFdBQUE7QUFERjs7QUFPQTtFQUNFLE9BQUE7QUFKRjs7QUFNQTtFQUNFLFFBQUE7QUFIRjs7QUFNQTtFQUNFLFFBQUE7QUFIRiIsImZpbGUiOiJob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNjb250YWluZXIge1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuXHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgdG9wOiA1MCU7XHJcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xyXG59XHJcblxyXG4jY29udGFpbmVyIHN0cm9uZyB7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyNnB4O1xyXG59XHJcblxyXG4jY29udGFpbmVyIHAge1xyXG4gIGZvbnQtc2l6ZTogMTZweDtcclxuICBsaW5lLWhlaWdodDogMjJweDtcclxuXHJcbiAgY29sb3I6ICM4YzhjOGM7XHJcblxyXG4gIG1hcmdpbjogMDtcclxufVxyXG5cclxuI2NvbnRhaW5lciBhIHtcclxuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbn1cclxuXHJcbi52aWRlbyB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4uaWNvbiB7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG4gIGxlZnQ6IDQwJTtcclxuICB0b3A6IDQwJTtcclxuICBtaW4taGVpZ2h0OiA3cmVtO1xyXG4gIGNvbG9yOndoaXRlO1xyXG4gIHRleHQtc2hhZG93OiAxcHggMXB4IDVweCBibGFjaztcclxuIH1cclxuIC5mb290ZXJ7XHJcbiAgYmFja2dyb3VuZDogIzI3MjcyNyAhaW1wb3J0YW50O1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gfVxyXG5cclxuXHJcblxyXG5cclxuLnBvc2l0aW9uLXRvcHtcclxuICB0b3A6NSVcclxufVxyXG4ucG9zaXRpb24tY2VudGVye1xyXG4gIHRvcDo0MCVcclxufVxyXG5cclxuLnBvc2l0aW9uLWJvdHRvbXtcclxuICB0b3A6ODAlXHJcbn1cclxuIl19 */";
 
 /***/ }),
 
@@ -2117,7 +2129,7 @@ module.exports = "#container {\n  text-align: center;\n  position: absolute;\n  
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\" >\n      <ion-button *ngIf=\"!showCamera\" (click)=\"navBack()\">\n        <ion-icon slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\n      </ion-button>\n\n    </ion-buttons>\n    <ion-buttons slot=\"end\" >\n <!--      <ion-button id=\"open-modal-config\" *ngIf=\"!showCamera\">\n        <ion-icon name=\"cog-outline\"></ion-icon>\n      </ion-button> -->\n    </ion-buttons>\n    <ion-title style=\"text-align: center\"> ({{evento.nome}}) </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n\n\n\n  <ion-chip\n\n    style=\"z-index: 999; font-size: 7rem; background:none; margin-top: 2rem;\"\n    [hidden]=\"!isRecording || counter === 0\"\n    class=\"icon\"\n    #recordEffect\n    [ngClass]=\"position === 'top'?'position-top':position === 'center'?'position-center':'position-bottom'\"\n    >{{counter}}</ion-chip\n  >\n   <!--  -->\n  <!-- Display the video stream while capturing -->\n  <video\n    class=\"video\"\n    #video\n    autoplay\n    playsinline\n    muted\n    [hidden]=\"!showCamera\"\n    width=\"100%\"\n    height=\"100%\"\n  ></video>\n\n  <!--  [style.color]=\"position === 'top'?'red':'white'\" alterar status de color das letras-->\n\n  <ion-chip\n    style=\"z-index: 999; font-size: 7rem; background: none; margin-top: 2.5rem;\"\n\n    class=\"icon\"\n    [hidden]=\"delay===8\"\n    [ngClass]=\"position === 'top'?'position-top':position === 'center'?'position-center':'position-bottom'\"\n    #delayEffect\n    >{{delay}}</ion-chip\n  >\n\n  <!-- Neccessary for the video player -->\n  <div id=\"fullscreen\" slot=\"fixed\"></div>\n\n  <!--\n  <ion-list *ngIf=\"!isRecording\" style=\"margin-top: 50px;\">\n    <ion-item *ngFor=\"let video of videos;\"  tappable>\n      <ion-label slot=\"start\" (click)=\"play(video)\">    {{ video }}</ion-label>\n\n      <ion-icon slot=\"end\" name=\"cloud-upload-outline\" (click)=\"sendVideo(video)\"></ion-icon>\n\n    </ion-item>\n  </ion-list>\n  -->\n\n  <ion-fab\n    [vertical]=\"position\"\n    horizontal=\"center\"\n    slot=\"fixed\"\n    style=\"zoom: 2;\"\n    [hidden]=\"isRecording\"\n    *ngIf=\"delay === 8 && showCamera === false\"\n  >\n    <ion-fab-button color=\"new\" (click)=\"startVideo()\">\n      <ion-icon name=\"checkmark-circle-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ng-container >\n\n  </ng-container>\n  <ion-fab\n    [vertical]=\"position\"\n    horizontal=\"center\"\n    slot=\"fixed\"\n    style=\"zoom: 2;\"\n\n    id=\"contagem\"\n    [hidden]=\"isRecording\"\n    *ngIf=\"delay === 8 && showCamera === true\"\n  >\n    <ion-fab-button (click)=\"isRecording ? stopRecord() : delayRecord()\" *ngIf=\"!delayStarted\"\n    >\n      <ion-icon [name]=\"isRecording ? 'stop' : 'videocam'\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <ion-modal trigger=\"open-modal-config\">\n    <ng-template>\n      <ion-header>\n        <ion-toolbar>\n          <ion-buttons slot=\"start\">\n            <ion-button (click)=\"cancel()\">Fechar</ion-button>\n          </ion-buttons>\n          <ion-title>Configuração</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content class=\"ion-padding\">\n        <div>\n          <ion-list>\n            <ion-item>\n              <ion-label>Config. Tempo</ion-label>\n              <ion-select\n                placeholder=\"Tempo\"\n                id=\"segundos\"\n                [(ngModel)]=\"segundos\"\n              >\n                <ion-select-option value=\"15000\">15 seg</ion-select-option>\n                <ion-select-option value=\"12000\">12 seg</ion-select-option>\n                <ion-select-option value=\"10000\">10 seg</ion-select-option>\n                <ion-select-option value=\"7000\">7 seg</ion-select-option>\n                <ion-select-option value=\"5000\">5 seg</ion-select-option>\n              </ion-select>\n            </ion-item>\n\n            <ion-item>\n              <ion-label>Config. Efeitos</ion-label>\n              <ion-select placeholder=\"Efeito\" id=\"efeito\" [(ngModel)]=\"efeito\">\n                <ion-select-option value=\"0\">Mix</ion-select-option>\n                <ion-select-option value=\"1\">Boomerang</ion-select-option>\n                <ion-select-option value=\"2\">SlowMotion</ion-select-option>\n                <ion-select-option value=\"3\">Nenhum</ion-select-option>\n              </ion-select>\n            </ion-item>\n\n\n          <!--   <ion-item>\n              <ion-label>Entrada de Video</ion-label>\n              <ion-select\n                placeholder=\"Video\"\n                id=\"Video\"\n\n              >\n                <ion-select-option\n                (change)='selectVideoSource($event)'\n                  [value]=\"video\"\n                  *ngFor=\"let video  of videoDevices\"\n                  >{{video.label}}</ion-select-option\n                >\n              </ion-select>\n            </ion-item>\n\n            <ion-item>\n              <ion-label>Config. Câmera</ion-label>\n              <ion-select placeholder=\"Câmera\" id=\"camera\" [(ngModel)]=\"camera\">\n                <ion-select-option value=\"environment\"\n                  >Traseira</ion-select-option\n                >\n                <ion-select-option value=\"user\" selected\n                  >Frontal</ion-select-option\n                >\n              </ion-select>\n            </ion-item> -->\n          </ion-list>\n        </div>\n      </ion-content>\n    </ng-template>\n  </ion-modal>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <ion-label>\n      <p>Tempo : {{evento.tempo}} seg</p>\n      <p>Câmera : {{evento.videoInput.label}}</p>\n    </ion-label>\n  </ion-toolbar>\n</ion-footer>\n";
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\" >\r\n      <ion-button *ngIf=\"!showCamera\" (click)=\"navBack()\">\r\n        <ion-icon slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\" >\r\n <!--      <ion-button id=\"open-modal-config\" *ngIf=\"!showCamera\">\r\n        <ion-icon name=\"cog-outline\"></ion-icon>\r\n      </ion-button> -->\r\n    </ion-buttons>\r\n    <ion-title style=\"text-align: center\"> ({{evento.nome}}) </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n\r\n\r\n  <ion-chip\r\n\r\n    style=\"z-index: 999; font-size: 7rem; background:none; margin-top: 2rem;\"\r\n    [hidden]=\"!isRecording || counter === 0\"\r\n    class=\"icon\"\r\n    #recordEffect\r\n    [ngClass]=\"position === 'top'?'position-top':position === 'center'?'position-center':'position-bottom'\"\r\n    >{{counter}}</ion-chip\r\n  >\r\n   <!--  -->\r\n  <!-- Display the video stream while capturing -->\r\n  <video\r\n    class=\"video\"\r\n    #video\r\n    autoplay\r\n    playsinline\r\n    muted\r\n    [hidden]=\"!showCamera\"\r\n    width=\"100%\"\r\n    height=\"100%\"\r\n  ></video>\r\n\r\n  <!--  [style.color]=\"position === 'top'?'red':'white'\" alterar status de color das letras-->\r\n\r\n  <ion-chip\r\n    style=\"z-index: 999; font-size: 7rem; background: none; margin-top: 2.5rem;\"\r\n\r\n    class=\"icon\"\r\n    [hidden]=\"delay===8\"\r\n    [ngClass]=\"position === 'top'?'position-top':position === 'center'?'position-center':'position-bottom'\"\r\n    #delayEffect\r\n    >{{delay}}</ion-chip\r\n  >\r\n\r\n  <!-- Neccessary for the video player -->\r\n  <div id=\"fullscreen\" slot=\"fixed\"></div>\r\n\r\n  <!--\r\n  <ion-list *ngIf=\"!isRecording\" style=\"margin-top: 50px;\">\r\n    <ion-item *ngFor=\"let video of videos;\"  tappable>\r\n      <ion-label slot=\"start\" (click)=\"play(video)\">    {{ video }}</ion-label>\r\n\r\n      <ion-icon slot=\"end\" name=\"cloud-upload-outline\" (click)=\"sendVideo(video)\"></ion-icon>\r\n\r\n    </ion-item>\r\n  </ion-list>\r\n  -->\r\n\r\n  <ion-fab\r\n    [vertical]=\"position\"\r\n    horizontal=\"center\"\r\n    slot=\"fixed\"\r\n    style=\"zoom: 2;\"\r\n    [hidden]=\"isRecording\"\r\n    *ngIf=\"delay === 8 && showCamera === false\"\r\n  >\r\n    <ion-fab-button color=\"new\" (click)=\"startVideo()\">\r\n      <ion-icon name=\"checkmark-circle-outline\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <ng-container >\r\n\r\n  </ng-container>\r\n  <ion-fab\r\n    [vertical]=\"position\"\r\n    horizontal=\"center\"\r\n    slot=\"fixed\"\r\n    style=\"zoom: 2;\"\r\n\r\n    id=\"contagem\"\r\n    [hidden]=\"isRecording\"\r\n    *ngIf=\"delay === 8 && showCamera === true\"\r\n  >\r\n    <ion-fab-button (click)=\"isRecording ? stopRecord() : delayRecord()\" *ngIf=\"!delayStarted\"\r\n    >\r\n      <ion-icon [name]=\"isRecording ? 'stop' : 'videocam'\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n\r\n  <ion-modal trigger=\"open-modal-config\">\r\n    <ng-template>\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-buttons slot=\"start\">\r\n            <ion-button (click)=\"cancel()\">Fechar</ion-button>\r\n          </ion-buttons>\r\n          <ion-title>Configuração</ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content class=\"ion-padding\">\r\n        <div>\r\n          <ion-list>\r\n            <ion-item>\r\n              <ion-label>Config. Tempo</ion-label>\r\n              <ion-select\r\n                placeholder=\"Tempo\"\r\n                id=\"segundos\"\r\n                [(ngModel)]=\"segundos\"\r\n              >\r\n                <ion-select-option value=\"15000\">15 seg</ion-select-option>\r\n                <ion-select-option value=\"12000\">12 seg</ion-select-option>\r\n                <ion-select-option value=\"10000\">10 seg</ion-select-option>\r\n                <ion-select-option value=\"7000\">7 seg</ion-select-option>\r\n                <ion-select-option value=\"5000\">5 seg</ion-select-option>\r\n              </ion-select>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label>Config. Efeitos</ion-label>\r\n              <ion-select placeholder=\"Efeito\" id=\"efeito\" [(ngModel)]=\"efeito\">\r\n                <ion-select-option value=\"0\">Mix</ion-select-option>\r\n                <ion-select-option value=\"1\">Boomerang</ion-select-option>\r\n                <ion-select-option value=\"2\">SlowMotion</ion-select-option>\r\n                <ion-select-option value=\"3\">Nenhum</ion-select-option>\r\n              </ion-select>\r\n            </ion-item>\r\n\r\n\r\n          <!--   <ion-item>\r\n              <ion-label>Entrada de Video</ion-label>\r\n              <ion-select\r\n                placeholder=\"Video\"\r\n                id=\"Video\"\r\n\r\n              >\r\n                <ion-select-option\r\n                (change)='selectVideoSource($event)'\r\n                  [value]=\"video\"\r\n                  *ngFor=\"let video  of videoDevices\"\r\n                  >{{video.label}}</ion-select-option\r\n                >\r\n              </ion-select>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label>Config. Câmera</ion-label>\r\n              <ion-select placeholder=\"Câmera\" id=\"camera\" [(ngModel)]=\"camera\">\r\n                <ion-select-option value=\"environment\"\r\n                  >Traseira</ion-select-option\r\n                >\r\n                <ion-select-option value=\"user\" selected\r\n                  >Frontal</ion-select-option\r\n                >\r\n              </ion-select>\r\n            </ion-item> -->\r\n          </ion-list>\r\n        </div>\r\n      </ion-content>\r\n    </ng-template>\r\n  </ion-modal>\r\n</ion-content>\r\n\r\n<ion-footer>\r\n  <ion-toolbar>\r\n    <ion-label>\r\n      <p>Tempo : {{evento.tempo}} seg</p>\r\n      <p>Câmera : {{evento.videoInput.label}}</p>\r\n    </ion-label>\r\n  </ion-toolbar>\r\n</ion-footer>\r\n";
 
 /***/ })
 
