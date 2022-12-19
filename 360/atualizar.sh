@@ -1,6 +1,3 @@
-
-
-
 pm2 stop 0
 echo "********************************** backup Eventos ***********************************"
 mv /var/www/html/360Linux/videoSpinAPI/eventos /var/www/html/eventos
