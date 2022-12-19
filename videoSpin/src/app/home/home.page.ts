@@ -270,15 +270,15 @@ export class HomePage implements OnInit, AfterViewInit {
     // Show the stream inside our video object
     this.captureElement.nativeElement.srcObject = this.stream;
     let options
-    if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
-      options = {mimeType: 'video/webm; codecs=vp9'};
-  } else  if (MediaRecorder.isTypeSupported('video/webm')) {
-       options = {mimeType: 'video/webm'};
-  } else if (MediaRecorder.isTypeSupported('video/mp4')) {
-       options = {mimeType: 'video/mp4'};
-  } else {
-      console.error("no suitable mimetype found for this device");
-  }
+    if (MediaRecorder.isTypeSupported('video/webm')) {
+      options = { mimeType: 'video/webm' };
+    } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+      options = { mimeType: 'video/webm; codecs=vp9' };
+    } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+      options = { mimeType: 'video/mp4' };
+    } else {
+      console.error('no suitable mimetype found for this device');
+    } 
     this.mediaRecorder = new MediaRecorder(this.stream, options);
     this.changeDetector.detectChanges();
   }
