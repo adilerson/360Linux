@@ -5,7 +5,7 @@
     if (isset($_GET['maximo'])){
         $maximo = $_GET['maximo'];
     }else{
-        $maximo = 100;
+        $maximo = 10;
     }
 
     $evento = $_REQUEST['evento'];
@@ -55,6 +55,7 @@
 
     $arquivos = array_reverse($arquivos);
     $delay = 0;
+    $keyTotal = count($arquivos);
     foreach($arquivos as $arquivo){
         
 
@@ -64,11 +65,11 @@
 
             echo '
                     <div class="videoPai animate-out" style="opacity:0;animation-delay: '.$delay.'ms;">
-            
+                        <div class="conta numVideo" id="numVideo'.$key.'">'.$keyTotal--.'</div>
                         <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
                         
                         </div>
-                        <div id="qrcode_'.$key.'" class="desfocado qrcode transition-1">
+                        <div id="qrcode_'.$key.'" numvideo="'.$key.'" class="desfocado qrcode transition-1">
                             <img src="img/clique.png" class="clique">
                         </div>
                     </div>';
@@ -96,12 +97,15 @@
 $(".qrcode").click(function(){
         $(".qrcode").removeClass("desfocado");
         $(".qrcode").addClass("desfocado");
+        $(".numVideo").fadeIn("0");
+        $("#numVideo"+$(this).attr("numvideo")).fadeOut("1300");
         $(this).removeClass("desfocado",1300);
     })
     $(".video").click(function(){
         
         $(".qrcode").removeClass("desfocado");
         $(".qrcode").addClass("desfocado");
+        
         $("#"+$(this).attr("ide")).removeClass("desfocado",1300);
     });
 
@@ -116,7 +120,7 @@ $(".qrcode").click(function(){
         $("#myModal").fadeIn("50");
         
         
-        gerar("http://<?php echo $_SERVER['SERVER_NAME'] ?>/360Linux/360/download.php?video=<?php echo $path ?>"+$(this).attr("video"),"qrcodeModal"); 
+        gerar("<?php echo 'http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle ?>"+$(this).attr("video"),"qrcodeModal"); 
         $("#videoModal").attr("src","<?php echo $path ?>"+$(this).attr("video"))
         
     })

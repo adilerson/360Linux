@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <meta http-equiv="Cache-control" content="no-cache">
-    <link href="css/style.css?teste=4" rel="stylesheet">
+    <link href="css/style.css?teste=5" rel="stylesheet">
     <title>CG-360</title>
 </head>
 
@@ -19,11 +19,13 @@
 <div class="pai">
 
     <div class="baixarDiv">
-      <a href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap;">Baixar Video</a>
+      <a href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap; font-size:3rem;" class="btn" download>Baixar Video</a>
       <!--<a class="bubbly-button" href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap;" download>Baixar Video</a>-->
-        
+      
     </div>
-
+    <div class="baixarDiv">
+      <a href="../videoSpinAPI/eventos/<?php echo $video ?>" style="white-space: nowrap; font-size:3rem;" class="btn">Visualizar Video</a>
+    </div>
 </div>
 
 </body>

@@ -21,7 +21,7 @@
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
-    <link href="css/style.css?teste=4" rel="stylesheet">
+    <link href="css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
 
 
     <link rel="stylesheet" href="css/jquery-confirm.css">
