@@ -1,4 +1,5 @@
 <?php
+
     include('class.php');
     
     if (isset($_GET['atualiza'])){
