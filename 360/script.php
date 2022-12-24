@@ -11,6 +11,7 @@
     if (isset($_GET['contaVideos'])){
         
         $path = "../videoSpinAPI/eventos/".$_GET['evento']."/";
+        //echo '<script>console.log("'.$path.'")</script>';
         
         $diretorio = dir($path);
         $conta = 0;

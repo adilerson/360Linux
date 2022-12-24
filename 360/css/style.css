@@ -4,10 +4,40 @@
 }
 
 body{
-    font-family:'Roboto';
+    font-family:'Roboto' !important;
     background: #373e46 !important;
 }
-
+html{
+  font-family:'Roboto' !important;
+}
+.videoPai{
+  text-align: center;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+.numVideo{
+  position: absolute;
+  background-color: white;
+  margin-top: 21.5rem;
+  z-index: 2000;
+  /*margin-left: 4.6rem;*/
+  display: flex;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+}
 .dividir{
     width:100%;
     border-bottom: 1px solid silver;
@@ -20,6 +50,9 @@ body{
 }
 .flex{
     display: flex !important;
+}
+.coluna{
+  flex-direction: column;
 }
 .hCenter{
     justify-content: center;
@@ -133,18 +166,11 @@ text-align:center;
     border: 3px solid #c1c1c1;
 }
 
-.videoPai{
-    text-align: center;
-    margin-right: 1.5rem;
-    margin-bottom: 1rem;
-}
+
+
 .video{
-    /*position: relative;*/
-    /*width: 10rem;*/
+  width: 11.3rem;
     height: 17rem;
-    /*border: 1px solid #e5e5e5;*/
-    /*margin: 0rem 1rem 0rem 0rem;*/
-    /*padding: 1rem;*/
     border-bottom: none !important;
     border-radius: 0.3rem 0.3rem 0rem 0rem;
     box-shadow: 1px 1px 10px rgb(100, 100, 100);
@@ -224,14 +250,14 @@ transition: all 0.3s ease-in-out;
     box-shadow: 1px 1px 10px black;
     background-color: #21252a;
     margin: 2% auto; /* 15% from the top and centered */
-    padding: 20px;
-    /*border: 1px solid #888;*/
+    padding: 0rem 2rem 2rem 2rem;
     border-radius: 0.5rem;
     width: 80%; /* Could be more or less, depending on screen size */
     max-height: -webkit-fill-available;
 
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    border: 1px solid white;
   }
  
   form{
@@ -338,16 +364,16 @@ transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
 
-  a:link { text-decoration: none; }
+  a:link { text-decoration: none !important; color: white; }
 
 
-  a:visited { text-decoration: none; }
+  a:visited { text-decoration: none !important; color: white; }
   
   
-  a:hover { text-decoration: none; }
+  a:hover { text-decoration: none !important; color: white; }
   
   
-  a:active { text-decoration: none; }
+  a:active { text-decoration: none !important; color: white; }
 
 
   /* Add Animation */

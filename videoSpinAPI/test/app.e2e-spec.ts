@@ -19,6 +19,6 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('<h1 style="display:flex; flex-direction: column; padding: 3rem; justify-content: center; font-size:2.5rem"><a href="https://192.168.36.36/360Linux/front">Acessar Eventos</a></h1>');
   });
 });

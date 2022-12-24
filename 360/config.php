@@ -1,10 +1,12 @@
 <?php
 
 if (isset($_POST['atualizar'])){
-    
+    $path = 'videoSpin/src/assets/';
+    $path = '';
     $newJsonString = json_encode($_POST);
-    file_put_contents('videoSpin/src/assets/data.json', $newJsonString); 
+    file_put_contents($path.'data.json', $newJsonString); 
 
+    
     echo '<div style="
         color: white;
         text-align: center;
@@ -19,8 +21,10 @@ if (isset($_POST['atualizar'])){
 
 }
 
-$json = file_get_contents("videoSpin/src/assets/data.json");
+$json = file_get_contents($path."data.json");
+
 $data = json_decode($json);
+
 
 ?>
 
@@ -33,6 +37,7 @@ $data = json_decode($json);
     <link href="css/style.css?teste=4" rel="stylesheet">
     <title>Led</title>
 </head>
+
 <body>
     <div style="display:flex; width:100%; height:80vh;align-items: center;justify-content: center;">
 
@@ -41,8 +46,21 @@ $data = json_decode($json);
         echo '<div class="form"><form method="post" action="?status=5&desktop=1">';
         echo '<input type="hidden" name="atualizar" value="1">';
         foreach ($data as $key => $entry) {
-            if ($key != 'atualizar'){
+            if ( ($key != 'atualizar') && ($key != 'estilo') ){
                 echo  '<div class="input"><label for="'.$key.'">'.ucfirst($key).'</label><input name="'.$key.'" id="'.$key.'" value="'.$entry.'"></div>';
+            }
+            if ($key == 'estilo'){
+                $white = ''; $dark = '';
+                if ($entry == '#272727'){
+                    $dark == 'selected';
+                }else if ($entry == 'white'){
+                    $white = 'selected';
+                }
+                echo '<div class="input"><label for="'.$key.'">'.ucfirst($key).'</label>
+                <select name="estilo" id="estilo">
+                    <option value="#272727" '.$dark.'>Dark</option>
+                    <option value="white" '.$white.'>Branco</option>
+                </select></div>';
             }
             
         }
@@ -65,8 +83,7 @@ $data = json_decode($json);
         cursor: pointer;
         ">Atualizar</button></form></div></div>';
 
-        //$newJsonString = json_encode($data);
-        //file_put_contents('data.json', $newJsonString);        
+     
     ?>
 
     
