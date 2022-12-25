@@ -24,15 +24,15 @@
 
     }
     function aplica(total){
-        console.log("Vai: " + total);
+        //console.log("Vai: " + total);
         $(".progressoAtual").css("width",total + "%");
         $(".progressoAtual").html(total + "%");
     }
-    
+    setInterval(atualiza, 1000);
 
 
     $(".atualizar").click(function(){
-        setInterval(atualiza, 1000);
+        
         $("#status").load("script.php?atualizar=1");
     });
 
