@@ -3,27 +3,26 @@
 
 include('class.php');
     
-    if (isset($_POST['lixeira']))
+    if (isset($_POST['nomeoriginal_a']))
     {
+        
 
         $file = "../videoSpinAPI/config/evento/evento.json";
         $json =  json_decode(file_get_contents($file),true);
 
-        
         foreach($json as $key => $value){
             if ($key == $_POST['key']){   
-                
                 unset($json[$key]);
             }
             
         }
         
-        if (is_dir("../videoSpinAPI/eventos/".$_POST['nomeoriginal'])){
-            $nomeNovo = $_POST['nomeoriginal'];
-            if (is_dir("videos/lixeira/".$_POST['nomeoriginal'])){
-                $nomeNovo = $_POST['nomeoriginal'].'-'.date("ymdhi");
+        if (is_dir("../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'])){
+            $nomeNovo = $_POST['nomeoriginal_a'];
+            if (is_dir("videos/lixeira/".$_POST['nomeoriginal_a'])){
+                $nomeNovo = $_POST['nomeoriginal_a'].'-'.date("ymdhi");
             }
-            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal'], "videos/lixeira/".$_POST['nomeoriginal'])){
+            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'], "videos/lixeira/".$_POST['nomeoriginal_a'])){
                 $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Enviado para lixeira';
             }else{
                 $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['edit_nome'].'<strong>';
@@ -31,7 +30,7 @@ include('class.php');
         }
         
         file_put_contents($file, json_encode($json));
-
+        //echo $_POST['nomeoriginal_a'];exit;
     }
 
 
@@ -250,9 +249,11 @@ include('class.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css?teste=5" rel="stylesheet">
+    <link href="css/style.css?teste=4" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <title>Aplicativo 360</title>
+    <link rel="stylesheet" href="css/jquery-confirm.css">
+    <script src="js/jquery-confirm.js"></script>
+    <title>360BR</title>
 </head>
 <body>
     
@@ -354,10 +355,10 @@ include('class.php');
   
     <div class="modal-content flex">
       <div class="fecharModal">
-          <span class="close" style="height: 3rem !important;">&times;</span>
+          <span class="close" style="font-size: 3rem;height: 3rem !important;">&times;</span>
       </div>
     <div style="">
-        <form method="post" action="eventos.php" enctype="multipart/form-data">
+        <form method="post" id="form_edit" action="eventos.php" enctype="multipart/form-data">
             <input type="hidden" name="nomeoriginal" id="nomeoriginal">
             <input type="hidden" name="key" id="key">
             <div class="inputs">
@@ -393,10 +394,14 @@ include('class.php');
 
             </div>
             <div class="flex">
-                <input type="submit" class="btn" value="Atualizar" name="atualizar">
-                <input type="submit" class="btn btn-danger" value="Lixeira" name="lixeira">
-            </div>
+            <input type="submit" class="btn" value="Atualizar" name="atualizar">
         </form>
+            <form method="post" id="form_lixeira" action="eventos.php">
+                <input type="hidden" name="nomeoriginal_a" id="nomeoriginal_a">
+                <input type="hidden" name="key" id="key_a">
+                <input type="submit" class="btn btn-danger lixeira" value="Lixeira" name="lixeira" id="lixeira">
+            </form>
+        </div>
     </div>
     
   </div>
@@ -426,7 +431,9 @@ $(".editarEvento").click(function(){
     $("#edit_vSlow").val($(this).attr("vslow"));
     $("#edit_vFast").val($(this).attr("vfast"));
     $("#nomeoriginal").val($(this).attr("nomeoriginal"));
+    $("#nomeoriginal_a").val($(this).attr("nomeoriginal"));
     $("#key").val($(this).attr("key"));
+    $("#key_a").val($(this).attr("key"));
 
     
         
@@ -518,6 +525,44 @@ $(".downALL").click(function (){
 $(".arquivoDownload").slideUp();
 
 
+
+
+$("#lixeira").click(function(){
+$( "#target" ).submit();
+    $.confirm({
+        title: 'Excluir',
+        content: 'Tem certeza que deseja excluir o item '+$("#edit_nome").val(),
+        buttons: {
+            /*
+            Sim: function () {
+                $.alert('Excluído!');
+            },*/
+            
+            Cancelar: function () {
+                //$.alert('Canceled!');
+            },
+            somethingElse: {
+                text: 'Excluir',
+                btnClass: 'btn-blue',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    console.log('Fez');
+                    $('#form_lixeira').submit();
+
+                    //$.alert('Excluído com sucesso');
+                }
+            }
+        }
+    });
+    event.preventDefault();
+});
+
+
+
+$( "#form_lixeira" ).submit(function( event ) {
+   
+    //confirma(evento);
+});
 </script>
 
 <style>

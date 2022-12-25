@@ -9,7 +9,21 @@
 </head>
 <body style="color: white;">
     <?php
-        echo '<h2 style="    width: 100%;text-align: center;">Atualização</h2>';
+
+        $command = 'curl -Is https://www.google.com | head -1';
+                exec($command, $out, $status);
+                $conectado = false;
+                foreach ($out as $value){
+                    if (str_contains($value, '200')) {
+                        $conectado = true;
+                    }
+
+                }
+        if ($conectado == false){
+            echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
+        }
+
+        echo '<h2 style="  font-size:2.2rem;  width: 100%;text-align: center;">Atualização</h2>';
         $command = 'sudo bash /home/adilerson/atualizar.sh';
         exec($command, $out, $status);
 
@@ -17,7 +31,7 @@
 
             if (str_contains($value, '***')) {
                 $value = preg_replace('/[*]/ui', '', $value);
-                echo '<div style="display: flex;margin: 0.5rem 0.3rem;font-size:1.8rem;"><div>'.trim($value).'</div> <div style="margin: 0rem 0.4rem;">-</div> <div style="color:#3eb93e; font-weight:bold;">✓</div></div>';
+                echo '<div style="display: flex;margin: 0.5rem 0.3rem;font-size:1.8rem;"><div style="margin: 0rem 0.5rem; color:#3eb93e; font-weight:bold;">✓</div><div>'.trim($value).'</div></div>';
             }
 
         }
