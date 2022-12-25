@@ -124,6 +124,10 @@ pm2 startup
 pm2 save
 
 
+echo "********************************** Criando arquivo Atualizar.sh ***********************************"
+echo "wget -N https://aplicativo360.com.br/up.sh
+bash up.sh" > atualizar.sh
+
 
 nano /etc/netplan/00-installer-config-wifi.yaml
 
