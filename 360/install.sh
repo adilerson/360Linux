@@ -134,6 +134,4 @@ bash up.sh" > atualizar.sh
 
 nano /etc/netplan/00-installer-config-wifi.yaml
 
-
-
 #extras

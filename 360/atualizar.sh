@@ -54,3 +54,4 @@ echo "********************** Movendo arquivos de atualização e index *********
 echo "{\"pc\":\"100\"}" > /var/www/html/pc.json
 mv futuroAtualizar.php /var/www/html/atualizar.php
 mv futuroIndex.php /var/www/html/index.php
+mv futuroScript.php /var/www/html/script.php
