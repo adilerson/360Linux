@@ -1,5 +1,15 @@
+import json
 import os
 
-os.system("stty -F /dev/ttyACM0 raw ispeed 115200 ospeed 115200 cs8 -ignpar -cstopb -echo");
-os.system("cat < /dev/ttyACM0 > /dev/null &");
-#os.system('echo "9" > /dev/ttyACM0');
+arquivo = open("/var/www/html/360Linux/360/data.json", 'r')
+
+with open('data.json', 'r') as f2:
+    data = f2.read()
+
+pegaTudo = json.loads(data)
+
+usb = pegaTudo['usb']
+
+os.system("stty -F /dev/tty" + usb + " raw ispeed 115200 ospeed 115200 cs8 -ignpar -cstopb -echo")
+os.system("cat < /dev/tty" + usb + " > /dev/null &")
+exit()
