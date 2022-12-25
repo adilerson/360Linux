@@ -112,6 +112,8 @@ sudo systemctl restart apache2
 echo "********************************** PERMISSOES ***********************************"
 chmod -R 777 /tmp
 chmod -R 777 /var/www/html/360Linux
+rm -r /var/www/html/360Linux/videoSpin
+echo "www-data ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 echo "********************** Movendo arquivos de atualização e index ****************************"
 mv futuroAtualizar.php /var/www/html/atualizar.php
