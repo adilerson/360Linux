@@ -38,6 +38,9 @@ html{
   border-radius: 0.5rem;
   border: 1px solid black;
 }
+.aviso{
+  color: #ef7900 !important;
+}
 .dividir{
     width:100%;
     border-bottom: 1px solid silver;

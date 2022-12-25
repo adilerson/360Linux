@@ -118,6 +118,7 @@ echo "www-data ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 echo "********************** Movendo arquivos de atualização e index ****************************"
 mv futuroAtualizar.php /var/www/html/atualizar.php
 mv futuroIndex.php /var/www/html/index.php
+mv futuroScript.php /var/www/html/script.php
 
 echo "********************************** pm2 start ***********************************"
 cd /var/www/html/360Linux/videoSpinAPI

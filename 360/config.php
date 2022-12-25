@@ -35,10 +35,11 @@ $data = json_decode($json);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css?teste=4" rel="stylesheet">
-    <title>Led</title>
+    <title>Configurações 360</title>
 </head>
 
 <body>
+    <h1 style="width:100%; color:white; text-align:center; margin-top:2rem;">Configurações</h1>
     <div style="display:flex; width:100%; height:80vh;align-items: center;justify-content: center;">
 
     <?php 
@@ -46,7 +47,8 @@ $data = json_decode($json);
         echo '<div class="form"><form method="post" action="?status=5&desktop=1">';
         echo '<input type="hidden" name="atualizar" value="1">';
         foreach ($data as $key => $entry) {
-            if ( ($key != 'atualizar') && ($key != 'estilo') ){
+            if ( ($key != 'atualizar') && ($key != 'estilo') && ($key != 'usb')  && ($key != 'porta') && ($key != 'record') ){
+
                 echo  '<div class="input"><label for="'.$key.'">'.ucfirst($key).'</label><input name="'.$key.'" id="'.$key.'" value="'.$entry.'"></div>';
             }
             if ($key == 'estilo'){
@@ -61,6 +63,30 @@ $data = json_decode($json);
                     <option value="#272727" '.$dark.'>Dark</option>
                     <option value="white" '.$white.'>Branco</option>
                 </select></div>';
+            }
+
+            if ($key == 'usb'){
+                $command = 'ls /dev/ttyA*';
+                exec($command, $out, $status);
+
+                foreach($out as $value){
+                        $str[] = $value;
+                }
+
+                unset($out);
+
+                $command = 'ls /dev/ttyU*';
+                exec($command, $out, $status);
+                foreach($out as $value){
+                        $str[] = $value;
+                }
+
+                echo '<div class="input"><label for="'.$key.'">Arduino</label><select name="usb" id="usb" class="select">';
+                foreach($str as $value){
+                        echo '<option value="'.$value.'" class="option">'.str_replace("/dev/tty", "", ucfirst($value)).'</option>';
+                }
+
+                echo '</select></div>';
             }
             
         }
@@ -81,11 +107,11 @@ $data = json_decode($json);
         border-radius: 5px 5px 5px 5px;
         margin: 15px 20px 14px 20px;
         cursor: pointer;
-        ">Atualizar</button></form></div></div>';
+        ">Salvar</button></form></div></div>';
 
      
     ?>
-
+    
     
 
     <?php //echo '<a class="btn" style="background-color:blue; color: white;" href="?status=3&desktop=1">MANTER</a>'; ?>
