@@ -36,3 +36,7 @@ echo "********************** Restaurando Backup Eventos ************************
 mv /var/www/html/eventos /var/www/html/360Linux/videoSpinAPI/eventos
 echo "********************** Restaurando Backup Config ****************************"
 mv /var/www/html/config /var/www/html/360Linux/videoSpinAPI/config
+
+echo "********************** Movendo arquivos de atualização e index ****************************"
+mv futuroAtualizar.php /var/www/html/atualizar.php
+mv futuroIndex.php /var/www/html/index.php

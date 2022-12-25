@@ -113,11 +113,18 @@ echo "********************************** PERMISSOES ****************************
 chmod -R 777 /tmp
 chmod -R 777 /var/www/html/360Linux
 
+echo "********************** Movendo arquivos de atualização e index ****************************"
+mv futuroAtualizar.php /var/www/html/atualizar.php
+mv futuroIndex.php /var/www/html/index.php
+
 echo "********************************** pm2 start ***********************************"
 cd /var/www/html/360Linux/videoSpinAPI
 pm2 start dist/main.js --name api
 pm2 startup
 pm2 save
+
+
+
 nano /etc/netplan/00-installer-config-wifi.yaml
 
 

@@ -250,9 +250,9 @@ include('class.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css?teste=4" rel="stylesheet">
+    <link href="css/style.css?teste=5" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <title>360BR</title>
+    <title>Aplicativo 360</title>
 </head>
 <body>
     

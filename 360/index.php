@@ -1,7 +1,5 @@
 <?php
     include('class.php');
-        
-
 
         if (!isset($_GET['evento'])){
             echo '<script>window.location.href = "eventos.php";</script>';
