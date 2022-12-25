@@ -7,9 +7,9 @@
     <link href="360Linux/360/css/style.css" rel="stylesheet">
     <title>Atualização360</title>
 </head>
-<body >
+<body style="color: white;">
     <?php
-        echo '<h2>Iniciando Atualização</h2>';
+        echo '<h2 style="    width: 100%;text-align: center;">Atualização</h2>';
         $command = 'sudo bash /home/adilerson/atualizar.sh';
         exec($command, $out, $status);
 
@@ -17,7 +17,7 @@
 
             if (str_contains($value, '***')) {
                 $value = preg_replace('/[*]/ui', '', $value);
-                echo '<div style="display: flex;"><div>'.trim($value).'</div> - <div style="color:green; font-size:2.2rem; font-weight:bold;">✓</div></div>';
+                echo '<div style="display: flex;margin: 0.5rem 0.3rem;font-size:1.8rem;"><div>'.trim($value).'</div> <div style="margin: 0rem 0.4rem;">-</div> <div style="color:#3eb93e; font-weight:bold;">✓</div></div>';
             }
 
         }
