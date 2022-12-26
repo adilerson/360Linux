@@ -1,9 +1,9 @@
 import json
 import os
 
-arquivo = open("/var/www/html/360Linux/360/data.json", 'r')
+#arquivo = open("/var/www/html/360Linux/360/data.json", 'r')
 
-with open('data.json', 'r') as f2:
+with open('/var/www/html/360Linux/360/data.json', 'r') as f2:
     data = f2.read()
 
 pegaTudo = json.loads(data)
