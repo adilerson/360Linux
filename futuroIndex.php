@@ -18,11 +18,13 @@
     <div class="flex hCenter vCenter coluna text-white m-2" style="flex-direction: column;">
         <h1>Celular</h1>
         <div class="fs-1 p-1">
-            <a href="https://<?php echo $ip; ?>:3000" target="_blank" rel="noopener noreferrer" class="btn">Passo 1</a>
+            <a href="https://<?php echo $ip; ?>:3000" target="_blank" rel="noopener noreferrer" class="btn">Acessar</a>
         </div>
+        <!--        
         <div class="fs-1 p-1">
             <a href="https://<?php echo $ip; ?>/360Linux/front" target="_blank" rel="noopener noreferrer" class="btn">Passo 2</a>
         </div>
+        -->
 
         <h1>Aparelho Start</h1>
         <div class="fs-1 p-1">
@@ -31,10 +33,12 @@
 
         <div class="divisao"></div>
 
-        <h1>Admin</h1>
+        <h1>Tablet</h1>
         <div class="fs-1 p-1">
             <a href="http://<?php echo $ip; ?>/360Linux/360/" target="_blank" rel="noopener noreferrer" class="btn">Eventos</a>
         </div>
+
+        <h1>Administrador</h1>
 
         <div class="fs-1 p-1">
             <a href="http://<?php echo $ip; ?>/360Linux/360/config.php" target="_blank" rel="noopener noreferrer" class="btn">Configurações</a>

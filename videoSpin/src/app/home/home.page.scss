@@ -57,3 +57,11 @@
 .position-bottom{
   top:80%
 }
+main{
+  display: flex;
+    justify-content: center;
+    width: 100%;
+}
+video{
+  width: 100% !important;
+}

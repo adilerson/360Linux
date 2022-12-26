@@ -39,6 +39,7 @@
     [hidden]="!showCamera"
     width="100%"
     height="100%"
+    horizontal="center"
   ></video>
 
   <!--  [style.color]="position === 'top'?'red':'white'" alterar status de color das letras-->
@@ -80,7 +81,7 @@
     </ion-fab-button>
   </ion-fab>
   <ng-container >
-
+    
   </ng-container>
   <ion-fab
     [vertical]="position"
@@ -111,6 +112,7 @@
       <ion-content class="ion-padding">
         <div>
           <ion-list>
+            <!--
             <ion-item>
               <ion-label>Config. Tempo</ion-label>
               <ion-select
@@ -137,7 +139,7 @@
             </ion-item>
 
 
-          <!--   <ion-item>
+               <ion-item>
               <ion-label>Entrada de Video</ion-label>
               <ion-select
                 placeholder="Video"
@@ -170,12 +172,15 @@
     </ng-template>
   </ion-modal>
 </ion-content>
+<!--
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-label>
-      <p>Tempo : {{evento.tempo}} seg</p>
-      <p>Câmera : {{evento.videoInput.label}}</p>
-    </ion-label>
-  </ion-toolbar>
-</ion-footer>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-label>
+        <p>Tempo : {{evento.tempo}} seg</p>
+        <p>Câmera : {{evento.videoInput.label}}</p>
+      </ion-label>
+    </ion-toolbar>
+  </ion-footer>
+  
+-->
