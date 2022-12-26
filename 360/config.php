@@ -3,6 +3,7 @@
 if (isset($_POST['atualizar'])){
     $path = 'videoSpin/src/assets/';
     $path = '';
+    $_POST['usb'] = str_replace("/dev/tty", "", $_POST['usb']);
     $newJsonString = json_encode($_POST);
     file_put_contents($path.'data.json', $newJsonString); 
 
