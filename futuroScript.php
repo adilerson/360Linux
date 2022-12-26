@@ -15,6 +15,12 @@ if (isset($_GET['atualizar'])){
         echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
     }
 
+    $command = 'sudo ';
+    exec($command, $out, $status);
+
+    $command = 'sudo bash /var/www/html/up.sh';
+    exec($command, $out, $status);
+
     $command = 'sudo bash /var/www/html/up.sh';
     exec($command, $out, $status);
     //exit;
