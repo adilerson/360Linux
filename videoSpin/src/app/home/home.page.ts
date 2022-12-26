@@ -183,12 +183,13 @@ export class HomePage implements OnInit, AfterViewInit {
       if (this.router.url !== '/home') {
         return;
       }
-
-      if (data.data) {
-        this.startVideo();
-        setTimeout(() => {
-          this.delayRecord();
-        }, 500);
+      if (!this.showCamera) {
+        if (data.data) {
+          this.startVideo();
+          setTimeout(() => {
+            this.delayRecord();
+          }, 500);
+        }
       }
     });
   }

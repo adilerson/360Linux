@@ -1,12 +1,12 @@
 <ion-header class="bg">
   <ion-toolbar class="bg">
     <ion-title class="bg">Lista de Eventos </ion-title>
-    <!--<ion-buttons slot="end">
-      <ion-button (click)="configUrltAlert()">
-        <ion-icon name="options-sharp"></ion-icon>
+   <ion-buttons slot="end" (click)="reload()">
+      <ion-button>
+ <ion-icon name="sync-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-  -->
+
 
   </ion-toolbar>
 </ion-header>
@@ -18,12 +18,13 @@
 
   <!--<h1 class="ion-padding" style="text-align: ceter;">Eventos</h1>-->
 
-  <ng-container *ngFor="let evento of eventos; let i = index" style="background: #272727 !important;color: white !important;">
-    <div *ngIf="evento.nome !== 'null' " style="background: #272727 !important;color: white !important;">
-      <ion-item (click)="eventoActionSheet(evento,i)" style="background: #272727 !important;color: white !important;" button>
-        <ion-label style="background: #272727 !important;color: white !important;">
+  <ng-container *ngFor="let evento of eventos; let i = index">
+    <div *ngIf="evento.nome !== 'null' " >
+      <ion-item (click)="setConfig(evento)"  button>
+        <ion-label >
           <h2>{{evento.nome}}</h2>
-          <p>{{evento.data |date:'dd/MM/YYYY'}}</p>
+          <p>Tempo: {{evento.tempo}} s</p>
+        <!--   <p>{{evento.data |date:'dd/MM/YYYY'}}</p> -->
         </ion-label>
       </ion-item>
     </div>

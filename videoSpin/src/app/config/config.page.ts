@@ -100,7 +100,7 @@ export class ConfigPage implements OnInit {
       for (const key in res) {
         if (Object.prototype.hasOwnProperty.call(res, key)) {
           const element = res[key];
-          this.eventos.push(element);
+          this.eventos.unshift(element);
         }
       }
 
@@ -108,6 +108,9 @@ export class ConfigPage implements OnInit {
     });
   }
 
+  reload(){
+    window.location.href = 'https://192.168.36.36/front'
+  }
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
