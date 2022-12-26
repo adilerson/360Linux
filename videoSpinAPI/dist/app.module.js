@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const comando_module_1 = require("./comandos/comando.module");
 const evento_module_1 = require("./evento/evento.module");
 const arduino_module_1 = require("./arduino/arduino.module");
 const media_module_1 = require("./media/media.module");
@@ -15,11 +16,13 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const bull_1 = require("@nestjs/bull");
 const media_consumer_1 = require("./media/media-consumer");
+const app_gateway_1 = require("./app.gateway");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            comando_module_1.ComandoModule,
             evento_module_1.EventoModule,
             arduino_module_1.ArduinoModule,
             media_module_1.MediaModule,
@@ -31,7 +34,8 @@ AppModule = __decorate([
             }),
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, media_consumer_1.videoConsumer],
+        providers: [app_service_1.AppService, media_consumer_1.videoConsumer, app_gateway_1.AppGateway],
+        exports: [app_gateway_1.AppGateway]
     })
 ], AppModule);
 exports.AppModule = AppModule;

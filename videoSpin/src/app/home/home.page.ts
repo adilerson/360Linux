@@ -24,7 +24,8 @@ import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { EventService } from '../services/event.service';
-import * as dayjs from 'dayjs'
+import * as dayjs from 'dayjs';
+import { SocketioService } from '../services/socketio.service';
 
 @Component({
   selector: 'app-home',
@@ -79,6 +80,7 @@ export class HomePage implements OnInit, AfterViewInit {
     private eventoService: EventoSharedService,
     private router: Router,
     private storage: StorageService,
+    private socket: SocketioService,
     private toastController: ToastController,
     private animationCtrl: AnimationController
   ) {}
@@ -91,27 +93,25 @@ export class HomePage implements OnInit, AfterViewInit {
         //console.log(config);
         //console.log(JSON.stringify(config));
         if (JSON.stringify(config) == null) {
-
           //console.log('localStorage')
           //console.log(_event)
           if (_event) {
             this.apiUrl = this.storage.get('apiUrl') || '';
             this.evento = _event;
-            this.position =_event.position? _event.position:'center';
+            this.position = _event.position ? _event.position : 'center';
 
-            console.log(typeof _event.vNormal)
-            console.log(typeof _event.vFast)
-            console.log(typeof _event.vSlow)
+            console.log(typeof _event.vNormal);
+            console.log(typeof _event.vFast);
+            console.log(typeof _event.vSlow);
 
-
-          _event.vNormal =parseInt(_event.vNormal,10)
-          _event.vFast =parseInt(_event.vFast,10)
-          _event.vSlow =parseInt(_event.vSlow,10)
+            _event.vNormal = parseInt(_event.vNormal, 10);
+            _event.vFast = parseInt(_event.vFast, 10);
+            _event.vSlow = parseInt(_event.vSlow, 10);
 
             this.eventoDetails = {
               name: _event.nome.replace(/[^A-Z0-9]+/gi, '_'),
-              audio: _event.audioName !== 'null'?_event.audioName:'',
-              frame: _event.frameName !== 'null'?_event.frameName:'',
+              audio: _event.audioName !== 'null' ? _event.audioName : '',
+              frame: _event.frameName !== 'null' ? _event.frameName : '',
               vNormal: _event.vNormal,
               vFast: _event.vFast,
               vSlow: _event.vSlow,
@@ -128,23 +128,22 @@ export class HomePage implements OnInit, AfterViewInit {
           this.evento = config;
           //console.log(config);
           this.storage.set('selectedEvento', config);
-          this.position =config.position? config.position:'center';
+          this.position = config.position ? config.position : 'center';
           //this.camera = this.evento.camera;
           this.segundos = this.evento.tempo * 1000;
 
+          console.log(typeof config.vNormal);
+          console.log(typeof config.vFast);
+          console.log(typeof config.vSlow);
 
-          console.log(typeof config.vNormal)
-          console.log(typeof config.vFast)
-          console.log(typeof config.vSlow)
-
-          config.vNormal =parseInt(config.vNormal,10)
-          config.vFast =parseInt(config.vFast,10)
-          config.vSlow =parseInt(config.vSlow,10)
+          config.vNormal = parseInt(config.vNormal, 10);
+          config.vFast = parseInt(config.vFast, 10);
+          config.vSlow = parseInt(config.vSlow, 10);
 
           this.eventoDetails = {
             name: config.nome.replace(/[^A-Z0-9]+/gi, '_'),
-            audio: config.audioName !== 'null'?config.audioName:'',
-            frame: config.frameName !== 'null'?config.frameName:'',
+            audio: config.audioName !== 'null' ? config.audioName : '',
+            frame: config.frameName !== 'null' ? config.frameName : '',
             vNormal: config.vNormal,
             vFast: config.vFast,
             vSlow: config.vSlow,
@@ -152,6 +151,8 @@ export class HomePage implements OnInit, AfterViewInit {
         }
       }
     );
+
+    this.socketListen();
   }
 
   async ngAfterViewInit() {
@@ -174,6 +175,22 @@ export class HomePage implements OnInit, AfterViewInit {
         track.stop();
       });
     }
+  }
+
+  socketListen() {
+    this.socket.listen('startGiraGira').subscribe((data: any) => {
+      console.log(this.router.url);
+      if (this.router.url !== '/home') {
+        return;
+      }
+
+      if (data.data) {
+        this.startVideo();
+        setTimeout(() => {
+          this.delayRecord();
+        }, 500);
+      }
+    });
   }
 
   changeSegundos(value: any) {
@@ -269,7 +286,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     // Show the stream inside our video object
     this.captureElement.nativeElement.srcObject = this.stream;
-    let options
+    let options;
     if (MediaRecorder.isTypeSupported('video/webm')) {
       options = { mimeType: 'video/webm' };
     } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
@@ -278,7 +295,7 @@ export class HomePage implements OnInit, AfterViewInit {
       options = { mimeType: 'video/mp4' };
     } else {
       console.error('no suitable mimetype found for this device');
-    } 
+    }
     this.mediaRecorder = new MediaRecorder(this.stream, options);
     this.changeDetector.detectChanges();
   }
@@ -287,11 +304,9 @@ export class HomePage implements OnInit, AfterViewInit {
     this.pulse();
     this.delayStarted = true;
     //console.log('delay in');
-    this.changeDetector.detectChanges(); 
+    this.changeDetector.detectChanges();
     this.intervalDelay = setInterval(() => {
-
       this.delay--;
-
 
       if (this.delay === 0) {
         //console.log(this.delay);
@@ -301,23 +316,19 @@ export class HomePage implements OnInit, AfterViewInit {
         this.delay = 8;
       }
       if (this.delay === 2) {
-        this.startGiraGira()
+        this.startGiraGira();
       }
 
- //console.log('delay in');
-    this.changeDetector.detectChanges();
+      //console.log('delay in');
+      this.changeDetector.detectChanges();
     }, 1000);
-
-
   }
 
-  async startGiraGira(){
+  async startGiraGira() {
     this.http.startGiraGira();
   }
 
   async recordVideo() {
-
-
     clearInterval(this.intervalDelay);
     this.delayStarted = false;
     this.isRecording = true;
@@ -338,10 +349,10 @@ export class HomePage implements OnInit, AfterViewInit {
     // Store the video on stop
     this.mediaRecorder.onstop = async (event) => {
       const videoBuffer = new Blob(chunks, { type: 'video/mp4' });
-      const fileName = dayjs().format('YYYY-MM-DD_HH_mm_ss')  + '.mp4';
+      const fileName = dayjs().format('YYYY-MM-DD_HH_mm_ss') + '.mp4';
       await this.videoService.storeVideo(videoBuffer);
       const formData = new FormData();
-      console.log(fileName)
+      console.log(fileName);
       formData.append('evento', JSON.stringify(this.eventoDetails));
 
       formData.append('file', videoBuffer, fileName);
@@ -349,8 +360,6 @@ export class HomePage implements OnInit, AfterViewInit {
       formData.forEach((res) => {
         //console.log(res);
       });
-
-
 
       this.http.sendVideo(formData);
       this.mediaRecorder = null;

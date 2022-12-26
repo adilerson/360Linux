@@ -30,6 +30,7 @@ async function bootstrap() {
       `http://localhost:4200`,
       `http://localhost:4300`,
       `http://localhost:8100`,
+      `https://localhost:8100`,
     ],
   });
   await app.listen(3000, process.env.SERVIDOR_IP).then(() => {
