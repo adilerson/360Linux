@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['atualizar'])){
 
     $command = 'curl -Is https://www.google.com | head -1';
@@ -14,9 +15,9 @@ if (isset($_GET['atualizar'])){
         echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
     }
 
-    $command = 'sudo bash /home/adilerson/atualizar.sh';
+    $command = 'sudo bash /var/www/html/up.sh';
     exec($command, $out, $status);
-    exit;
+    //exit;
 
 }
 
@@ -24,8 +25,18 @@ if (isset($_GET['progresso'])){
     $file = "pc.json";
         $json =  json_decode(file_get_contents($file),true);
 
-        
-    echo '<script>aplica("'.$json->pc.'")</script>';
+        //echo $json['pc'];
+    echo '<script>aplica("'.$json['pc'].'","'.$json['texto'].'")</script>';
+}
+
+
+if (isset($_GET['zera'])){
+    $valor['pc'] = "0";
+    $valor['texto'] = "";
+    
+    $newJsonString = json_encode($valor);
+    file_put_contents('pc.json', $newJsonString); 
+
 }
 
 ?>

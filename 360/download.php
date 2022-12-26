@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/360Linux/360/img/favicon.ico">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <meta http-equiv="Cache-control" content="no-cache">
     <link href="css/style.css?teste=5" rel="stylesheet">

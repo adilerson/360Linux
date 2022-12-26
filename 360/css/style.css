@@ -450,3 +450,21 @@ transition: all 0.3s ease-in-out;
 .jconfirm-holder{
   padding: 5rem !important;
 }
+
+.progresso{
+  width:100%;
+  border: 1px solid white;
+  height:2rem;
+  border-radius: 0.2rem;
+}
+.progressoAtual{
+  background-color:#368f19;
+  width: 0%;
+  height: 2rem;
+  border-radius: 0.1rem;
+  font-size: 1.2rem;
+  color:white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}

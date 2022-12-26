@@ -34,6 +34,7 @@ $data = json_decode($json);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.ico">
     <link href="css/style.css?teste=4" rel="stylesheet">
     <title>Configurações 360</title>
 </head>
@@ -91,23 +92,7 @@ $data = json_decode($json);
             
         }
 
-        echo '<button type="submit" style="margin-top:1rem; 
-        background-color: #56baed;
-        border: none;
-        color: white;
-        padding: 15px 80px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        /* text-transform: uppercase; */
-        font-size: 1.3rem;
-        -webkit-box-shadow: 0 10px 30px 0 rgb(95 186 233 / 40%);
-        box-shadow: 0 10px 30px 0 rgb(95 186 233 / 40%);
-        -webkit-border-radius: 5px 5px 5px 5px;
-        border-radius: 5px 5px 5px 5px;
-        margin: 15px 20px 14px 20px;
-        cursor: pointer;
-        ">Salvar</button></form></div></div>';
+        echo '<button type="submit" class="btn">Salvar</button></form></div></div>';
 
      
     ?>
@@ -119,6 +104,7 @@ $data = json_decode($json);
     <style>
             .input{
                 margin:0.7rem;
+                width: 15rem;
             }
             label{
                 font-size:1.3rem;
@@ -128,8 +114,8 @@ $data = json_decode($json);
             }
             form{
                 display: flex;
-    flex-direction: column;
-    align-items: center;
+                flex-direction: column;
+                align-items: center;
             }
             .input{
                 display:flex;

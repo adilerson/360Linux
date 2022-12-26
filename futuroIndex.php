@@ -40,6 +40,10 @@
             <a href="http://<?php echo $ip; ?>/360Linux/360/config.php" target="_blank" rel="noopener noreferrer" class="btn">Configurações</a>
         </div>
         
+        <div class="fs-1 p-1">
+            <a href="http://<?php echo $ip; ?>/atualizar.php" target="_blank" rel="noopener noreferrer" class="btn">Atualizações</a>
+        </div>
+
     </div>
 </body>
 </html>
