@@ -86,11 +86,6 @@ network:
         <input type="submit" value="Atualizar" class="btn mt-3">
     </form>
     <div class="dividir"></div>
-  <h3 class="text-white text-center fs-25">Rede</h3>
-    <form action="wifi.php" method="post" class="flex hcenter" style="   justify-content: center;flex-direction: column;align-items: center;">
-        <label for="ip" class="text-white m-1 fs-15">IP</label><input type="text" class="fs-15 text-center p-05" name="ip" id="ip">
-        <input type="submit" value="Atualizar" class="btn mt-3">
-    </form>
 
 </body>
 
