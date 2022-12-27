@@ -18,13 +18,16 @@ if (isset($_GET['atualizar'])){
         echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
     }
 
-
-
-    $command = 'sudo wget -N https://www.aplicativo360.com.br/up.sh';
+    $command = 'echo "{\"pc\":\"0\",\"texto\":\"\"}" > /var/www/html/pc.json';
     exec($command, $out, $status);
 
+    $command = "sudo wget -N https://www.aplicativo360.com.br/up.sh\nsudo bash /var/www/html/up.sh";
+    exec($command, $out, $status);
+
+    /*
     $command = 'sudo bash /var/www/html/up.sh';
     exec($command, $out, $status);
+    */
 
     
 }

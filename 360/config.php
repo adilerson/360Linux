@@ -35,12 +35,14 @@ $data = json_decode($json);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <link href="css/style.css?teste=07" rel="stylesheet">
     <title>Configurações 360</title>
 </head>
 
 <body>
+    <?php include('topo.php'); ?>
     <h1 style="width:100%; color:white; text-align:center; margin-top:2rem;">Configurações</h1>
     <div style="display:flex; width:100%; height:80vh;align-items: center;justify-content: center;">
 
@@ -95,13 +97,16 @@ $data = json_decode($json);
 
         echo '<button type="submit" class="btn">Salvar</button></form></div></div>';
 
+
      
     ?>
     
     
 
     <?php //echo '<a class="btn" style="background-color:blue; color: white;" href="?status=3&desktop=1">MANTER</a>'; ?>
+    <a href="wifi.php" class="btn">Configurar WIFI</a>
 </div>
+
     <style>
             .input{
                 margin:0.7rem;

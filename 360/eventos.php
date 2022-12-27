@@ -1,7 +1,44 @@
 <?php
-
-
 include('class.php');
+
+if (!is_dir("/360Linux/videoSpinAPI/eventos")){
+    mkdir("/360Linux/videoSpinAPI/eventos", 0777);    
+}
+if (!is_dir("/360Linux/videoSpinAPI/config")){
+    mkdir("/360Linux/videoSpinAPI/config", 0777);    
+}
+
+if (!is_dir("/360Linux/videoSpinAPI/audio")){
+    mkdir("/360Linux/videoSpinAPI/audio", 0777);    
+}
+
+if (!is_dir("/360Linux/videoSpinAPI/frame")){
+    mkdir("/360Linux/videoSpinAPI/frame", 0777);    
+}
+
+if (!file_exists("/360Linux/videoSpinAPI/config/evento/evento.json")){
+$evento =
+    '[
+        {
+        "nome": "null",
+        "tempo": "12",
+        "frameName": "null",
+        "audioName": "null",
+        "data": "2022-12-04",
+        "videoInput": "",
+        "vNormal": "5",
+        "vSlow": "3",
+        "vFast": "4",
+        "position": "top"
+        }
+        ]
+    ';
+
+    $file = 'evento.json';
+    file_put_contents($file, $evento);
+
+}
+
 
     
     if (isset($_POST['nomeoriginal_a']))
@@ -232,6 +269,7 @@ include('class.php');
                 
 
                 $oldmask = umask(0);
+                
                 mkdir("../videoSpinAPI/eventos/".$evento, 0777);
                 umask($oldmask);
                 file_put_contents($file, json_encode($json));
