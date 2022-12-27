@@ -109,7 +109,7 @@ export class ConfigPage implements OnInit {
   }
 
   reload(){
-    window.location.href = 'https://192.168.36.36/front'
+    window.location.href = 'https://192.168.36.36/360Linux/front'
   }
   cancel() {
     this.modal.dismiss(null, 'cancel');
