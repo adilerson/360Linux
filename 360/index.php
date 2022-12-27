@@ -19,8 +19,7 @@
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
-    <link href="css/style.css?teste=07<?php echo date('ymdis'); ?>" rel="stylesheet">
-
+    <link href="css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
 
     <link rel="stylesheet" href="css/jquery-confirm.css">
     <script src="js/jquery-confirm.js"></script>
@@ -57,6 +56,12 @@
 
 <div id="listaVideos">
 
+</div>
+
+<div class="w-100 flex hCenter">
+        <a href="index.php?maximo=500&evento=<?php echo $_GET['evento']; ?>" class="btn">
+            Exibir Todos
+        </a>
 </div>
 
 
@@ -158,7 +163,7 @@ function toggleFullScreen(teste) {
   }
 }
 
-$("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
+$("#listaVideos").load("listaVideos.php", {'maximo':'<?php echo $_GET['maximo']; ?>', 'evento': '<?php echo $evento; ?>'});
 
 function confirma(item){
     $.confirm({

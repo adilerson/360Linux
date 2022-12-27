@@ -53,7 +53,14 @@
             var div = "";
             for (var i = 0; i < textoSplitado.length; i++) {
                 if ( (textoSplitado[i] != '0') && (textoSplitado[i].length > 3) ){
-                    div += `<div class="filhos"><div class="mark">✓</div><div class="item">` + textoSplitado[i] + `</div></div>`;                  
+                    if (i == textoSplitado){
+                        
+                        div += `<div class="filhos"><div class="mark animate-out">✓</div><div class="item">` + textoSplitado[i] + `</div></div>`;                  
+
+                    }else{
+
+                        div += `<div class="filhos"><div class="mark">✓</div><div class="item">` + textoSplitado[i] + `</div></div>`;                  
+                    }
                     
                 }
             }
@@ -94,9 +101,8 @@
                         keys: ['enter', 'shift'],
                         action: function(){
                             $("#btnAtualizar").attr("style","opacity: 0; display:none !important");
-                            
-                            setInterval(atualiza, 1000);
                             $("#status").load("script.php?atualizar=1");
+                            setInterval(atualiza, 1000);
                         }
                     }
                 }

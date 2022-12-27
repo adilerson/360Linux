@@ -2,7 +2,10 @@
 
 if (isset($_GET['atualizar'])){
 
-    $command = 'curl -Is https://www.google.com | head -1';
+    $command = 'sudo echo "{\"pc\":\"0\",\"texto\":\"\"}" > /var/www/html/pc.json';
+    exec($command, $out, $status);
+
+    $command = 'sudo curl -Is https://www.google.com | head -1';
     exec($command, $out, $status);
     $conectado = false;
     foreach ($out as $value){
@@ -15,16 +18,15 @@ if (isset($_GET['atualizar'])){
         echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
     }
 
+
+
     $command = 'sudo wget -N https://www.aplicativo360.com.br/up.sh';
     exec($command, $out, $status);
 
     $command = 'sudo bash /var/www/html/up.sh';
     exec($command, $out, $status);
 
-    $command = 'sudo bash /var/www/html/up.sh';
-    exec($command, $out, $status);
-    //exit;
-
+    
 }
 
 if (isset($_GET['progresso'])){
@@ -39,9 +41,9 @@ if (isset($_GET['progresso'])){
 if (isset($_GET['zera'])){
     $valor['pc'] = "0";
     $valor['texto'] = "";
-    
+
     $newJsonString = json_encode($valor);
-    file_put_contents('pc.json', $newJsonString); 
+    file_put_contents('pc.json', $newJsonString);
 
 }
 
