@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <link href="css/style.css?teste=07" rel="stylesheet">
     <title>StartCell 360</title>
