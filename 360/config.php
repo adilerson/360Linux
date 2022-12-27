@@ -36,7 +36,7 @@ $data = json_decode($json);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.ico">
-    <link href="css/style.css?teste=04" rel="stylesheet">
+    <link href="css/style.css?teste=07" rel="stylesheet">
     <title>Configurações 360</title>
 </head>
 

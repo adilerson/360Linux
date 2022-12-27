@@ -468,3 +468,6 @@ transition: all 0.3s ease-in-out;
   justify-content: center;
   align-items: center;
 }
+.jconfirm-box{
+  color: #272727 !important;
+}
