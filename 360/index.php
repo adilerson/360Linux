@@ -17,6 +17,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
     <link href="css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">

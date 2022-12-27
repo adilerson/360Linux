@@ -2,6 +2,15 @@
 
 if (isset($_POST['comando'])){
     $command = $_POST['comando'];
+    if (isset($_POST['sudo']))
+    {
+        
+        if ( ($_POST['sudo'] == 'true') || ($_POST['sudo'] == 'on')){
+            $sudo = 'sudo ';
+        }else{
+            $sudo = '';
+        }
+    }
     exec('sudo '.$command, $out, $status);
 }
 
@@ -12,14 +21,16 @@ if (isset($_POST['comando'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
         <link href="360Linux/360/css/style.css" rel="stylesheet">
     <script type="text/javascript" src="/360Linux/360/js/jquery-2.2.4.min.js"></script>
 
     <title>Programar</title>
 </head>
 <body>
-    <form action="programar.php" method="post"  class="flex coluna hCenter vCenter" style="height: 15rem; justify-content: space-around !important;">
-    <label for="comando">Linha de Comando</label><input type="text" name="comando" value="">
+<form action="programar.php" method="post"  class="flex coluna hCenter vCenter" style="height: 15rem; justify-content: space-around !important;">
+    <label for="comando">Linha de Comando</label><input type="text" id="comando" name="comando" value="">
+    <div><input type="checkbox" name="sudo" id="sudo"><label for="sudo">Sudo</label></div>
     <input type="submit" class="btn" value="Executar">
     </form>
 

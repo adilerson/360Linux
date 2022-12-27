@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="360Linux/360/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="360Linux/360/js/qrcode.js?teste=2"></script>
     <link href="360Linux/360/css/style.css" rel="stylesheet">
