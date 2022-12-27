@@ -53,10 +53,8 @@
         if (anterior != textoTotal){
             var div = "";
             for (var i = 0; i < textoSplitado.length; i++) {
-                if (textoSplitado[i] != '0'){
-                    div += `<div class="filhos"><div class="mark">✓</div><div class="item">` + textoSplitado[i] + `</div></div>`;
-                    //var element = document.getElementById("resultado");
-                    
+                if ( (textoSplitado[i] != '0') && (textoSplitado[i].length > 3) ){
+                    div += `<div class="filhos"><div class="mark">✓</div><div class="item">` + textoSplitado[i] + `</div></div>`;                  
                     
                 }
             }
