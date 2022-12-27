@@ -30,38 +30,6 @@
       }
 
 
-      if (isset($_POST['ip'])){
-        $myfile = fopen("00-installer-config-wifi.yaml", "w");
-        
-        $txt = "#wifi gravado por 360CG
-network:
-  ethernets:
-    enp1s0:
-      optional: true
-      addresses:
-      - '".$_POST['ip']."'/24
-      gateway4: 8.8.8.8
-      nameservers:
-        addresses:
-        - 8.8.8.8
-        search: []
-  version: 2";
-        fwrite($myfile, $txt);
-        fclose($myfile);
-
-        $command = 'sudo rm /etc/netplan/00-installer-config.yaml';
-        exec($command, $out, $status);
-
-        $command = 'sudo mv /var/www/html/360Linux/360/00-installer-config.yaml /etc/netplan/00-installer-config.yaml';
-        exec($command, $out, $status);
-    
-        $command = 'sudo netplan apply';
-        exec($command, $out, $status);
-
-        $sucesso[] = 'Rede alterado com sucesso!';
-
-      }
-
       
 ?>
 
