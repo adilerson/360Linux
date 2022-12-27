@@ -1,4 +1,3 @@
-
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -58,15 +57,17 @@
                     
                 }
             }
+            
             $("#resultado").html(div);
+
+            $(".progressoAtual").css("width",total + "%");
+            $(".progressoAtual").html(total + "%");
+            anterior = textoTotal;
+            if (total == '100'){
+                $("#inicio").attr("style","opacity: 1; display:flex !important");
+            }
         }
 
-        $(".progressoAtual").css("width",total + "%");
-        $(".progressoAtual").html(total + "%");
-        anterior = textoTotal;
-        if (total == '100'){
-            $("#inicio").attr("style","opacity: 1; display:flex !important");
-        }
     }
     
     

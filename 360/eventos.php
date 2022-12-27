@@ -2,6 +2,7 @@
 
 
 include('class.php');
+
     
     if (isset($_POST['nomeoriginal_a']))
     {
@@ -257,8 +258,8 @@ include('class.php');
     <title>360BR</title>
 </head>
 <body>
-    
-    <?php include('msg.php'); ?>
+
+    <?php include('topo.php'); include('msg.php'); ?>
     <div class="settings">
         <!--<a href="enviar.php">
             Envio de Audios e Molduras
@@ -304,7 +305,7 @@ include('class.php');
                 </select>
 
             </div>
-            <div class="botaoIncluir">
+            <div class="botaoIncluir flex hCenter">
                 <input type="submit" class="btn" value="Incluir" id="Incluir">
             </div>
         </form>
