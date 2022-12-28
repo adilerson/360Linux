@@ -130,6 +130,13 @@ $data = json_decode($json);
             }
             .input{
                 display:flex;
+                
+            }
+            input{
+                width: 12rem !important;
+            }
+            select{
+                width: 12rem !important;
             }
     </style>
 </body>

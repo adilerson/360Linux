@@ -328,7 +328,7 @@ export class MediaService {
 
         }else{
           if ( (fileConfig.vFast > 0) && (fileConfig.vSlow > 0) ){
-            console.log('Slow ***********************************************')
+            //console.log('todos ***********************************************')
             command.complexFilter(
               [
                 {
@@ -483,7 +483,7 @@ export class MediaService {
           }
 
           if ( (fileConfig.vFast == 0) && (fileConfig.vSlow > 0) ){
-            console.log('slow ***********************************************')
+            //console.log('slow ***********************************************')
             command.complexFilter(
               [
                 {
@@ -595,7 +595,7 @@ export class MediaService {
           }
 
           if ( (fileConfig.vFast > 0) && (fileConfig.vSlow == 0) ){
-            console.log('Fast***********************************************')
+            //console.log('Fast***********************************************')
             command.complexFilter(
               [
                 {

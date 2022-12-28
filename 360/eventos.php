@@ -68,8 +68,13 @@ if (!file_exists("/360Linux/360/data.json")){
             $nomeNovo = $_POST['nomeoriginal_a'];
             if (is_dir("videos/lixeira/".$_POST['nomeoriginal_a'])){
                 $nomeNovo = $_POST['nomeoriginal_a'].'-'.date("ymdhi");
+            }else{
+                $nomeNovo = $_POST['nomeoriginal_a'].'-'.date("ymdhi");
+                mkdir("videos/lixeira/".$nomeNovo);
             }
-            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'], "videos/lixeira/".$_POST['nomeoriginal_a'])){
+            //echo "../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'];exit;
+            if (rename("../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'], "videos/lixeira/".$nomeNovo)){
+                //echo "../videoSpinAPI/eventos/".$_POST['nomeoriginal_a'] . " - " .  "videos/lixeira/".$_POST['nomeoriginal_a']; exit;
                 $sucesso[] = 'Evento <strong>'.$_POST['edit_nome'].'<strong> Enviado para lixeira';
             }else{
                 $erro[] = 'Erro ao encontrar a pasta do evento <strong>'.$_POST['edit_nome'].'<strong>';
@@ -385,7 +390,7 @@ if (!file_exists("/360Linux/360/data.json")){
         <div class="pai">
             <div class="link bubbly-button flex hCenter vCenter" >
                 <div>
-                    <a href="index.php?evento='.$value->nome.'" style="">'.corrigeNome($value->nome).'</a>
+                    <a href="index.php?evento='.$value->nome.'" style="">'.ucfirst(corrigeNome($value->nome)).'</a>
                 </div>
                     <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
                 <div>
