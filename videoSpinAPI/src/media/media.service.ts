@@ -608,7 +608,7 @@ export class MediaService {
                   filter: 'trim',
                   options: {
                     start: fileConfig.vNormal,
-                    duration: fileConfig.vSlow,
+                    duration: fileConfig.vFast,
                   },
                   inputs: '0',
                   outputs: ['t1'],
@@ -643,7 +643,7 @@ export class MediaService {
                   filter: 'trim',
                   options: {
                     start: fileConfig.vNormal,
-                    duration: fileConfig.vSlow,
+                    duration: fileConfig.vFast,
                   },
                   inputs: '0',
                   outputs: ['t1'],
