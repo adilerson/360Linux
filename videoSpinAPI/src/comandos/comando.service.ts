@@ -13,7 +13,7 @@ export class ComandoService {
     }
   async startGiraGira() {
 
-    console.log('started socket Gira gira');
+    //console.log('started socket Gira gira');
 
     const json = {
         id: 'startGiraGira',

@@ -17,7 +17,7 @@ let ComandoService = class ComandoService {
         this.socket = socket;
     }
     async startGiraGira() {
-        console.log('started socket Gira gira');
+        c//onsole.log('started socket Gira gira');
         const json = {
             id: 'startGiraGira',
             data: true,

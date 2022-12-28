@@ -12,18 +12,31 @@
 
 <body>
     <div class="flex collum hCenter">
-        <div class="btn">Ligar</div>
+        <div class="btn" id="btn">Ligar</div>
     </div>
-    <div id="status"></div>
+    <div id="status" style="opacity:0;"></div>
 
 </body>
 <script>
+    gravando = false;
     $(".btn").click(function(){
-        $("#status").load("https://192.168.36.36:3000/comando?status=1")
-        //$("#status").load("startCellScript.php");
+        //console.log('clicou');
+        if (gravando == false){
+            //console.log('gravando');
+            $("#status").load("https://192.168.36.36:3000/comando?status=1");
+            gravando = true
+        }
+        
+        setTimeout(function ()
+        {
+            //console.log('desgravando');
+            gravando = false;
+        }, 1000);
+        
     });
 </script>
 <style>
+
 html{
 display: flex;
     justify-content: center;
