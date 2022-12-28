@@ -472,7 +472,7 @@ export class MediaService {
                 '[output]scale=720:1080[scaled]',
                 {
                   filter: 'framerate',
-                  options: { fps: '60' },
+                  options: { fps: '30' },
                   inputs: ['scaled'],
                   outputs: 'output1',
                 },
@@ -584,7 +584,7 @@ export class MediaService {
                 '[output]scale=720:1080[scaled]',
                 {
                   filter: 'framerate',
-                  options: { fps: '60' },
+                  options: { fps: '30' },
                   inputs: ['scaled'],
                   outputs: 'output1',
                 },
@@ -698,7 +698,7 @@ export class MediaService {
                 '[output]scale=720:1080[scaled]',
                 {
                   filter: 'framerate',
-                  options: { fps: '60' },
+                  options: { fps: '30' },
                   inputs: ['scaled'],
                   outputs: 'output1',
                 },
@@ -785,3 +785,6 @@ export class MediaService {
 
   
 }
+
+
+
