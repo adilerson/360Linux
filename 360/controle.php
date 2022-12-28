@@ -36,7 +36,7 @@ if (isset($_POST['gravaStart']))
 }
 
 
-if (isset($_POST['gravaStart']))
+if (isset($_POST['gravaStop']))
 {
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/stopRec.py';
@@ -106,20 +106,15 @@ if (isset($json->porta)){
     <title>Controle</title>
 </head>
 <body>
-    <h3 class="text-white text-center fs-25">Controle Remoto</h3>
+    <?php $evento = 'Controle Remoto'; include('top.php'); if(isset($success)){echo $success;}?>
     <form action="controle.php" method="post" class="flex hcenter" style="   justify-content: center;flex-direction: column;align-items: center;">
-        <label for="ip" class="text-white m-1 fs-15">Porta USB</label>
-        <select name="portas" id="portas">
-            <option value="-1">Selecionar Porta</option>
-            <?php
-            foreach($portas as $value){
-                if ($value == $porta){
-                    echo '<option value="'.$value.'">'.str_replace("/dev/tty", "", "$value").'</option>';
-                }
-            }
-            ?>
-        </select>
-        <input type="submit" value="Atualizar" class="btn mt-3">
+        <div class="flex coluna">
+            <a href="?reset=1" class="btn m-3">Resetar Controle</a>
+            <label for="ip" class="text-white m-1 fs-15">Para gravar seu controle pressione o botão correspondente do controle de sua plataforma, clique no botão abaixo, e aguarde 5 segundos para soltar o botão de sua plataforma</label>
+            <a href="?gravaStart=1"  class="btn">Gravar botão Start</a>
+            <a href="?gravaStop=1"  class="btn">Gravar botão Stop</a>
+        </div>
+        
     </form>
 </body>
 </html>

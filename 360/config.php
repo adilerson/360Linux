@@ -8,7 +8,7 @@ if (isset($_POST['atualizar'])){
     file_put_contents($path.'data.json', $newJsonString); 
 
     
-    echo '<div style="
+    $success = '<div style="
         color: white;
         text-align: center;
         width: 90%;
@@ -42,13 +42,18 @@ $data = json_decode($json);
 </head>
 
 <body>
-    <?php include('topo.php'); ?>
-    <h1 style="width:100%; color:white; text-align:center; margin-top:2rem;">Configurações</h1>
+
+    <?php $evento = 'Configurações'; include('top.php'); if(isset($success)){echo $success;}?>
+
     <div style="display:flex; width:100%; height:80vh;align-items: center;justify-content: center;">
 
     <?php 
 
-        echo '<div class="form"><form method="post" action="?status=5&desktop=1">';
+        echo '<div class="form">
+        <form method="post" action="?status=5&desktop=1">
+        <a href="wifi.php" class="btn">Configurar WIFI</a>
+        <a href="controle.php" class="btn">Configurar Controle</a>
+        ';
         echo '<input type="hidden" name="atualizar" value="1">';
         foreach ($data as $key => $entry) {
             if ( ($key != 'atualizar') && ($key != 'estilo') && ($key != 'usb')  && ($key != 'porta') && ($key != 'record') ){
@@ -104,7 +109,7 @@ $data = json_decode($json);
     
 
     <?php //echo '<a class="btn" style="background-color:blue; color: white;" href="?status=3&desktop=1">MANTER</a>'; ?>
-    <a href="wifi.php" class="btn">Configurar WIFI</a>
+    
 </div>
 
     <style>

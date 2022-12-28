@@ -1,5 +1,5 @@
 <?php
-include('class.php');
+include("class.php");
 
 if (!is_dir("/360Linux/videoSpinAPI/eventos")){
     mkdir("/360Linux/videoSpinAPI/eventos", 0777);    
@@ -39,6 +39,15 @@ $evento =
 
 }
 
+if (!file_exists("/360Linux/360/data.json")){
+    $evento =
+        '{"atualizar":"1","porta":"5","ip":"192.168.36.36","record":"15","normal":"6","fast":"5","slow":"4","delay":"8","usb":""}';
+    
+        $file = 'data.json';
+        file_put_contents($file, $evento);
+    
+    }
+
 
     
     if (isset($_POST['nomeoriginal_a']))
@@ -68,7 +77,7 @@ $evento =
         }
         
         file_put_contents($file, json_encode($json));
-        //echo $_POST['nomeoriginal_a'];exit;
+        
     }
 
 
@@ -81,10 +90,6 @@ $evento =
 
         if (strlen($_FILES['edit_frameName']['name']) > 0)
         {
-            
-
-            
-
             $pasta = "../videoSpinAPI/config/frame/";
 
             $nome_frameName    = $_FILES['edit_frameName']['name'];
@@ -106,11 +111,10 @@ $evento =
             }
             
         }
-
+        
         if (!isset($erro)){
             if (strlen($_FILES['edit_audioName']['name']) > 0)
             {
-                
 
                 $pasta = "../videoSpinAPI/config/audio/";
                 $permitidos = array(".png");	
@@ -133,9 +137,6 @@ $evento =
 
             }
         }
-
-
-
 
         foreach($json as $key => $value){
             if ($key == $_POST['key']){                
@@ -163,11 +164,12 @@ $evento =
 
     }
 
-
+    
     if (isset($_POST['nome'])){
         
         $evento = clean($_POST['nome']);
 
+        
         if (is_dir("../videoSpinAPI/eventos/".$evento)){
             $erro[] =  "Evento '$evento' já existente";
 
@@ -178,13 +180,10 @@ $evento =
             $nome_atual_audio = 'null';
             $nome_atual_audio_sem = 'null';
 
-
+            
             if (strlen($_FILES['frameName']['name']) > 0)
             {
                 
-
-                
-
                 $pasta = "../videoSpinAPI/config/frame/";
 
                 $nome_frameName    = $_FILES['frameName']['name'];
@@ -207,6 +206,7 @@ $evento =
                 }
             }
 
+            
             if (!isset($erro)){
                 if (strlen($_FILES['audioName']['name']) > 0)
                 {
@@ -233,7 +233,7 @@ $evento =
 
                 }
             }
-
+            
             if (!isset($erro)){
 
             
@@ -269,6 +269,8 @@ $evento =
                 
 
                 $oldmask = umask(0);
+
+                
                 
                 mkdir("../videoSpinAPI/eventos/".$evento, 0777);
                 umask($oldmask);
@@ -279,16 +281,14 @@ $evento =
     }
 }
 
-
-    
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
+    <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <link href="css/style.css?teste=07" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" href="css/jquery-confirm.css">
@@ -297,7 +297,16 @@ $evento =
 </head>
 <body>
 
-    <?php include('topo.php'); include('msg.php'); ?>
+<div class="topo">
+    <div class="home" id="home">
+        <a href="/"><img src="img/home.png"></a>
+    </div>
+    <div class="eventoTitulo">
+        Eventos
+    </div>  
+    <div class="text-center transition flex"><img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;"></div>
+</div>
+    <?php include('msg.php'); ?>
     <div class="settings">
         <!--<a href="enviar.php">
             Envio de Audios e Molduras

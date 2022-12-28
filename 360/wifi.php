@@ -45,9 +45,9 @@
     <title>Wifi360</title>
 </head>
 <body>
-  <?php include('topo.php'); ?>
+    <?php $evento = 'Wifi'; include('top.php'); ?>
   <?php include('msg.php'); ?>
-  <h3 class="text-white text-center fs-25">Wifi</h3>
+  
     <form action="wifi.php" method="post" class="flex hcenter" style="   justify-content: center;flex-direction: column;align-items: center;">
         <label for="SSID" class="text-white m-1 fs-15">SSID</label><input type="text" class="fs-15 text-center p-05" name="SSID" id="SSID">
         <label for="senha" class="text-white m-1 fs-15">Senha</label><input type="text" class="fs-15 text-center p-05" name="senha" id="senha">

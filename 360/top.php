@@ -5,9 +5,7 @@
     <div class="eventoTitulo">
         <?php
             
-            if (isset($evento)){
-                echo ucfirst(corrigeNome($evento));
-            }
+            if (isset($evento)){echo $evento;}
 
         ?>
     </div>  
