@@ -1,14 +1,14 @@
 <?php
 
+//echo '<script>console.log("tese: '.$rootPath.'");</script>';exit;
 $zip = new ZipArchive();
 
 $arquivoZip=$_GET['evento'].".zip";
 
 $rootPath = realpath("../videoSpinAPI/eventos/".$_GET['evento']);
-
 $zip = new ZipArchive();
 $zip->open('arquivos360.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
+//echo $rootPath.')'; exit;
 // Create recursive directory iterator
 /** @var SplFileInfo[] $files */
 $files = new RecursiveIteratorIterator(

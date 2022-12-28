@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <link href="css/style.css?teste=07" rel="stylesheet">
+    <link href="css/style.css?teste=08" rel="stylesheet">
     <title>StartCell 360</title>
 </head>
 
 <body>
     <div class="flex collum hCenter">
-        <div class="btn" id="btn">Ligar</div>
+        <div class="btn naoselecionavel" id="btn">Ligar</div>
     </div>
     <div id="status" style="opacity:0;"></div>
 
@@ -31,7 +31,7 @@
         {
             //console.log('desgravando');
             gravando = false;
-        }, 1000);
+        }, 2000);
         
     });
 </script>
