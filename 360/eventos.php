@@ -669,5 +669,14 @@ a {
     display: flex;
     flex-wrap: wrap;
 }
+.arquivoDownload{
+    position: absolute;
+    bottom: 1px;
+
+    width: 91%;
+    border-radius: 1.1rem 1.5rem 0rem 0rem;
+    background-color: #00000042;
+    margin: 0 !important;
+}
 </style>
 </html>
