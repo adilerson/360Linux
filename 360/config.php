@@ -37,7 +37,7 @@ $data = json_decode($json);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
-    <link href="css/css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
+    <link href="css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
     <title>Configurações 360</title>
 </head>
 

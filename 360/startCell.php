@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <link href="css/css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
+    <link href="css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
     <title>StartCell 360</title>
 </head>
 
