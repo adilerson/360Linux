@@ -28,28 +28,36 @@
         -->
 
         <h1>Aparelho Start</h1>
-        <div class="fs-1 p-1">
+        <div class="fs-1 pb-1">
             <a href="https://<?php echo $ip; ?>/360Linux/360/startCell.php" rel="noopener noreferrer" class="btn">Abrir</a>
         </div>
 
         <div class="divisao"></div>
 
         <h1>Tablet</h1>
-        <div class="fs-1 p-1">
+        <div class="fs-1 pb-1">
             <a href="https://<?php echo $ip; ?>/360Linux/360/" rel="noopener noreferrer" class="btn">Eventos</a>
         </div>
 
         <h1>Administrador</h1>
 
-        <div class="fs-1 p-1">
+        <div class="fs-1 pb-1">
             <a href="https://<?php echo $ip; ?>/360Linux/360/config.php" rel="noopener noreferrer" class="btn">Configurações</a>
         </div>
         
-        <div class="fs-1 p-1">
+        <div class="fs-1 pb-1">
             <a href="https://<?php echo $ip; ?>/atualizar.php" rel="noopener noreferrer" class="btn">Atualizações</a>
         </div>
 
     </div>
 </body>
+
 </html>
 
+
+<style>
+    h1{
+        margin-top:1.5rem;
+        margin-bottom:0rem;
+    }
+</style>

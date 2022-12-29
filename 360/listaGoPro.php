@@ -1,14 +1,12 @@
 <?php
-/* Fbw-B!8-Rks 
-http://10.5.5.9/bacpac/PW?t=Fbw-B!8-Rks&p=%01
-*/
 
+if (isset($_GET['evento'])){
+$evento = $_GET['evento'];
+}
+else{$evento = 'evento';}
 
-//$homepage = explode("href=", file_get_contents('http://10.5.5.9:8080/videos/DCIM/'));
-
-//$pastaGoPro = 'http://192.168.0.23/360Linux/360/gopro';
 $pastaGoPro = 'http://10.5.5.9:8080';
-$pastaDestino = 'http://192.168.0.23/360Linux/360/gopro/videos/download/';
+
 $homepage = explode("href=", file_get_contents($pastaGoPro.'/videos/DCIM'));
 
 $conta = 0;
@@ -41,9 +39,45 @@ foreach($homepage as $href){
 
 
 $outro = file_get_contents($pastaGoPro.$pastas[0]);
-//echo $outro;exit;
+
 $novo = explode('href=',htmlentities($outro));
+
+if (!is_dir('gopro/videos/download/')){
+    mkdir("gopro/videos/download/", 0777);    
+}
+
+if (!is_dir('gopro/videos/download/'.$evento)){
+    mkdir("gopro/videos/download/".$evento, 0777);    
+}
+
+$json = file_get_contents("../videoSpinAPI/config/evento/evento.json");
+$data = json_decode($json, true);
+//print_r($json);
+//exit;
+foreach($data as $value){
+    
+    if ($value['nome'] == $evento){
+        $txt = '{"name":"'.$value['nome'].'","audio":"'.$value['audio'].'","frame":"'.$value['frame'].'","vNormal":'.$value['vNormal'].',"vFast":'.$value['vFast'].',"vSlow":'.$value['vSlow'].'}';
+    }
+
+    foreach($value as $key=>$valor){
+        if ( ($key == 'nome') && ($valor == $evento) ){
+            
+            //$txt = {"name":"$","audio":"Video_Promo","frame":"Video_Promo","vNormal":5,"vFast":4,"vSlow":3}
+            //echo 'encontrou: '.$valor.'<br>';
+
+        }
+
+    }
+    
+}
+
+
+
+$files = [];
+$nofiles = [];
 foreach($novo as $new){
+
     //echo $new.'---<br><br>';
     $file = explode('"',html_entity_decode($new));
     //var_dump($file);
@@ -57,37 +91,46 @@ foreach($novo as $new){
         $arquivoG = pathinfo($arquivoP[4]);
         //print_r($arquivoG); continue;
         if (strtolower($arquivoG['extension']) == 'mp4'){
+
             //echo $pastaGoPro.$pastas[0].$arquivoG['basename'].'<br>';
+            //continue;
     
             $file = $pastaGoPro.$pastas[0].$arquivoG['filename'].'.'.strtolower($arquivoG['extension']);
             $newfile = $pastaDestino.$arquivoG['filename'].'.'.strtolower($arquivoG['extension']);
-
-            echo $file.'<br>';
-            echo $newfile.'<br><br>';
-            //exit;
-            //$newfile = $_SERVER['DOCUMENT_ROOT'] . $arquivoG['basename'];
+            //{"name":"Video_Promo","audio":"Video_Promo","frame":"Video_Promo","vNormal":5,"vFast":4,"vSlow":3}
             
             $url = $file;
               
-            // Use basename() function to return the base name of file
+            
             $file_name = basename($url);
+            $file_info = pathinfo(basename($url));
+            $remote_file_url = $file;
+            
+            /* New file name and path for this file */
+            $local_file = $newfile;
+            if (file_exists('../videoSpinAPI/tmp1/'.$local_file)){
+                continue;
+            }
+             
+            $copy = copy( $remote_file_url, '../videoSpinAPI/tmp/'.$local_file );
+            
+            
+            if( !$copy ) {
+                $nofiles[] = $file;
+            }
+            else{
+                $myfile = fopen('../videoSpinAPI/tmp/'.$file_info['filename'].".txt", "w");               
+                fwrite($myfile, $txt);
+                fclose($myfile);
+
+                $files[] = $file;
+            }
             
 
-            if (file_put_contents('gopro/videos/download/'.$file_name, file_get_contents($url)))
-            {
-                echo "File downloaded successfully";
-            }
-            else
-            {
-                echo "File downloading failed.";
-            }
-
         }
+
     }
 }
-    
-        
-
-
+print_r($files);
 
 ?>

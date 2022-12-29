@@ -308,6 +308,27 @@ transition: all 0.3s ease-in-out;
   .p-3{
     padding: 3rem;
   }
+
+  .pt-1{
+    padding-top: 1rem;
+  }
+  .pt-2{
+    padding-top: 2rem;
+  }
+  .pt-3{
+    padding-top: 3rem;
+  }
+
+  .pb-1{
+    padding-bottom: 1rem;
+  }
+  .pb-2{
+    padding-bottom: 2rem;
+  }
+  .pb-3{
+    padding-bottom: 3rem;
+  }
+
   .text-white{
     color:white !important;
   }
@@ -399,6 +420,25 @@ transition: all 0.3s ease-in-out;
   border: 3px solid;
   border-radius: 0.24rem;
   padding: 0.6rem 1.8rem;
+}
+
+.animate-left-in{
+  -webkit-animation: entra 200ms ease-in-out forwards;
+  animation: entra 200ms ease-in-out forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes entra { 
+  0% {
+    opacity: 0;
+    /*transform: rotate(10deg);*/
+    margin-left: -3rem;
+   }
+  100% { 
+    opacity: 1;
+    /*transform: rotate(0deg);*/
+    margin-left:0rem;
+  }
 }
 
   .animate-out {

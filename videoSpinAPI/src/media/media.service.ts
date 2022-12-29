@@ -36,7 +36,7 @@ export class MediaService {
 
       if (this.files.length > 0 && this.fileTxt.length > 0 ) {
         if (this.canEdit) {
-          console.log(this.files);
+          //console.log(this.files);
           this.converMedia(this.files[0]);
         }
       }
@@ -376,14 +376,14 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: '0.3*PTS',
+                  options: '0.2*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
     
                 {
                   filter: 'setpts',
-                  options: '1.7*PTS',
+                  options: '4*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
