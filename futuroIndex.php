@@ -1,7 +1,7 @@
 <?php 
-    //include('360Linux/360/env.php');
-    //$ip = dados('ip');
-    $ip = '192.168.36.36';
+    include('360Linux/360/env.php');
+    $ip = dados('ip');
+    //$ip = '192.168.36.36';
 
 ?>
 <!DOCTYPE html>
