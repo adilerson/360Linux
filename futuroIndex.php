@@ -1,7 +1,25 @@
 <?php 
-    include('360Linux/360/env.php');
-    $ip = dados('ip');
-    //$ip = '192.168.36.36';
+
+        $url = 'https://www.aplicativo360.com.br/versao.php';    
+        $escaped_url = file_get_contents($url);
+        echo $escaped_url; 
+        exit;
+
+    
+    if ($_SERVER['SERVER_NAME'] =='localhost'){
+        include('360/env.php');
+    }else{
+        include('360Linux/360/env.php');
+    }
+    $versao = dados('versao');
+    if ($versao > 2.5){
+        echo '<div></div>';
+    }
+    else{
+        echo 'é menor';
+    }
+    
+    $ip = dados('versao');
 
 ?>
 <!DOCTYPE html>

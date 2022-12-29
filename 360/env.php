@@ -1,7 +1,13 @@
 <?php 
 
     function dados($str){
-        $json = file_get_contents("360Linux/360/data.json");
+        if ($_SERVER['SERVER_NAME'] =='localhost'){
+            $json = file_get_contents("data.json");
+            
+        }else{
+            $json = file_get_contents("/360Linux/360/data.json");
+            
+        }
 
         $data = json_decode($json);
         

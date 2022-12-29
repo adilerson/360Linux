@@ -1,5 +1,23 @@
 <?php
 include("class.php");
+//include("env.php");
+
+function dados($str){
+    $json = file_get_contents("data.json");
+
+    $data = json_decode($json);
+    
+    
+    foreach ($data as $key => $value) {
+        if ($key == $str){
+            
+            return $value;
+        }
+    }
+}
+
+
+
 
 if (!is_dir("/360Linux/videoSpinAPI/eventos")){
     mkdir("/360Linux/videoSpinAPI/eventos", 0777);    
@@ -337,16 +355,16 @@ if (!file_exists("/360Linux/360/data.json")){
                 <label class="branco label" for="data">Data do Evento</label><input type="text" name="data" id="data">
             </div>-->
             <div class="inputs">
-                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" required>
+                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" value="<?php echo dados('record'); ?>" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="vNormal" id="vNormal" required>
+                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="vNormal" id="vNormal" value="<?php echo dados('normal'); ?>" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" required>
+                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" required>
+                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" value="<?php echo dados('fast'); ?>" required>
             </div>
             <div class="inputs">
                 
@@ -494,12 +512,14 @@ $(".editarEvento").click(function(){
         
 });
 
+    /*
     if ($("#tempo").val() == ''){
         $("#tempo").val("12");
         $("#vNormal").val("5");
         $("#vFast").val("4");
         $("#vSlow").val("3");
     }
+    */
 
     $("#tempo").change(function(){
         var tempo = $("#tempo").val();
