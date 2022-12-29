@@ -12,6 +12,20 @@
 </head>
 <body style="color: white;">
 
+<div class="topo">
+    <div class="home" id="home">
+        <a href="/"><img src="360Linux/360/img/home.png"></a>
+    </div>
+    <div class="eventoTitulo">
+
+    </div>
+        <div class="text-center transition flex">
+                <img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;">
+        </div><div class="text-center transition flex">
+        <img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;">
+        </div>
+</div>
+
 <div class="flex hCenter vCenter mt-3" id="btnAtualizar">
     <div class="btn atualizar">Atualizar</div>
 </div>
@@ -26,6 +40,7 @@
 
 <div id="status" style="opacity: 0"></div>
 </body>
+<?php include('/360Linux/360/top.php'); ?>
 <input type="hidden" id="atualizados" style="width:100%;" value="0">
 <div id="resultado" class="resultado">
     
