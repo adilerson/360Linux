@@ -339,15 +339,20 @@ body[class*=jconfirm-no-scroll-] {
 }
 
 .jconfirm .jconfirm-box div.jconfirm-title-c {
-    display: block;
-    font-size: 22px;
-    line-height: 20px;
+    text-align: center;
+    background-color: #53a3cc;
+    color: white;
+    padding: 1rem 0rem;
+    margin-bottom: 1rem !important;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: default;
-    padding-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+
 }
 
 .jconfirm .jconfirm-box div.jconfirm-title-c.jconfirm-hand {
@@ -611,13 +616,14 @@ body[class*=jconfirm-no-scroll-] {
 
 .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons,
 .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons {
-    float: right;
+    display:flex;
+    justify-content: space-around;
 }
 
 .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button,
 .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: bold;
     text-shadow: none;
 }
@@ -663,7 +669,8 @@ body[class*=jconfirm-no-scroll-] {
 
 .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons,
 .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-buttons {
-    float: right;
+    display:flex;
+    justify-content: space-around;
 }
 
 .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons button,

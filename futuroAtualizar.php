@@ -4,9 +4,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
+    <link rel="stylesheet" href="/360Linux/360/css/jquery-confirm.css">
     <link href="/360Linux/360/css/style.css?teste=1" rel="stylesheet">
     <script type="text/javascript" src="/360Linux/360/js/jquery-2.2.4.min.js"></script>
-    <link rel="stylesheet" href="/360Linux/360/css/jquery-confirm.css">
     <script src="/360Linux/360/js/jquery-confirm.js"></script>
     <title>Atualização360</title>
 </head>

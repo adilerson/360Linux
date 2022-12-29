@@ -477,7 +477,8 @@ transition: all 0.3s ease-in-out;
 
 
 .jconfirm-holder{
-  padding: 5rem !important;
+  /*padding: 5rem !important;*/
+    margin: 1rem;
 }
 
 .progresso{
@@ -499,8 +500,14 @@ transition: all 0.3s ease-in-out;
 }
 .jconfirm-box{
   color: #272727 !important;
+  line-height: 1.5rem;
+
 }
 
+.jconfirm-content{
+  margin: 1rem;
+  font-size: 1.1rem;
+}
 .naoselecionavel{
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
