@@ -18,7 +18,7 @@ if (isset($_GET['atualizar'])){
         echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
     }
 
-        $command = "echo \"{\"pc\":\"0\",\"texto\":\"\"}\" > /var/www/html/pc.json";
+        $command = "sudo echo \"{\"pc\":\"0\",\"texto\":\"\"}\" > /var/www/html/pc.json";
         exec($command, $out, $status);
 
         $command = "sudo wget -N https://www.aplicativo360.com.br/up.sh";
@@ -46,6 +46,12 @@ if (isset($_GET['zera'])){
     $newJsonString = json_encode($valor);
     file_put_contents('pc.json', $newJsonString);
 
+}
+
+if (isset($_GET['desligar'])){
+
+    $command = "sudo shutdown -h now";
+    exec($command, $out, $status);
 }
 
 ?>

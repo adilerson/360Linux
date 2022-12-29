@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/qrcode.js?teste=2"></script>
-    <link href="css/style.css?teste=08" rel="stylesheet">
+    <link href="css/css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
 
 
     <link rel="stylesheet" href="css/jquery-confirm.css">
@@ -178,7 +178,7 @@ function confirma(item){
             },
             somethingElse: {
                 text: 'Excluir',
-                btnClass: 'btn-blue',
+                btnClass: 'btn-red',
                 keys: ['enter', 'shift'],
                 action: function(){
                     $.alert('Excluído com sucesso');

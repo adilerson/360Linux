@@ -295,7 +295,7 @@ if (!file_exists("/360Linux/360/data.json")){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
-    <link href="css/style.css?teste=08" rel="stylesheet">
+    <link href="css/css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" href="css/jquery-confirm.css">
     <script src="js/jquery-confirm.js"></script>
@@ -599,7 +599,7 @@ $( "#target" ).submit();
             },
             somethingElse: {
                 text: 'Excluir',
-                btnClass: 'btn-blue',
+                btnClass: 'btn-red',
                 keys: ['enter', 'shift'],
                 action: function(){
                     console.log('Fez');

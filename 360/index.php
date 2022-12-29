@@ -181,7 +181,7 @@ function confirma(item){
             },
             somethingElse: {
                 text: 'Excluir',
-                btnClass: 'btn-blue',
+                btnClass: 'btn-red',
                 keys: ['enter', 'shift'],
                 action: function(){
                     $.alert('Excluído com sucesso');

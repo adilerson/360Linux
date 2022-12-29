@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Roboto";
-    src: url("Roboto-Regular.ttf") format('truetype');
+    src: url("/360Linux/360/css/Roboto-Regular.ttf") format('truetype');
 }
 
 body{
@@ -350,7 +350,9 @@ transition: all 0.3s ease-in-out;
   .fs-3{
     font-size: 3rem;
   }
-
+  .wrap{
+    flex-wrap: wrap !important;
+  }
   .btn-danger{
     background-color: #cc1517;
   }

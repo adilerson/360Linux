@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="/360Linux/360/img/favicon.png">
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <meta http-equiv="Cache-control" content="no-cache">
-    <link href="css/style.css?teste=08" rel="stylesheet">
+    <link href="css/css/style.css?teste=<?php echo date('ymdis'); ?>" rel="stylesheet">
     <title>CG-360</title>
 </head>
 
