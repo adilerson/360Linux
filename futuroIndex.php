@@ -1,25 +1,31 @@
 <?php 
 
-        $url = 'https://www.aplicativo360.com.br/versao.php';    
-        $escaped_url = file_get_contents($url);
+    $url = 'https://www.aplicativo360.com.br/versao.php';
+    $escaped_url = file_get_contents($url);
+
+    function dados($str){
+    $json = file_get_contents("360Linux/360/data.json");
+    $data = json_decode($json);
 
 
-    
-    if ($_SERVER['SERVER_NAME'] =='localhost'){
-        include('360/env.php');
-    }else{
-        include('/360Linux/360/env.php');
+    foreach ($data as $key => $value) {
+    if ($key == $str){
+
+        return $value;
     }
+    }
+    }
+
     $versao = dados('versao');
+
     if ($versao > 2.0){
-        echo '<div></div>';
+    echo '<div></div>';
     }
     else{
-        echo '';
+    echo '';
     }
-    
-    $ip = dados('versao');
 
+    $ip = dados('ip');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" style="background: #373e46 !important;">
