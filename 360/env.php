@@ -5,7 +5,7 @@
             $json = file_get_contents("data.json");
             
         }else{
-            $json = file_get_contents("/360Linux/360/data.json");
+            $json = file_get_contents("/var/www/html/360Linux/360/data.json");
             
         }
 

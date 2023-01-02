@@ -3,7 +3,7 @@ include("class.php");
 //include("env.php");
 
 function dados($str){
-    $json = file_get_contents("data.json");
+    $json = file_get_contents("/var/www/html/360Linux/360/data.json");
 
     $data = json_decode($json);
     
