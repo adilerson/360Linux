@@ -173,6 +173,14 @@ export class MediaService {
           if (fileConfig.vFast > 0){
             qts++;
           }
+
+          if (fileConfig.cFast == null){
+            fileConfig.cFast = 0.5
+          }
+
+          if (fileConfig.cSlow == null){
+            fileConfig.cFast = 2.0
+          }
           
 
 
