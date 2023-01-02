@@ -1,111 +1,74 @@
-int led = 13;
-int a = A0;
-int b = A1;
+#include <Wire.h>
+#include <TimeLib.h>
+#include <DS1307RTC.h>
+
+const char *monthName[12] = {
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+};
+
+tmElements_t tm;
+
 void setup() {
-  pinMode(led, OUTPUT);
-  pinMode(a, OUTPUT);
-  digitalWrite(a, HIGH);
-  pinMode(b, OUTPUT);
-  digitalWrite(b, HIGH);
-  Serial.begin(115200);
-}
+  bool parse=false;
+  bool config=false;
 
-String leStringSerial() {
-  String conteudo = "";
-  char caractere;
-
-  // Enquanto receber algo pela serial
-  while (Serial.available() > 0) {
-    // Lê byte da serial
-    caractere = Serial.read();
-    // Ignora caractere de quebra de linha
-    if (caractere != '\n') {
-      // Concatena valores
-      conteudo.concat(caractere);
+  // get the date and time the compiler was run
+  if (getDate(__DATE__) && getTime(__TIME__)) {
+    parse = true;
+    // and configure the RTC with this info
+    if (RTC.write(tm)) {
+      config = true;
     }
-    // Aguarda buffer serial ler próximo caractere
-    delay(10);
   }
 
-  //Serial.print("Recebi: ");
-  //Serial.println(conteudo);
-
-  return conteudo;
+  Serial.begin(9600);
+  while (!Serial) ; // wait for Arduino Serial Monitor
+  delay(200);
+  if (parse && config) {
+    Serial.print("DS1307 configured Time=");
+    Serial.print(__TIME__);
+    Serial.print(", Date=");
+    Serial.println(__DATE__);
+  } else if (parse) {
+    Serial.println("DS1307 Communication Error :-{");
+    Serial.println("Please check your circuitry");
+  } else {
+    Serial.print("Could not parse info from the compiler, Time=\"");
+    Serial.print(__TIME__);
+    Serial.print("\", Date=\"");
+    Serial.print(__DATE__);
+    Serial.println("\"");
+  }
 }
 
 void loop() {
-  // Se receber algo pela serial
-  if (Serial.available() > 0) {
-    // Lê toda string recebida
-    String recebido = leStringSerial();
+}
 
-    if (recebido == "0") {
-      digitalWrite(led, HIGH);
-      digitalWrite(b, LOW);
-      delay(750);
-      digitalWrite(led, LOW);
-      digitalWrite(b, HIGH);
-    }    
+bool getTime(const char *str)
+{
+  int Hour, Min, Sec;
 
-    if (recebido == "1") {
-      digitalWrite(led, HIGH);
-      digitalWrite(a, LOW);
-      delay(750);
-      digitalWrite(led, LOW);
-      digitalWrite(a, HIGH);
-    }
+  if (sscanf(str, "%d:%d:%d", &Hour, &Min, &Sec) != 3) return false;
+  tm.Hour = Hour;
+  tm.Minute = Min;
+  tm.Second = Sec;
+  return true;
+}
 
+bool getDate(const char *str)
+{
+  char Month[12];
+  int Day, Year;
+  uint8_t monthIndex;
 
-
-    if (recebido == "3") {
-      Serial.print("Stop Gravado");
-      digitalWrite(led, HIGH);
-      digitalWrite(b, LOW);
-      delay(4000);
-      digitalWrite(led, LOW);
-      digitalWrite(b, HIGH);
-      
-    }
-
-     if (recebido == "4") {
-      Serial.print("Start gravado");
-      digitalWrite(led, HIGH);
-      digitalWrite(a, LOW);
-      delay(4000);
-      digitalWrite(led, LOW);
-      digitalWrite(a, HIGH);
-      
-    }
-
-     if (recebido == "9") {
-      Serial.print("Reset iniciado...");
-
-      digitalWrite(a, LOW);
-      digitalWrite(b, LOW);
-      delay(3500);
-      Serial.print("5 segundos...");
-      digitalWrite(b, HIGH);
-      delay(350);
-      digitalWrite(b, LOW);
-      delay(350);
-      digitalWrite(b, HIGH);
-      delay(350);
-      digitalWrite(b, LOW);
-      delay(350);
-      digitalWrite(b, HIGH);      
-      delay(350);
-      digitalWrite(b, LOW);
-      delay(350);
-      digitalWrite(b, HIGH);      
-      delay(50);
-      digitalWrite(a, HIGH);
-
-
-    }
-
-    if (recebido == "5") {
-      Serial.print("ok");
-    }
-
+  if (sscanf(str, "%s %d %d", Month, &Day, &Year) != 3) return false;
+  for (monthIndex = 0; monthIndex < 12; monthIndex++) {
+    if (strcmp(Month, monthName[monthIndex]) == 0) break;
   }
+  if (monthIndex >= 12) return false;
+  tm.Day = Day;
+  tm.Month = monthIndex + 1;
+  tm.Year = CalendarYrToTm(Year);
+  return true;
 }

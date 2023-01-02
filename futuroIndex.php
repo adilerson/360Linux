@@ -4,16 +4,17 @@
     $escaped_url = file_get_contents($url);
 
     function dados($str){
-    $json = file_get_contents("360Linux/360/data.json");
-    $data = json_decode($json);
+        $json = file_get_contents("360Linux/360/data.json");
+        $data = json_decode($json);
 
 
-    foreach ($data as $key => $value) {
-    if ($key == $str){
 
-        return $value;
-    }
-    }
+        foreach ($data as $key => $value) {
+            if ($key == $str){
+
+                return $value;
+            }
+        }
     }
 
     $versao = dados('versao');
@@ -80,6 +81,7 @@
                     </div>
                 </div>
             </div>
+            <div id="versao" class="w-100 text-center text-white mt-2">Versão <b><?php echo $versao; ?></b></div>
         </div>
     </div>
     <div class="des" style="opacity:0;">
@@ -113,7 +115,7 @@
                         $(".Botoes").fadeOut("2000")
                         $("body").css("overflow","hidden");
                         tempo = 1000;
-                        atraso = 1000;
+                        atraso = 650;
                         setTimeout(function(){
                             $(".des").fadeIn("2000");
                         }, tempo);

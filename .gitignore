@@ -4,6 +4,7 @@ videoSpin/dist
 videoSpinAPI/node_modules
 videoSpin/node_modules
 /node_modules
+360/mp3
 
 # Logs
 logs
@@ -54,6 +55,7 @@ videoSpinAPI/*.pem
 *.pem
 *.rar
 *.mp4
+
 *.txt
 *.map
 *.tsbuildinfo
@@ -62,3 +64,5 @@ videoSpinAPI/*.pem
 *.pack
 *.mp3
 *.tsbuildinfo
+
+*.ino

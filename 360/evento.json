@@ -9,6 +9,8 @@
         "vNormal": "5",
         "vSlow": "3",
         "vFast": "4",
+        "cFast":"0.5",
+        "cSlow":"4.0",
         "position": "top"
         }
         ]

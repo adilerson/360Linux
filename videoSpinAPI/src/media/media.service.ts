@@ -113,6 +113,7 @@ export class MediaService {
         console.log(fileConfig);
 
         let output = 'output1'
+        
 
 
     
@@ -160,9 +161,21 @@ export class MediaService {
         }
 
 
+
        
 
         if (frameConfig) {
+          
+          var qts = 1;
+          if (fileConfig.vSlow > 0){
+            qts++;
+          }
+          if (fileConfig.vFast > 0){
+            qts++;
+          }
+          
+
+
           output ='output2'
           command.complexFilter(
             [
@@ -211,14 +224,14 @@ export class MediaService {
               },
               {
                 filter: 'setpts',
-                options: '0.3*PTS',
+                options: fileConfig.cFast + '*PTS',
                 inputs: 't1N',
                 outputs: ['t1F'],
               },
   
               {
                 filter: 'setpts',
-                options: '1.7*PTS',
+                options: fileConfig.cSlow + '*PTS',
                 inputs: 't2N',
                 outputs: ['t2S'],
               },
@@ -267,14 +280,14 @@ export class MediaService {
               },
               {
                 filter: 'setpts',
-                options: '0.5*PTS',
+                options: fileConfig.cFast + '*PTS',
                 inputs: 't1N',
                 outputs: ['t1F'],
               },
   
               {
                 filter: 'setpts',
-                options: '1.7*PTS',
+                options: fileConfig.cSlow + '*PTS',
                 inputs: 't2N',
                 outputs: ['t2S'],
               },
@@ -307,7 +320,7 @@ export class MediaService {
               '[output]scale=720:1080[scaled]',
               {
                 filter: 'framerate',
-                options: { fps: '60' },
+                options: { fps: '30' },
                 inputs: ['scaled'],
                 outputs: 'output1',
               },
@@ -376,14 +389,14 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: '0.2*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
     
                 {
                   filter: 'setpts',
-                  options: '4*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -432,14 +445,14 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: '0.3*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
     
                 {
                   filter: 'setpts',
-                  options: '1.5*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -516,7 +529,7 @@ export class MediaService {
     
                 {
                   filter: 'setpts',
-                  options: '2*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -551,7 +564,7 @@ export class MediaService {
     
                 {
                   filter: 'setpts',
-                  options: '2*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -629,7 +642,7 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: '0.3*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
@@ -665,7 +678,7 @@ export class MediaService {
 
                 {
                   filter: 'setpts',
-                  options: '0.3*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },

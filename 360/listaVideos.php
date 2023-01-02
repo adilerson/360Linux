@@ -10,13 +10,13 @@
 
     $evento = $_REQUEST['evento'];
     
-    echo '';
+    
 
     echo '<div class="videos">';
 
     $pathSingle = $evento."/";
-	$path = "../videoSpinAPI/eventos/".$evento."/";
-
+	$path = "../videoSpinAPI/eventos/".descorrigeNome($evento)."/";
+    
     if (!is_dir($path)){
 
         echo '<div class="bg-orange text-white p-2 w-100 text-center fs-15">Aguardando Envio de video</div>';
@@ -56,20 +56,21 @@
     $arquivos = array_reverse($arquivos);
     $delay = 0;
     $keyTotal = count($arquivos);
+
     foreach($arquivos as $arquivo){
         
 
         if ($key < $maximo){
         
             $sonome = pathinfo($arquivo, PATHINFO_FILENAME);
-
+            
             echo '
-                    <div class="videoPai animate-out" style="opacity:0;animation-delay: '.$delay.'ms;">
+                    <div class="videoPai" style="">
                         <div class="conta numVideo" id="numVideo'.$key.'">'.$keyTotal--.'</div>
                         <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
                         
                         </div>
-                        <div id="qrcode_'.$key.'" numvideo="'.$key.'" class="desfocado qrcode transition-1">
+                        <div id="qrcode_'.$key.'" numvideo="'.$key.'" class="desfocado qrcode">
                             <img src="img/clique.png" class="clique">
                         </div>
                     </div>';

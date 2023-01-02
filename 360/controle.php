@@ -1,17 +1,17 @@
 <?php
-if (isset($_POST['porta']))
+if (isset($_GET['porta']))
 {
     $file = 'config.json';
     $json = json_decode(file_get_contents($file),TRUE);
 
-    $json['porta'] = $_POST['porta'];
+    $json['porta'] = $_GET['porta'];
 
     file_put_contents($file, json_encode($json));
     
 }
 
 
-if (isset($_POST['reset']))
+if (isset($_GET['reset']))
 {
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/reset.py';
@@ -23,7 +23,7 @@ if (isset($_POST['reset']))
 
 }
 
-if (isset($_POST['gravaStart']))
+if (isset($_GET['gravaStart']))
 {
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/startRec.py';
@@ -36,7 +36,7 @@ if (isset($_POST['gravaStart']))
 }
 
 
-if (isset($_POST['gravaStop']))
+if (isset($_GET['gravaStop']))
 {
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/stopRec.py';
@@ -49,7 +49,7 @@ if (isset($_POST['gravaStop']))
 }
 
 
-if (isset($_POST['teste']))
+if (isset($_GET['teste']))
 {
 
         echo 'executando o teste:<br>';
@@ -80,7 +80,7 @@ foreach ($out as $value){
 
 
 
-$file = 'config.json';
+$file = 'data.json';
 $json = json_decode(file_get_contents($file));
 if (isset($json->porta)){
     $porta = $json->porta;
@@ -107,14 +107,11 @@ if (isset($json->porta)){
 </head>
 <body>
     <?php $evento = 'Controle Remoto'; include('top.php'); if(isset($success)){echo $success;}?>
-    <form action="controle.php" method="post" class="flex hcenter" style="   justify-content: center;flex-direction: column;align-items: center;">
         <div class="flex coluna">
             <a href="?reset=1" class="btn m-3">Resetar Controle</a>
             <label for="ip" class="text-white m-1 fs-15">Para gravar seu controle pressione o botão correspondente do controle de sua plataforma, clique no botão abaixo, e aguarde 5 segundos para soltar o botão de sua plataforma</label>
             <a href="?gravaStart=1"  class="btn">Gravar botão Start</a>
             <a href="?gravaStop=1"  class="btn">Gravar botão Stop</a>
         </div>
-        
-    </form>
 </body>
 </html>

@@ -96,7 +96,9 @@ html{
 .m-3{
   margin: 3rem !important;
 }
-
+#myModal {
+  z-index: 3000;
+}
 .text-center{
     text-align: center;
 }
@@ -112,11 +114,13 @@ html{
     margin-left:0.5rem
 }
 .qrcode{
+  border-radius: 0rem 0rem 0.8rem 0.8rem;
+  background-color: white !important;
     /*text-align: center;*/
     /*margin: 1rem;*/
 }
 canvas{
-    background: white;
+    /*background: white;*/
     width: 10rem !important;
     padding: 0.7rem;
     border-bottom: 2px solid white;

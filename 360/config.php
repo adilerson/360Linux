@@ -56,7 +56,7 @@ $data = json_decode($json);
         ';
         echo '<input type="hidden" name="atualizar" value="1">';
         foreach ($data as $key => $entry) {
-            if ( ($key != 'atualizar') && ($key != 'estilo') && ($key != 'usb')  && ($key != 'porta') && ($key != 'record') ){
+            if ( ($key != 'atualizar') && ($key != 'estilo') && ($key != 'usb')  && ($key != 'porta') && ($key != 'record') && ($key != 'versao') ){
 
                 echo  '<div class="input"><label for="'.$key.'">'.ucfirst($key).'</label><input name="'.$key.'" id="'.$key.'" value="'.$entry.'"></div>';
             }
@@ -74,6 +74,9 @@ $data = json_decode($json);
                 </select></div>';
             }
 
+            if ($key == 'versao'){
+                echo '<input type="hidden" name="versao" value="'.$entry.'">';
+            }
             if ($key == 'usb'){
                 $command = 'ls /dev/ttyA*';
                 exec($command, $out, $status);

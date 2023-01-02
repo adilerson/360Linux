@@ -47,6 +47,8 @@ $evento =
         "vNormal": "5",
         "vSlow": "3",
         "vFast": "4",
+        "cFast":"0.5",
+        "cSlow":"4.0",
         "position": "top"
         }
         ]
@@ -57,14 +59,6 @@ $evento =
 
 }
 
-if (!file_exists("/360Linux/360/data.json")){
-    $evento =
-        '{"atualizar":"1","porta":"5","ip":"192.168.36.36","record":"15","normal":"6","fast":"5","slow":"4","delay":"8","usb":""}';
-    
-        $file = 'data.json';
-        file_put_contents($file, $evento);
-    
-    }
 
 
     
@@ -168,6 +162,8 @@ if (!file_exists("/360Linux/360/data.json")){
                 $json[$key]['vNormal'] = $_POST['edit_vNormal'];
                 $json[$key]['vSlow'] = $_POST['edit_vSlow'];
                 $json[$key]['vFast'] = $_POST['edit_vFast'];
+                $json[$key]['cSlow'] = $_POST['edit_cSlow'];
+                $json[$key]['cFast'] = $_POST['edit_cFast'];
                 $json[$key]['posicao'] = $_POST['edit_position'];
             }
 
@@ -285,6 +281,8 @@ if (!file_exists("/360Linux/360/data.json")){
                                 "vNormal" => $_POST['vNormal'],
                                 "vSlow" => $_POST['vSlow'],
                                 "vFast" => $_POST['vFast'],
+                                "cSlow" => $_POST['cSlow'],
+                                "cFast" => $_POST['cFast'],
                                 "position" => $_POST['position']
                                 
                         );
@@ -338,7 +336,7 @@ if (!file_exists("/360Linux/360/data.json")){
         </a>-->
     </div>
 
-    <div>
+    <div style="color:white; font-size:1rem">
         <form method="post" action="eventos.php" enctype="multipart/form-data">
             <div class="inputs">
                 <label class="branco label" for="nome">Nome</label><input type="text" size="10" name="nome" id="nome" required>
@@ -354,18 +352,34 @@ if (!file_exists("/360Linux/360/data.json")){
             <div class="inputs">
                 <label class="branco label" for="data">Data do Evento</label><input type="text" name="data" id="data">
             </div>-->
-            <div class="inputs">
-                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" value="<?php echo dados('record'); ?>" required>
+            <div class="inputs fs-1 vCenter">
+                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" value="<?php echo dados('record'); ?>" required>Segundos
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="vNormal" id="vNormal" value="<?php echo dados('normal'); ?>" required>
+                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" size="2" name="vNormal" id="vNormal" value="<?php echo dados('normal'); ?>" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" required>
+                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" style="width: 3rem;" required>
+                <select name="cSlow" id="cSlow">
+                    <option value="1.5">Baixo</option>
+                    <option value="2.0">Médio</option>
+                    <option value="3.0">Alto</option>
+                    <option value="4.0">SuperSlow</option>
+                    <option value="5.0">UltraSlow</option>
+                </select>
             </div>
+            
             <div class="inputs">
-                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" value="<?php echo dados('fast'); ?>" required>
+                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" value="<?php echo dados('fast'); ?>" style="width: 3rem;" required>
+                <select name="cFast" id="cFast">
+                    <option value="0.6">Baixo</option>
+                    <option value="0.5">Médio</option>
+                    <option value="0.4">Alto</option>
+                    <option value="0.3">SuperFast</option>
+                </select>
             </div>
+           
+
             <div class="inputs">
                 
                 <label class="branco label" for="position">Posição dos Botões</label>
@@ -430,32 +444,47 @@ if (!file_exists("/360Linux/360/data.json")){
       <div class="fecharModal">
           <span class="close" style="font-size: 3rem;height: 3rem !important;">&times;</span>
       </div>
-    <div style="">
+    <div style="color:white;">
         <form method="post" id="form_edit" action="eventos.php" enctype="multipart/form-data">
             <input type="hidden" name="nomeoriginal" id="nomeoriginal">
             <input type="hidden" name="key" id="key">
             <div class="inputs">
-                <label class="branco label" for="nome">Nome</label><input type="text" name="edit_nome" id="edit_nome">
+                <label class="branco label" for="edit_nome">Nome</label><input type="text" name="edit_nome" id="edit_nome">
             </div>
             
             <div class="inputs">
-                <label class="branco label" for="frameName">Moldura</label><input type="file" accept="image/png" name="edit_frameName" id="edit_frameName">
+                <label class="branco label" for="edit_frameName">Moldura</label><input type="file" accept="image/png" name="edit_frameName" id="edit_frameName">
             </div>
             <div class="inputs">
-                <label class="branco label" for="audioName">Áudio</label><input type="file" accept="audio/mp3" name="edit_audioName" id="edit_audioName">
+                <label class="branco label" for="edit_audioName">Áudio</label><input type="file" accept="audio/mp3" name="edit_audioName" id="edit_audioName">
             </div>
             <div class="inputs">
-                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="edit_tempo" min="5" max="30" id="edit_tempo" required>
+                <label class="branco label" for="edit_tempo">Tempo Total</label><input type="number" name="edit_tempo" min="5" max="30" id="edit_tempo" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="edit_vNormal" id="edit_vNormal" required>
+                <label class="branco label esquerda" for="edit_vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" name="edit_vNormal" id="edit_vNormal" required>
             </div>
             <div class="inputs">
-                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="edit_vSlow" id="edit_vSlow" required>
+                <label class="branco label esquerda" for="edit_vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="edit_vSlow" id="edit_vSlow" required>
+                <select name="edit_cSlow" id="edit_cSlow">
+                    <option value="1.5">Baixo</option>
+                    <option value="2.0">Médio</option>
+                    <option value="3.0">Alto</option>
+                    <option value="4.0">SuperSlow</option>
+                    <option value="5.0">UltraSlow</option>
+                </select>
             </div>
+            
             <div class="inputs">
-                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="edit_vFast" id="edit_vFast" required>
+                <label class="branco label esquerda" for="edit_vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="edit_vFast" id="edit_vFast" required>
+                <select name="edit_cFast" id="edit_cFast">
+                    <option value="0.6">Baixo</option>
+                    <option value="0.5">Médio</option>
+                    <option value="0.4">Alto</option>
+                    <option value="0.3">SuperFast</option>
+                </select>
             </div>
+            
             <div class="inputs">
                 
                 <label class="branco label" for="edit_position">Posição dos Botões</label>
