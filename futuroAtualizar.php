@@ -86,7 +86,7 @@
             $(".progressoAtual").css("width",total + "%");
             $(".progressoAtual").html(total + "%");
             anterior = textoTotal;
-            if (total == '100'){
+            if (total > 94){
                 $("#inicio").attr("style","opacity: 1; display:flex !important");
             }
         }
