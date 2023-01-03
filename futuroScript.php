@@ -53,11 +53,12 @@ if (isset($_GET['atualizaVersao'])){
     $url = 'https://www.aplicativo360.com.br/versao.php';
     $versaoSite = file_get_contents($url);
 
+
     $json = file_get_contents("/var/www/html/360Linux/360/data.json");
     $valor = json_decode($json);
-
-    $valor['versao'] = $versaoSite;
+    $valor->versao = $versaoSite;
     $newJsonString = json_encode($valor);
+
     file_put_contents('/var/www/html/360Linux/360/data.json', $newJsonString);
 
 }

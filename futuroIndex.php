@@ -1,4 +1,20 @@
+<?php
+function dados($str){
+        $json = file_get_contents("/var/www/html/360Linux/360/data.json");
+        $data = json_decode($json);
 
+        foreach ($data as $key => $value) {
+            if ($key == $str){
+
+                return $value;
+            }
+        }
+    }
+
+    $versao = dados('versao');  
+
+    $ip = dados('ip');
+    ?>
 <!DOCTYPE html>
 <html lang="pt-BR" style="background: #373e46 !important;">
 <head>

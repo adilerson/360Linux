@@ -66,7 +66,7 @@
 
 <?php
     if ($versao < $versaoSite){
-        echo '<div id="versao" class="w-100 text-center fs-1 text-white mt-2">Versão disponível <b>'.$versaoSite.' para atualização</b></div>';
+        echo '<div id="versao" class="w-100 text-center fs-1 text-white mt-2">Versão '.$versaoSite.' disponível para atualização</b></div>';
     }
     else{
         echo '<div class="w-100 text-center fs-1 text-white mt-2" style="color:#ada;">Sua versão encontra-se atualizada</div>';
