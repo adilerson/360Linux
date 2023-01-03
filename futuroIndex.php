@@ -1,33 +1,4 @@
-<?php 
 
-    $url = 'https://www.aplicativo360.com.br/versao.php';
-    $escaped_url = file_get_contents($url);
-
-    function dados($str){
-        $json = file_get_contents("/var/www/html/360Linux/360/data.json");
-        $data = json_decode($json);
-
-
-
-        foreach ($data as $key => $value) {
-            if ($key == $str){
-
-                return $value;
-            }
-        }
-    }
-
-    $versao = dados('versao');
-
-    if ($versao > 2.0){
-    echo '<div></div>';
-    }
-    else{
-    echo '';
-    }
-
-    $ip = dados('ip');
-?>
 <!DOCTYPE html>
 <html lang="pt-BR" style="background: #373e46 !important;">
 <head>
@@ -65,7 +36,6 @@
                     <a href="https://<?php echo $ip; ?>/360Linux/360/" rel="noopener noreferrer" class="btn">Eventos</a>
                 </div>
             </div>
-
             <div class="divisao">
                 <h1>Administrador</h1>
                 <div class="flex hCenter wrap">
@@ -81,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div id="versao" class="w-100 text-center text-white mt-2">Versão <b><?php echo $versao; ?></b></div>
+            
         </div>
     </div>
     <div class="des" style="opacity:0;">

@@ -1,3 +1,26 @@
+<?php 
+
+    $url = 'https://www.aplicativo360.com.br/versao.php';
+    $versaoSite = file_get_contents($url);
+    
+
+    function dados($str){
+        $json = file_get_contents("/var/www/html/360Linux/360/data.json");
+        $data = json_decode($json);
+
+        foreach ($data as $key => $value) {
+            if ($key == $str){
+
+                return $value;
+            }
+        }
+    }
+
+    $versao = dados('versao');  
+
+    $ip = dados('ip');
+?>
+
 <html lang="pt-BR" style="margin: 0rem;">
 <head>
     <meta charset="UTF-8">
@@ -40,6 +63,15 @@
 <div id="resultado" class="resultado">
     
 </div>
+
+<?php
+    if ($versao < $versaoSite){
+        echo '<div id="versao" class="w-100 text-center fs-1 text-white mt-2">Versão disponível <b>'.$versaoSite.' para atualização</b></div>';
+    }
+    else{
+        echo '<div class="w-100 text-center fs-1 text-white mt-2" style="color:#ada;">Sua versão encontra-se atualizada</div>';
+    }
+?>
 <script>
     function atualiza(){
         $("#status").load("script.php?progresso=1");
@@ -84,6 +116,7 @@
             
             if (total > 94){
                 $("#inicio").attr("style","opacity: 1; display:flex !important");
+                $("#status").load("script.php?atualizaVersao=1");
             }
 
         }
@@ -152,4 +185,4 @@
     $("#status").load("script.php?zera=1");
     $("#btnAtualizar").css("opacity","1");
     $("#inicio").attr("style","opacity: 0; display:none !important");
-    </script>
+</script>

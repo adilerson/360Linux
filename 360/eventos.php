@@ -16,9 +16,6 @@ function dados($str){
     }
 }
 
-
-
-
 if (!is_dir("/360Linux/videoSpinAPI/eventos")){
     mkdir("/360Linux/videoSpinAPI/eventos", 0777);    
 }
@@ -703,9 +700,6 @@ function calculaTempo(){
     var tTotal = +tSlow + +tFast + +vNormal;
     tTotal = tTotal * 2;
     $("#tempoTotal").html('<div class="tituloSegundos">Tempo Final: </div><div class="segundos">' + tTotal + '</div><div class="bold">segundos</div>');
-
-
-
 }
 calculaTempo();
 
