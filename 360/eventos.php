@@ -356,14 +356,14 @@ $evento =
                 <label class="branco label" for="data">Data do Evento</label><input type="text" name="data" id="data">
             </div>-->
             <div class="inputs fs-1 vCenter">
-                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" value="<?php echo dados('record'); ?>" required>Segundos
+                <label class="branco label" for="tempo">Tempo Total</label><input type="number" name="tempo" min="5" max="30" id="tempo" value="<?php echo dados('record'); ?>" required style="margin-right: 0.25rem;">Segundos
             </div>
             <div class="inputs">
                 <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" size="2" name="vNormal" id="vNormal" value="<?php echo dados('normal'); ?>" required>
             </div>
             
             <div class="inputs">
-                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" style="width: 3rem;" required>
+                <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" style="width: 3rem;margin-right: 0.25rem;" required >
                 <select name="cSlow" id="cSlow">
                     <option value="1.5">Baixo</option>
                     <option value="2.0">Médio</option>
@@ -374,7 +374,7 @@ $evento =
             </div>
             
             <div class="inputs">
-                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" value="<?php echo dados('fast'); ?>" style="width: 3rem;" required>
+                <label class="branco label esquerda" for="vFast">&nbsp;&nbsp;&nbsp;&nbsp;Fast</label><input type="number" min="0" max="30" name="vFast" id="vFast" value="<?php echo dados('fast'); ?>" style="width: 3rem;margin-right: 0.25rem;" required>
                 <select name="cFast" id="cFast">
                     <option value="0.6">Baixo</option>
                     <option value="0.5">Médio</option>
@@ -394,6 +394,7 @@ $evento =
                 </select>
 
             </div>
+            <div id="tempoTotal" class="flex w-100 text-center hCenter fs-15 p-05"></div>
             <div class="botaoIncluir flex hCenter">
                 <input type="submit" class="btn" value="Incluir" id="Incluir">
             </div>
@@ -573,6 +574,7 @@ $(".editarEvento").click(function(){
         var vSlow = $("#vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#tempo").val(total);
+        calculaTempo();
     })
 
     $("#vFast").change(function(){
@@ -581,6 +583,7 @@ $(".editarEvento").click(function(){
         var vSlow = $("#vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#tempo").val(total);
+        calculaTempo();
     })
     $("#vSlow").change(function(){
         var vNormal = $("#vNormal").val();
@@ -588,6 +591,14 @@ $(".editarEvento").click(function(){
         var vSlow = $("#vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#tempo").val(total);
+        calculaTempo();
+    })
+
+    $("#cSlow").change(function(){
+        calculaTempo();
+    })
+    $("#cFast").change(function(){
+        calculaTempo();
     })
 
 
@@ -608,6 +619,7 @@ $(".editarEvento").click(function(){
         var vSlow = $("#edit_vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#edit_tempo").val(total);
+        calculaTempo();
     })
 
     $("#edit_vFast").change(function(){
@@ -616,6 +628,7 @@ $(".editarEvento").click(function(){
         var vSlow = $("#edit_vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#edit_tempo").val(total);
+        calculaTempo();
     })
     $("#edit_vSlow").change(function(){
         var vNormal = $("#edit_vNormal").val();
@@ -623,6 +636,7 @@ $(".editarEvento").click(function(){
         var vSlow = $("#edit_vSlow").val();
         var total =  +vNormal + +vFast + +vSlow;
         $("#edit_tempo").val(total);
+        calculaTempo();
     })
 
 
@@ -674,6 +688,27 @@ $( "#form_lixeira" ).submit(function( event ) {
    
     //confirma(evento);
 });
+
+function calculaTempo(){
+    var vNormal = $("#vNormal").val();
+    var vSlow = $("#vSlow").val();
+    var vFast = $("#vFast").val();
+
+    var cSlow = $("#cSlow").val();
+    var cFast = $("#cFast").val();
+    
+    var tSlow = vSlow * cSlow;
+    var tFast = vFast * cFast;
+    //console.log(cSlow,cFast);
+    var tTotal = +tSlow + +tFast + +vNormal;
+    tTotal = tTotal * 2;
+    $("#tempoTotal").html('<div class="tituloSegundos">Tempo Final: </div><div class="segundos">' + tTotal + '</div><div class="bold">segundos</div>');
+
+
+
+}
+calculaTempo();
+
 </script>
 
 <style>
@@ -746,6 +781,15 @@ input, select{
     text-align: center;
     padding: 0.5rem;
     margin: 0.5rem;
+}
+.segundos{
+    margin-right:0.4rem;
+}
+.tituloSegundos{
+    margin-right:0.4rem;
+}
+#tempoTotal{
+    color: #ada !important;
 }
 </style>
 </html>

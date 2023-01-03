@@ -1,4 +1,4 @@
-<html lang="pt-BR" style="margin: 2rem;">
+<html lang="pt-BR" style="margin: 0rem;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -140,6 +140,12 @@
     }
     #resultado{
         margin-top:1rem;
+    }
+    .topo{
+        /*margin-bottom: 2rem;*/
+    }
+    .aviso{
+        padding:2rem;
     }
 </style>
 <script>
