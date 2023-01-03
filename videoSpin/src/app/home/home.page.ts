@@ -67,6 +67,8 @@ export class HomePage implements OnInit, AfterViewInit {
     vNormal: string;
     vFast: string;
     vSlow: string;
+    cFast: string;
+    cSlow: string;
   };
   segundosDisplay: string;
   videoDevices: any[];
@@ -107,6 +109,8 @@ export class HomePage implements OnInit, AfterViewInit {
             _event.vNormal = parseInt(_event.vNormal, 10);
             _event.vFast = parseInt(_event.vFast, 10);
             _event.vSlow = parseInt(_event.vSlow, 10);
+            _event.cSlow = parseInt(_event.cSlow, 10);
+            _event.cFast = parseInt(_event.cFast, 10);
 
             this.eventoDetails = {
               name: _event.nome.replace(/[^A-Z0-9]+/gi, '_'),
@@ -115,6 +119,8 @@ export class HomePage implements OnInit, AfterViewInit {
               vNormal: _event.vNormal,
               vFast: _event.vFast,
               vSlow: _event.vSlow,
+              cSlow: _event.cSlow ? _event.cSlow : '',
+              cFast: _event.cFast ? _event.cFast : '',
             };
             this.segundos = this.evento.tempo * 1000;
             if (this.apiUrl.length) {
@@ -139,6 +145,8 @@ export class HomePage implements OnInit, AfterViewInit {
           config.vNormal = parseInt(config.vNormal, 10);
           config.vFast = parseInt(config.vFast, 10);
           config.vSlow = parseInt(config.vSlow, 10);
+          config.cSlow = parseInt(config.cSlow, 10);
+          config.cFast = parseInt(config.cFast, 10);
 
           this.eventoDetails = {
             name: config.nome.replace(/[^A-Z0-9]+/gi, '_'),
@@ -147,6 +155,8 @@ export class HomePage implements OnInit, AfterViewInit {
             vNormal: config.vNormal,
             vFast: config.vFast,
             vSlow: config.vSlow,
+            cSlow: config.cSlow ? config.cSlow : '',
+            cFast: config.cFast ? config.cFast : '',
           };
         }
       }

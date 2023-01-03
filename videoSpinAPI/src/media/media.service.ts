@@ -110,7 +110,7 @@ export class MediaService {
         ]
 
         console.log('fodler: '+folder)
-        console.log(fileConfig);
+        console.log('113'+fileConfig);
 
         let output = 'output1'
         
@@ -161,26 +161,28 @@ export class MediaService {
         }
 
 
+        var qts = 1;
+        if (fileConfig.vSlow > 0){
+          qts++;
+        }
+        if (fileConfig.vFast > 0){
+          qts++;
+        }
 
+        if (!fileConfig.cFast){
+          fileConfig.cFast = 0.5
+        }
+
+        if (!fileConfig.cSlow){
+          fileConfig.cSlow = 2.0
+        }
        
+        
+        console.log('resultado config')
+        console.log(fileConfig)
 
-        if (frameConfig) {
-          
-          var qts = 1;
-          if (fileConfig.vSlow > 0){
-            qts++;
-          }
-          if (fileConfig.vFast > 0){
-            qts++;
-          }
-
-          if (fileConfig.vFast == null){
-            fileConfig.vFast = 0.5
-          }
-
-          if (fileConfig.vSlow == null){
-            fileConfig.vFast = 2.0
-          }
+        if (frameConfig) {      
+         
           
 
 
@@ -232,14 +234,14 @@ export class MediaService {
               },
               {
                 filter: 'setpts',
-                options: fileConfig.vFast + '*PTS',
+                options: fileConfig.cFast + '*PTS',
                 inputs: 't1N',
                 outputs: ['t1F'],
               },
   
               {
                 filter: 'setpts',
-                options: fileConfig.vSlow + '*PTS',
+                options: fileConfig.cSlow + '*PTS',
                 inputs: 't2N',
                 outputs: ['t2S'],
               },
@@ -288,14 +290,14 @@ export class MediaService {
               },
               {
                 filter: 'setpts',
-                options: fileConfig.vFast + '*PTS',
+                options: fileConfig.cFast + '*PTS',
                 inputs: 't1N',
                 outputs: ['t1F'],
               },
   
               {
                 filter: 'setpts',
-                options: fileConfig.vSlow + '*PTS',
+                options: fileConfig.cSlow + '*PTS',
                 inputs: 't2N',
                 outputs: ['t2S'],
               },
@@ -399,14 +401,14 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: fileConfig.vFast + '*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
     
                 {
                   filter: 'setpts',
-                  options: fileConfig.vSlow + '*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -455,14 +457,14 @@ export class MediaService {
                 },
                 {
                   filter: 'setpts',
-                  options: fileConfig.vFast + '*PTS',
+                  options: fileConfig.cFast + '*PTS',
                   inputs: 't1N',
                   outputs: ['t1F'],
                 },
     
                 {
                   filter: 'setpts',
-                  options: fileConfig.vSlow + '*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -539,7 +541,7 @@ export class MediaService {
     
                 {
                   filter: 'setpts',
-                  options: fileConfig.vSlow + '*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },
@@ -574,7 +576,7 @@ export class MediaService {
     
                 {
                   filter: 'setpts',
-                  options: fileConfig.vSlow + '*PTS',
+                  options: fileConfig.cSlow + '*PTS',
                   inputs: 't2N',
                   outputs: ['t2S'],
                 },

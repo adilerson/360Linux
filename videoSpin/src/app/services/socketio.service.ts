@@ -11,7 +11,7 @@ export class SocketioService {
   socket: any;
   public socketID: any;
 
-  //readonly url: string = 'https://192.168.1.104:3000/';
+  //readonly url: string = 'https://192.168.1.105:3000/';
   readonly url: string = 'https://192.168.36.36:3000/';
   constructor() {
    /* */this.socket = io(this.url);

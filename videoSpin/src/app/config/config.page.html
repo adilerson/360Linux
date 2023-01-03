@@ -22,7 +22,7 @@
     <div *ngIf="evento.nome !== 'null' " >
       <ion-item (click)="setConfig(evento)"  button>
         <ion-label >
-          <h2>{{evento.nome}}</h2>
+          <h2>{{evento.nome | space}}</h2>
           <p>Tempo: {{evento.tempo}} s</p>
         <!--   <p>{{evento.data |date:'dd/MM/YYYY'}}</p> -->
         </ion-label>
