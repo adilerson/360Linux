@@ -186,6 +186,8 @@ $evento =
     
     if (isset($_POST['nome'])){
         
+
+
         $evento = clean($_POST['nome']);
 
         
@@ -255,6 +257,7 @@ $evento =
             
             if (!isset($erro)){
 
+                    
             
                     $file = "../videoSpinAPI/config/evento/evento.json";
                     $json = json_decode(file_get_contents($file),true);
@@ -274,8 +277,8 @@ $evento =
 
                                 "nome" => $evento,
                                 "tempo" => $_POST['tempo'],
-                                "frameName" => "$evento",
-                                "audioName" => "$evento",
+                                "frameName" => "$nome_frameName",
+                                "audioName" => "$nome_audioName",
                                 "data" => date('Y-m-d'),
                                 "videoInput" => "",
                                 "vNormal" => $_POST['vNormal'],
@@ -287,7 +290,7 @@ $evento =
                                 
                         );
                 
-                
+                //print_r($json);exit;
 
                 $oldmask = umask(0);
 
@@ -358,6 +361,7 @@ $evento =
             <div class="inputs">
                 <label class="branco label esquerda" for="vNormal">&nbsp;&nbsp;&nbsp;&nbsp;Normal</label><input type="number" min="0" max="30" size="2" name="vNormal" id="vNormal" value="<?php echo dados('normal'); ?>" required>
             </div>
+            
             <div class="inputs">
                 <label class="branco label esquerda" for="vSlow">&nbsp;&nbsp;&nbsp;&nbsp;Slow</label><input type="number" min="0" max="30" name="vSlow" id="vSlow" value="<?php echo dados('slow'); ?>" style="width: 3rem;" required>
                 <select name="cSlow" id="cSlow">
@@ -424,7 +428,7 @@ $evento =
                 <div>
                     <a href="index.php?evento='.$value->nome.'" style="">'.ucfirst(corrigeNome($value->nome)).'</a>
                 </div>
-                    <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'">
+                    <img src="img/settingsw.png" class="m-s1 editarEvento" nome="'.corrigeNome($value->nome).'" key="'.$key.'" nomeoriginal="'.clean($value->nome).'" framename="'.$value->frameName.'" audioname="'.$value->audioName.'" tempo="'.$value->tempo.'" vnormal="'.$value->vNormal.'" vslow="'.$value->vSlow.'" vfast="'.$value->vFast.'" cfast="'.$value->cFast.'" cslow="'.$value->cSlow.'">
                 <div>
                 </div>
                 <div>
@@ -449,7 +453,7 @@ $evento =
             <input type="hidden" name="nomeoriginal" id="nomeoriginal">
             <input type="hidden" name="key" id="key">
             <div class="inputs">
-                <label class="branco label" for="edit_nome">Nome</label><input type="text" name="edit_nome" id="edit_nome">
+                <label class="branco label" for="edit_nome">Nome</label><input type="text" name="edit_nome" id="edit_nome" class="w-100">
             </div>
             
             <div class="inputs">
@@ -496,12 +500,12 @@ $evento =
 
             </div>
             <div class="flex">
-            <input type="submit" class="btn" value="Atualizar" name="atualizar">
+            <input type="submit" class="btn btnModal" value="Atualizar" name="atualizar">
         </form>
-            <form method="post" id="form_lixeira" action="eventos.php">
+            <form method="post" id="form_lixeira" action="eventos.php" style="margin: 0rem;width: 100%;display: flex;justify-content: center;">
                 <input type="hidden" name="nomeoriginal_a" id="nomeoriginal_a">
                 <input type="hidden" name="key" id="key_a">
-                <input type="submit" class="btn btn-danger lixeira" value="Lixeira" name="lixeira" id="lixeira">
+                <input type="submit" class="btn btn-danger lixeira btnModal" value="Lixeira" name="lixeira" id="lixeira">
             </form>
         </div>
     </div>
@@ -532,6 +536,8 @@ $(".editarEvento").click(function(){
     $("#edit_vNormal").val($(this).attr("vnormal"));
     $("#edit_vSlow").val($(this).attr("vslow"));
     $("#edit_vFast").val($(this).attr("vfast"));
+    $("#edit_cSlow").val($(this).attr("cSlow"));
+    $("#edit_cFast").val($(this).attr("cfast"));
     $("#nomeoriginal").val($(this).attr("nomeoriginal"));
     $("#nomeoriginal_a").val($(this).attr("nomeoriginal"));
     $("#key").val($(this).attr("key"));
@@ -674,6 +680,7 @@ $( "#form_lixeira" ).submit(function( event ) {
     body{
         background: #373e46 !important;
     }
+    
     .bubbly-button {
         margin: 1rem;
     font-family: "Helvetica", "Arial", sans-serif;
@@ -693,6 +700,7 @@ $( "#form_lixeira" ).submit(function( event ) {
     font-weight: bold;
     font-size: 1.5rem;
 }
+
 .pai{
     display: flex;
     align-items: center;
@@ -726,6 +734,18 @@ a {
     border-radius: 1.1rem 1.5rem 0rem 0rem;
     background-color: #00000042;
     margin: 0 !important;
+}
+.modal-content{
+    padding : 0;
+}
+input, select{
+    width: 100% !important;
+}
+.btnModal{
+    width: 50%;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 0.5rem;
 }
 </style>
 </html>

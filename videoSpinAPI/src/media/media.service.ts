@@ -324,7 +324,7 @@ export class MediaService {
                 inputs: ['c1', 'r'],
                 outputs: 'output',
               },
-  
+                
               '[output]scale=720:1080[scaled]',
               {
                 filter: 'framerate',
@@ -337,7 +337,9 @@ export class MediaService {
                 options: { x: '0', y: '0' },
                 inputs: ['output1'],
                 outputs: ['output2'],
-              }, 
+              },
+              
+              
             ],
             output,
           );
