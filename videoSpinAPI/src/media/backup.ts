@@ -80,7 +80,7 @@ export class MediaService {
       
             if (this.files.length > 0) {
               if (this.canEdit) {
-                console.log(this.files);
+                //console.log(this.files);
                 this.converMedia(this.files[0]);
               }
             }

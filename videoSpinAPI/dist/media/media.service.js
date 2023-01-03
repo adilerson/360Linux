@@ -93,8 +93,8 @@ let MediaService = class MediaService {
                     [
                         folder = `dist`
                     ];
-                console.log('fodler: ' + folder);
-                console.log(fileConfig);
+                //console.log('fodler: ' + folder);
+                //console.log(fileConfig);
                 
                 let output = 'output1';
                 var command = ffmpeg();

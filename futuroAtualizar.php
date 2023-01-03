@@ -19,11 +19,6 @@
     <div class="eventoTitulo">
 
     </div>
-        <div class="text-center transition flex">
-                <img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;">
-        </div><div class="text-center transition flex">
-        <img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;">
-        </div>
 </div>
 
 <div class="flex hCenter vCenter mt-3" id="btnAtualizar">
@@ -52,7 +47,7 @@
     }
     anterior = "";
     function aplica(total,texto){
-        
+
         var textoTotal = $("#atualizados").val();
         if (textoTotal.length > 0){
             var textoSplit = textoTotal.split(";")
@@ -86,15 +81,17 @@
             $(".progressoAtual").css("width",total + "%");
             $(".progressoAtual").html(total + "%");
             anterior = textoTotal;
+            
             if (total > 94){
                 $("#inicio").attr("style","opacity: 1; display:flex !important");
             }
+
         }
 
     }
     
     
-    $("#status").load("script.php?zera=1");
+    
 
 
     $(".atualizar").click(function(){
@@ -116,8 +113,8 @@
                         btnClass: 'btn-blue',
                         keys: ['enter', 'shift'],
                         action: function(){
-                            $("#btnAtualizar").attr("style","opacity: 0; display:none !important");
                             $("#status").load("script.php?atualizar=1");
+                            $("#btnAtualizar").attr("style","opacity: 0; display:none !important");
                             setInterval(atualiza, 1000);
                         }
                     }
@@ -146,6 +143,7 @@
     }
 </style>
 <script>
+    $("#status").load("script.php?zera=1");
     $("#btnAtualizar").css("opacity","1");
     $("#inicio").attr("style","opacity: 0; display:none !important");
     </script>
