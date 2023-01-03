@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <?php $evento = 'Remoto'; include('top.php');?>
     <div class="flex collum hCenter">
         <div class="btn naoselecionavel" id="btn">Ligar</div>
     </div>
@@ -49,5 +50,19 @@ display: flex;
     font-family: 'Roboto';
     text-transform: uppercase;
     font-weight: bold;
+}
+.topo{
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    text-shadow: 3px 4px 4px black;
+    background-color: #272727;
 }
 </style>
