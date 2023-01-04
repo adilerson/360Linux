@@ -271,6 +271,8 @@ $evento =
                     $conta++;
                     $nomeFinalFrame = pathinfo($nome_atual_frame);
                     $nomeFinalAudio = pathinfo($nome_atual_audio);
+                    $nomeFinalFrame = $nomeFinalFrame['filename'];
+                    $nomeFinalAudio = $nomeFinalAudio['filename'];
 
                         $json[] = array(
 
