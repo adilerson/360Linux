@@ -274,8 +274,8 @@ $evento =
 
                                 "nome" => $evento,
                                 "tempo" => $_POST['tempo'],
-                                "frameName" => "$nome_frameName",
-                                "audioName" => "$nome_audioName",
+                                "frameName" => "$nome_atual_frame",
+                                "audioName" => "$nome_atual_audio",
                                 "data" => date('Y-m-d'),
                                 "videoInput" => "",
                                 "vNormal" => $_POST['vNormal'],
