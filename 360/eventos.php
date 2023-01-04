@@ -269,13 +269,15 @@ $evento =
 
                     
                     $conta++;
+                    $nomeFinalFrame = pathinfo($nome_atual_frame);
+                    $nomeFinalAudio = pathinfo($nome_atual_audio);
 
                         $json[] = array(
 
                                 "nome" => $evento,
                                 "tempo" => $_POST['tempo'],
-                                "frameName" => "$nome_atual_frame",
-                                "audioName" => "$nome_atual_audio",
+                                "frameName" => "$nomeFinalFrame",
+                                "audioName" => "$nomeFinalAudio",
                                 "data" => date('Y-m-d'),
                                 "videoInput" => "",
                                 "vNormal" => $_POST['vNormal'],
