@@ -1,4 +1,7 @@
 <?php
+$command = 'sudo python3 /var/www/html/360Linux/360/begin.py';
+exec($command, $out, $status);
+
 if (isset($_GET['porta']))
 {
     $file = 'config.json';
@@ -13,6 +16,8 @@ if (isset($_GET['porta']))
 
 if (isset($_GET['reset']))
 {
+
+    
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/reset.py';
     exec($command, $out, $status);

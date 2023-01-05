@@ -1,17 +1,27 @@
 <?php
-    
-        if (!isset($_GET['evento'])){
-            echo '<script>window.location.href = "eventos.php";</script>';
-        }else{
-            $evento = $_GET['evento'];
-        }
-        $path = "../videoSpinAPI/eventos/".$evento."/";
+    include('class.php');
+    if (!isset($_GET['evento'])){
+        echo '<script>window.location.href = "eventos.php";</script>';exit;
+    }else{
+        $evento = $_GET['evento'];
+    }
+    $path = "../videoSpinAPI/eventos/".$evento."/";       
 
+    function dados($str){
         $json = file_get_contents("/var/www/html/360Linux/360/data.json");
-
+    
         $data = json_decode($json);
         
+        
+        foreach ($data as $key => $value) {
+            if ($key == $str){
+                
+                return $value;
+            }
+        }
+    }    
 
+        
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -56,34 +66,27 @@
 </head>
 <body id="body" style="background-color:<?php echo $data->estilo; ?> !important">
     
-<?php include('topo.php'); ?>
-
-<div id="qtdadeVideos">
-
+<?php include('topo.php');?>
+<div class="logo" onclick="full();"></div>
+<div class="main flex w-100 coluna text-white hCenter vCenter">
+    <div class="logoEspaco">
+        
+    </div>
+    <div class="qrcodeMain flex hCenter vCenter">
+        Escaneie o QRCode<br>para baixar seus videos
+        <div class="borda">
+            <div class="" id="qrcode">
+                
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<div id="myModal" class="modal">
-
-  
-  <div class="modal-content">
-    <div>
-        <span class="close" onclick="fechar()">&times;</span>
-    </div>
-    <div style="text-align: center;">
-        <video  class="videoEmbedModal" src="" id="videoModal" controls="controls" autoplay>
-    </div>
-    <div class="text-center">
-        <div id="qrcodeModal" class="qrcode-focado"></div>
-    </div>
-    </video>
-  </div>
-</div>
-
-<div class="w-100 text-center">
+<div class="zoom" style="z-index:1000">
     <div onclick="full();" id="full"><img src="img/full.png"></div>
-    <div onclick="fullE();" id="fullE"style="display:none;"><img src="img/fullE.png"></div>
+    <div onclick="full();" id="fullE"style="display:none;"><img src="img/fullE.png"></div>
 </div>
+
 
 <div id="status"></div>
 </body>
@@ -95,44 +98,28 @@
 
 <script>
     
-    $("#atualizar").click(function(){
-
-        $("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
-        $("#atualizar").fadeOut("50")
-
-    })
 
     function requestFullScreen(element) {
-    // Supports most browsers and their versions.
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+        var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
-    if (requestMethod) { // Native full screen.
-        requestMethod.call(element);
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}");
+        if (requestMethod) { // Native full screen.
+            requestMethod.call(element);
+        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
         }
     }
-}
 
 function full(){
-    $("#full").hide();
-    $("#fullE").show();
-    $("#home").hide();
+    
     
     //var elem = document.body; // Make the body go full screen.
     //requestFullScreen(elem);
     toggleFullScreen();
 }
 
-function fullE() {
-    $("#full").show();
-    $("#fullE").hide();
-    $("#home").show();
-
-    toggleFullScreen();
-}
 
 
 function toggleFullScreen(teste) {
@@ -148,6 +135,10 @@ function toggleFullScreen(teste) {
     } else if (document.documentElement.webkitRequestFullscreen) {
       document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
     }
+    $("#full").hide();
+    $("#fullE").show();
+    $(".topo").hide();
+    $(".logo").css("top","0px");
   } else {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -158,35 +149,13 @@ function toggleFullScreen(teste) {
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
+    $("#full").show();
+    $("#fullE").hide();
+    $(".topo").show();
+    $(".logo").css("top","56px");
   }
 }
 
-$("#listaVideos").load("listaVideos.php", {'evento': '<?php echo $evento; ?>'});
-
-function confirma(item){
-    $.confirm({
-        title: 'Excluir',
-        content: 'Tem certeza que deseja excluir o item '+item,
-        buttons: {
-            /*
-            Sim: function () {
-                $.alert('Excluído!');
-            },
-            */
-            Cancelar: function () {
-                //$.alert('Canceled!');
-            },
-            somethingElse: {
-                text: 'Excluir',
-                btnClass: 'btn-red',
-                keys: ['enter', 'shift'],
-                action: function(){
-                    $.alert('Excluído com sucesso');
-                }
-            }
-        }
-    });
-}
 
 mostra = 1;
 $(".eventoTitulo").click(function(){
@@ -203,21 +172,85 @@ $(".eventoTitulo").click(function(){
 });
 
 
-
-function fechar(){
-    var video = document.getElementById("videoModal");
-    video.pause();
-    $('#videoModal').attr("src","")
-$(function() {
-    $('#myModal').fadeOut({
-        
-    }, 50, function() {
-        
-        
-    })
-})
-
-}
-
+gerar("<?php echo 'http://'.dados('ip').'/360Linux/360/index.php?indexV2Videos='.$evento ?>","qrcode"); 
 
 </script>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background-color:white !important;
+    }
+
+    /* use viewport-relative units to cover page fully */
+    body {
+    height: 90vh;
+    width: 100vw;
+    }
+
+    /* include border and padding in element width and height */
+    * {
+    box-sizing: border-box;
+    }
+
+    /* full-sized  container that fills up the page */
+    .main {
+        height: 100%;
+        width: 100%;
+
+        /* example padding, font-size, background, etc */
+        padding: 10px;
+        font-size: 20px;
+        
+    }
+    .logo{
+        position: absolute;
+        left:0;
+        top: 56px;
+        width:100%;
+        height:100%;
+        background-image: url('img/moldura.jpg');
+        background-position-x: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        z-index:1;
+    }
+    .logoEspaco{
+        width: 100%;
+        height: 50%;
+    }
+    .qrcodeMain{
+        height: 50%;
+        z-index: 500;
+        flex-wrap: wrap;
+        flex-direction: column;
+        color: #666666;
+        text-align: center;
+        font-family: 'Roboto';
+    }
+    .borda{
+        border: 3px solid white;
+        padding: 1rem;
+    }
+    canvas{
+        width: 100% !important;
+        padding: 0 !important;
+        border-bottom: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    #qrcode{
+        border: 10px solid white;
+    }
+    .topo{
+        z-index:500;
+    }
+    .zoom{
+        z-index: 501;
+        position: absolute;
+        right: 10px;
+        top :5px;
+    }
+</style>
