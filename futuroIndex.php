@@ -65,6 +65,9 @@ function dados($str){
                     <div class="fs-1">
                         <div class="btn btn-danger desligar">Desligar</div>
                     </div>
+                    <div class="fs-1">
+                        <div class="btn btn-danger bg-orange reiniciar">Reiniciar</div>
+                    </div>
                 </div>
             </div>
             
@@ -160,7 +163,62 @@ function dados($str){
             }
         });
     })
+    conta = 20;
+
+    $(".reiniciar").click(function(){
+        $.confirm({
+            title: 'Reiniciar',
+            content: 'Tem certeza que deseja reiniciar o sistema?',
+            buttons: {
+                
+                Cancelar: function () {
+                    
+                },
+                somethingElse: {
+                    text: 'Reiniciar',
+                    btnClass: 'btn-red',
+                    keys: ['enter', 'shift'],
+                    action: function(){
+                        
+                        $('#status').load("script.php?reiniciar=1");
+                        $(".Botoes").fadeOut("2000")
+                        $("body").css("overflow","hidden");
+                        
+                        setTimeout(function(){
+                            $(".des").html("")
+                            $(".des").fadeIn("2000");
+                            conta = 23;
+                            myLoop();
+                        }, 1000);
+                        
+                    
+                            
+                    }
+                }
+            }
+        });
+    })
     
+    
+
+function myLoop() {
+  setTimeout(function() {
+    $(".des").html('<div style="flex-wrap: wrap;"><div>Sitema reinciando... </div><div> Reativa em ' + conta + ' segundos</div>')
+
+    console.log(conta);
+
+    conta--;                    //  increment the counter
+    if (conta >= 0) {           //  if the counter < 10, call the loop function
+      myLoop();             //  ..  again which will trigger another 
+    }  else{
+        $(".Botoes").fadeIn("2000");
+        $(".des").fadeOut("2000");
+    }                     //  ..  setTimeout()
+  }, 1000)
+}
+
+   
+
 </script>
 
 <style>

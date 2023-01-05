@@ -294,7 +294,7 @@ transition: all 0.3s ease-in-out;
     background-color: #cc1517;
   }
   .bg-orange{
-    background-color: rgb(255, 109, 56);
+    background-color: rgb(255, 109, 56) !important;
   }
   .w-100{
     width: 100% !important;

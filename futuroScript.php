@@ -69,4 +69,10 @@ if (isset($_GET['desligar'])){
     exec($command, $out, $status);
 }
 
+if (isset($_GET['reiniciar'])){
+
+    $command = "sudo reboot";
+    exec($command, $out, $status);
+}
+
 ?>
