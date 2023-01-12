@@ -56,31 +56,38 @@
     $arquivos = array_reverse($arquivos);
     $delay = 0;
     $keyTotal = count($arquivos);
-
     foreach($arquivos as $arquivo){
         
 
         if ($key < $maximo){
         
             $sonome = pathinfo($arquivo, PATHINFO_FILENAME);
-            
-            echo '
-                    <div class="videoPai" style="">
-                        <div class="conta numVideo" id="numVideo'.$key.'">'.$keyTotal--.'</div>
-                        <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
-                        
-                        </div>
-                        <div id="qrcode_'.$key.'" numvideo="'.$key.'" class="desfocado qrcode">
-                            <img src="img/clique.png" class="clique">
-                        </div>
-                    </div>';
-                    
-                    
-                $script .= 'gerar("http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle.$sonome.'.mp4","qrcode_'.$key.'");';
+            if(isset($_POST['v2'])){ /* QRCODE ÚNICO OU NÃO */
 
+                echo '
+                <div class="videoPai" style="">
+                    <div class="video" ide="video_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
+                    </div>                
+                    <a class="baixarVideoV2" href="http://192.168.36.36/360Linux/videoSpinAPI/eventos/'.$pathSingle.$sonome.'.mp4" download>Baixar Video</a>
+                </div>
+                ';
+                
+            }else{
+                echo '
+                 
+                <div class="videoPai" style="">
+                <div class="conta numVideo" id="numVideo'.$key.'">'.$keyTotal--.'</div>
+                <div class="video" ide="qrcode_'.$key.'" style="background-image: url(\''.$path.$sonome.'.jpg\');" video="'.$sonome.'.mp4">
+                
+                </div>
+                <div id="qrcode_'.$key.'" numvideo="'.$key.'" class="desfocado qrcode">
+                <img src="img/clique.png" class="clique">
+                </div>
+                </div>';
             }
-            $delay = $delay + 100;
-            $key++;
+        }
+        $delay = $delay + 100;
+        $key++;
         
 
     }
@@ -120,8 +127,12 @@ $(".qrcode").click(function(){
         
         $("#myModal").fadeIn("50");
         
-        
-        gerar("<?php echo 'http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle ?>"+$(this).attr("video"),"qrcodeModal"); 
+        <?php 
+            if (!isset($_POST['v2'])){
+
+                echo 'gerar("http://192.168.36.36/360Linux/360/download.php?video='.$pathSingle.'"+$(this).attr("video"),"qrcodeModal"); ';
+            }
+        ?>
         $("#videoModal").attr("src","<?php echo $path ?>"+$(this).attr("video"))
         
     })

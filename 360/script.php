@@ -54,6 +54,29 @@
 
         
     }
+
+    if (isset($_GET['identifica'])){
     
+        $command = 'sudo curl -Is https://www.google.com | head -1';
+        exec($command, $out, $status);
+        $conectado = false;
+        foreach ($out as $value){
+            if (str_contains($value, '200')) {
+                $conectado = true;
+            }
+        }
+        if ($conectado == false){
+            echo '<h1 style="color:#cc1517">Aparelho desconectado da internet! confira conexão wifi</h1>'; exit;
+        }else{
+            $command = 'sudo cat /etc/machine-id';
+            exec($command, $out, $status);
+            foreach($out as $value){
+                $id = $value;
+            }
+            $id;
+        }
+        
+    }
+
 
 ?>

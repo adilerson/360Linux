@@ -91,6 +91,7 @@ $evento =
         }
         
         file_put_contents($file, json_encode($json));
+        echo '<script>window.location.href="eventos.php";</script>';
         
     }
 
@@ -177,13 +178,13 @@ $evento =
 
         
         file_put_contents($file, json_encode($json));
+        echo '<script>window.location.href="eventos.php";</script>';
 
     }
 
     
     if (isset($_POST['nome'])){
-        
-
+    
 
         $evento = clean($_POST['nome']);
 
@@ -247,8 +248,6 @@ $evento =
                         $erro[] =  "Falha ao enviar o audio";
                         
                     }
-                    
-
                 }
             }
             
@@ -300,10 +299,11 @@ $evento =
                 mkdir("../videoSpinAPI/eventos/".$evento, 0777);
                 umask($oldmask);
                 file_put_contents($file, json_encode($json));
-                
+                echo '<script>window.location.href="eventos.php";</script>';
             
         }
     }
+
 }
 
 ?>
@@ -340,7 +340,8 @@ $evento =
         </a>-->
     </div>
 
-    <div style="color:white; font-size:1rem">
+    <div class="bg-orange w-100 text-center text-white fs-15 p-1 cursor" onclick="$('#incluiEvento').slideToggle('100');">Incluir Evento</div>
+    <div style="color:white; font-size:1rem"  id="incluiEvento">
         <form method="post" action="eventos.php" enctype="multipart/form-data">
             <div class="inputs">
                 <label class="branco label" for="nome">Nome</label><input type="text" size="10" name="nome" id="nome" required>
@@ -410,7 +411,7 @@ $evento =
     
     
     echo '<div id="status"></div>
-    <div class="arquivoDownload"><a href="arquivos360.zip" class="fs-1">Baixar Arquivo</a></div>';
+    <div class="arquivoDownload w-100"><a href="arquivos360.zip" class="fs-1">Baixar Arquivo</a></div>';
     echo '<div class="eventosBtn">';
     $str = '';
     foreach($json as $key => $value){    
@@ -706,7 +707,7 @@ function calculaTempo(){
     $("#tempoTotal").html('<div class="tituloSegundos">Tempo Final: </div><div class="segundos">' + tTotal + '</div><div class="bold">segundos</div>');
 }
 calculaTempo();
-
+$('#incluiEvento').slideToggle('0');
 </script>
 
 <style>
@@ -762,8 +763,6 @@ a {
 .arquivoDownload{
     position: absolute;
     bottom: 1px;
-
-    width: 91%;
     border-radius: 1.1rem 1.5rem 0rem 0rem;
     background-color: #00000042;
     margin: 0 !important;

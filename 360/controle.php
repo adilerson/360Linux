@@ -15,9 +15,7 @@ if (isset($_GET['porta']))
 
 
 if (isset($_GET['reset']))
-{
-
-    
+{  
 
     $command = 'sudo python3 /var/www/html/360Linux/360/arduino/reset.py';
     exec($command, $out, $status);

@@ -299,6 +299,19 @@ transition: all 0.3s ease-in-out;
   .w-100{
     width: 100% !important;
   }
+  .w-95{
+    width: 95% !important;
+  }
+  .w-90{
+    width: 90% !important;
+  }
+  .w-80{
+    width: 80% !important;
+  }
+  .w-70{
+    width: 70% !important;
+  }
+
 
   .p-05{
     padding: 0.5rem;
@@ -416,7 +429,7 @@ transition: all 0.3s ease-in-out;
   }
 
 .arquivoDownload{
-  padding: 1rem;
+  padding: 1rem 0rem;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -520,4 +533,17 @@ transition: all 0.3s ease-in-out;
      -moz-user-select: none; /* Old versions of Firefox */
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none;
+}
+.baixarVideoV2{
+  width: 100%;
+  background: #272727 !important;
+  color: #bdbdbd !important;
+  border-radius: 0rem 0rem 1rem 1rem;
+  padding: 0.7rem 0rem;
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.cursor{
+  cursor: pointer;
 }

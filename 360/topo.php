@@ -11,5 +11,5 @@
 
         ?>
     </div>  
-    <div class="text-center transition flex"><img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none;"></div>
+    <div class="text-center transition flex"><img src="img/refresh.png" id="atualizar" class="transition" style="padding:0;background-color: #56baed;display:none; margin-right:1rem;"></div>
 </div>
